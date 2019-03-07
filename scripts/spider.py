@@ -12,6 +12,17 @@ from bs4 import BeautifulSoup as BS4
 import requests
 from datetime import datetime as DATE
 
+# Core definitions
+Item = "Lawn-Mower" # Psudeo variable for what is being searched
+clean_item = lambda x : x.replace(' ','-')
+start_page = "https://www.google.com/utah-{}".format(clean_item(Item))
+
+
+# Predefined list for all items found
+Items = list()
+
+
+
 # Connect to DB
 
 # Search for input
