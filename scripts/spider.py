@@ -17,16 +17,20 @@ Item = "Lawn-Mower" # Psudeo variable for what is being searched
 clean_item = lambda x : x.replace(' ','%20') # remove spaces, replace with a dash
 #start_page = "https://www.google.com/utah-{}".format(clean_item(Item))
 # Craigslist listing searches
-craig_page_SLC = "https://saltlakecity.craigslist.org/search/sss?query={}&sort=rel"
-	.format(clean_item(Item))
-craig_page_Logan = "https://logan.craigslist.org/search/sss?query={}&sort=rel"
-	.format(clean_item(Item))
-craig_page_Ogden = "https://ogden.craigslist.org/search/sss?query={}&sort=rel"
-	.format(clean_item(Item))
-craig_page_Provo = "https://provo.craigslist.org/search/sss?query={}&sort=rel"
-	.format(clean_item(Item))
-craig_page_StGeo = "https://stgeorge.craigslist.org/search/sss?query={}&sort=rel"
-	.format(clean_item(Item))
+# Salt Lake City
+craig_page_SLC = "https://saltlakecity.craigslist.org/search/sss?query={}&sort=rel".format(clean_item(Item))
+
+# Logan
+craig_page_Logan = "https://logan.craigslist.org/search/sss?query={}&sort=rel".format(clean_item(Item))
+
+# Ogden
+craig_page_Ogden = "https://ogden.craigslist.org/search/sss?query={}&sort=rel".format(clean_item(Item))
+
+# Provo
+craig_page_Provo = "https://provo.craigslist.org/search/sss?query={}&sort=rel".format(clean_item(Item))
+
+# St George
+craig_page_StGeo = "https://stgeorge.craigslist.org/search/sss?query={}&sort=rel".format(clean_item(Item))
 
 # Responses
 #page_response = requests.get(start_page, timeout=10)
@@ -50,3 +54,5 @@ Items = list()
 # Connect to DB
 
 # Search for input
+
+print("TEST")
