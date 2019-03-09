@@ -6,6 +6,7 @@ class NavBar extends Component {
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
+  // may need to do a conditional render for mobile
   render() {
     const { activeItem } = this.state;
 
