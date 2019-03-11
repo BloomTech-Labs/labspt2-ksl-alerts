@@ -1,0 +1,21 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+requests = "*"
+bs3 = "*"
+beautifulsoup3 = "*"
+beautifulsoup = "*"
+
+[requires]
+python_version = "2.7"
+
+[flake8]
+ignore = E203, E266, E501, W503
+max-line-length = 80
+max-complexity = 18
+select = B,C,E,F,W,T4,B
