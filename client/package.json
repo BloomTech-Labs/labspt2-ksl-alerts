@@ -26,15 +26,14 @@
   "lint-staged": {
     "*.js": [
       "npm run test",
-      "npm run clean",
       "npm run pretty",
-      "npm run build",
       "git add"
     ]
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run clean && npm run build"
     }
   },
   "browserslist": [
