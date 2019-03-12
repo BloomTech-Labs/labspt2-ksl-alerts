@@ -3,37 +3,32 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "express": "^4.16.4",
-    "express-favicon": "^2.0.1",
-    "path": "^0.12.7",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
-    "react-scripts": "^2.1.8",
-    "rimraf": "^2.6.3"
+    "react-scripts": "^2.1.8"
   },
   "scripts": {
     "dev": "react-scripts start",
-    "start": "node src/server.js",
     "build": "react-scripts build",
-    "clean": "rimraf build/",
     "test": "react-scripts test",
     "pretty": "prettier --write \"src/**/*.js\"",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "style": "stylelint \"src/**/*.css\" --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
   "lint-staged": {
     "*.js": [
-      "npm run test",
       "npm run pretty",
+      "npm run style",
+      "npm run test",
       "git add"
     ]
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm run clean && npm run build"
+      "pre-commit": "lint-staged"
     }
   },
   "browserslist": [
@@ -45,6 +40,8 @@
   "devDependencies": {
     "husky": "^1.3.1",
     "lint-staged": "^8.1.5",
-    "prettier": "^1.16.4"
+    "prettier": "^1.16.4",
+    "stylelint": "^9.10.1",
+    "stylelint-config-recommended": "^2.1.0"
   }
 }
