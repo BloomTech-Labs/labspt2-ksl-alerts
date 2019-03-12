@@ -3,13 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "express": "^4.16.4",
+    "express-favicon": "^2.0.1",
+    "path": "^0.12.7",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
-    "react-scripts": "2.1.5"
+    "react-scripts": "^2.1.8",
+    "rimraf": "^2.6.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
+    "start": "node src/server.js",
     "build": "react-scripts build",
+    "clean": "rimraf build/",
     "test": "react-scripts test",
     "pretty": "prettier --write \"src/**/*.js\"",
     "eject": "react-scripts eject"
@@ -19,13 +25,15 @@
   },
   "lint-staged": {
     "*.js": [
+      "npm run test",
       "npm run pretty",
       "git add"
     ]
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run clean && npm run build"
     }
   },
   "browserslist": [
