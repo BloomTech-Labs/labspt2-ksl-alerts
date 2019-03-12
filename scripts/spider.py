@@ -72,6 +72,10 @@ print("TEST")
 # Search for "Honda" on SLC craiglist
 for i in content_SLC.find_all("li",{"class":"result-row"}):
 	log_flag(20,"Search Result 'Honda' on SLC Craiglist")
-	#print(i)
+	# 'Item' Name search/pull	
 	print(i.find("a",{"class":"result-title hdrlnk"}).text)
+	# 'Item' Price search/pull	
+	print(i.find("span").text)
+	# 'Item' Image search/pull
+	print(i.find("a",{"class":"result-image gallery"}))
 
