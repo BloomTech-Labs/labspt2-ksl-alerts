@@ -25,6 +25,7 @@
   },
   "lint-staged": {
     "*.js": [
+      "npm run test",
       "npm run pretty",
       "npm run clean",
       "npm run build",
