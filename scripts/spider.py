@@ -73,5 +73,5 @@ print("TEST")
 for i in content_SLC.find_all("li",{"class":"result-row"}):
 	log_flag(20,"Search Result 'Honda' on SLC Craiglist")
 	print(i)
-
+	print(i.find_all("a",{"class":"result-title hdrlnk"}))
 
