@@ -13,7 +13,6 @@
   },
   "scripts": {
     "dev": "react-scripts start",
-    "start": "node src/server.js",
     "build": "react-scripts build",
     "clean": "rimraf build/",
     "test": "react-scripts test",
@@ -33,7 +32,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "npm run clean && npm run build"
+      "pre-push": "npm run clean"
     }
   },
   "browserslist": [
