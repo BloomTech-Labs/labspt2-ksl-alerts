@@ -17,6 +17,7 @@ from datetime import datetime as DATE
 Item = "Lawn-Mower" # Psudeo variable for what is being searched
 clean_item = lambda x : x.replace(' ','%20') # remove spaces, replace with a dash
 #start_page = "https://www.google.com/utah-{}".format(clean_item(Item))
+
 # Craigslist listing searches
 # Salt Lake City
 craig_page_SLC = "https://saltlakecity.craigslist.org/search/sss?query={}&sort=rel".format(clean_item(Item))
@@ -37,7 +38,7 @@ craig_page_StGeo = "https://stgeorge.craigslist.org/search/sss?query={}&sort=rel
 #page_response = requests.get(start_page, timeout=10)
 response_SLC = requests.get(craig_page_SLC, timeout=10)
 response_Logan = requests.get(craig_page_Logan, timeout=10)
-response_Odgen = requests.get(craig_page_Ogden, timeout=10)
+response_Ogden = requests.get(craig_page_Ogden, timeout=10)
 response_Provo = requests.get(craig_page_Provo, timeout=10)
 response_StGeo = requests.get(craig_page_StGeo, timeout=10)
 
@@ -45,7 +46,7 @@ response_StGeo = requests.get(craig_page_StGeo, timeout=10)
 #page_content = BS4(page_response.content,"html.parser")
 content_SLC = BS4(response_SLC.content, "html.parser")
 content_Logan = BS4(response_Logan.content, "html.parser")
-content_Odgen = BS4(response_Odgen.content, "html.parser")
+content_Odgen = BS4(response_Ogden.content, "html.parser")
 content_Provo = BS4(response_Provo.content, "html.parser")
 content_StGeo = BS4(response_StGeo.content, "html.parser")
 
@@ -55,3 +56,18 @@ Items = list()
 # Connect to DB
 
 print("TEST")
+
+# Test that page url's format correctly
+print(craig_page_SLC)
+print(craig_page_Logan)
+print(craig_page_Ogden)
+print(craig_page_Provo)
+print(craig_page_StGeo)
+
+# Test that page response works correctly
+print(response_SLC)
+print(response_Logan)
+print(response_Ogden)
+print(response_Provo)
+print(response_StGeo)
+
