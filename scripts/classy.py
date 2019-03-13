@@ -26,8 +26,13 @@ class Alertifi_Spider:
 
 
 	def craiglist_url(self, city, search):
-		craig_page = "https://{}.craiglist.org/search/sss?query={}&sort=rel".format(city, clean_item(search))
+		''' Generate the response page for a cities craigslist '''
+		
+		# Format the url and store in craig_page
+		craig_page = "https://{}.craigslist.org/search/sss?query={}&sort=rel".format(city, search)
+		# A console log for what is happening
 		self.log_flag(10,"Getting response for {} in {}".format(city, search))
+		# Get the page response 
 		page_response = requests.get(craig_page, timeout=10)
 
 		return page_response
@@ -35,4 +40,5 @@ class Alertifi_Spider:
 
 spooder = Alertifi_Spider()
 spooder.log_flag(10,"T E S t")
+print(spooder.craiglist_url("saltlakecity","Honda"))
 
