@@ -1,16 +1,15 @@
-import spider.py
+from classy import Alertifi_Spider
 import unittest
 
 
 class TestSpider(unittest.TestCase):
-	""" Test class for the spider
-		- Test that link responses work
-		- Test for Item content
-		- Test for more..
-	"""
-	def test_Test(self):
+	""" Test class for the spider """
+	spooder = Alertifi_Spider()
+
+	'''
+	def test_log_flag(self, spooder.log_flag(3,"Test"):
 		print("Test is up and running")
-		pass
+		pass '''
 		
 	def setUp(self):
 		pass
