@@ -5,7 +5,7 @@ from uuid import uuid4
 class Alert(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     title = models.CharField(max_length=200)
-    url = models.TextField(blank=False)
+    url = models.TextField()
     count = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
