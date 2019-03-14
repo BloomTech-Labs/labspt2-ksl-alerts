@@ -15,7 +15,7 @@ class Alertifi_Spider:
 	# Lambda for easy URL formatting
 	# Remove white spaces and replace with a '-'
 	clean_item = lambda x : x.replace(' ','%20')
-	items = list()
+	Items = dict()
 
 	def log_flag(self, x, text):
 		''' Used for clean consol logs '''
@@ -39,16 +39,23 @@ class Alertifi_Spider:
 		
 		return rendered_page
 
-	def find_items(self, rendered_page):
+	def update_items(self, rendered_page):
 		''' Find name, cost and image of each item '''
 		self.log_flag(10,"Finding item data")
+
+		# Loop for appending the item dictionary
 		for i in rendered_page.find_all("li",{"class":"result-row"}):
-			self.Items.append(i.find("a",{"class":"result-title hdrlnk"}).text)
-			print(i)
+			self.log_flag(10,"Updating Dictionary with...")
+			# Select Item names && costs
+			i_name = i.find("a",{"class":"result-title hdrlnk"}).text
+			i_cost = i.find("span").text
+			print("Item:{}\nCost:{}".format(i_name,i_cost))
+			# Update dictionary with current items
+			self.Items.update({i_name : i_cost})		
 
 
 
 spooder = Alertifi_Spider()
 spooder.log_flag(10,"T E S t")
 print(spooder.craiglist_url("saltlakecity","Honda"))
-
+spooder.update_items(spooder.craiglist_url("logan","honda"))
