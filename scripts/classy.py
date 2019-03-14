@@ -2,7 +2,7 @@
 	CLASSY OVERHAUL OF spider.py
 """
 
-from bs4 import BeautifulSoup as bs4
+from bs4 import BeautifulSoup as BS4
 import requests
 from datetime import datetime as DATE
 
@@ -15,6 +15,7 @@ class Alertifi_Spider:
 	# Lambda for easy URL formatting
 	# Remove white spaces and replace with a '-'
 	clean_item = lambda x : x.replace(' ','%20')
+	items = list()
 
 	def log_flag(self, x, text):
 		''' Used for clean consol logs '''
@@ -34,9 +35,18 @@ class Alertifi_Spider:
 		self.log_flag(10,"Getting response for {} in {}".format(city, search))
 		# Get the page response 
 		page_response = requests.get(craig_page, timeout=10)
+		rendered_page = BS4(page_response.content,"html.parser")
+		
+		return rendered_page
 
-		return page_response
-			
+	def find_items(self, rendered_page):
+		''' Find name, cost and image of each item '''
+		self.log_flag(10,"Finding item data")
+		for i in rendered_page.find_all("li",{"class":"result-row"}):
+			self.Items.append(i.find("a",{"class":"result-title hdrlnk"}).text)
+			print(i)
+
+
 
 spooder = Alertifi_Spider()
 spooder.log_flag(10,"T E S t")
