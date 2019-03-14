@@ -8,7 +8,7 @@ const VerticalSidebar = props => {
   return (
     <Sidebar
       as={Menu}
-      animation={"overlay"}
+      animation={"push"}
       direction={"left"}
       icon="labeled"
       inverted

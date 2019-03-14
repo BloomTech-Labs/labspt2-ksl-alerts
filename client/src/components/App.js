@@ -11,20 +11,13 @@ export default class App extends Component {
     this.state = {
       sidebar: {
         width: "thin",
-        visible: true,
-        contentDimmed: true,
-        contentVisible: true
+        visible: true
       }
     };
   }
 
   render() {
-    const {
-      contentDimmed,
-      contentVisible,
-      visible,
-      width
-    } = this.state.sidebar;
+    const { visible, width } = this.state.sidebar;
 
     return (
       <div>
@@ -33,7 +26,7 @@ export default class App extends Component {
           <VerticalSidebar visible={visible} width={width} />
 
           {/* PAGE CONTENT CONTAINER */}
-          <Sidebar.Pusher dimmed={contentDimmed && contentVisible}>
+          <Sidebar.Pusher>
             {/* CONTENT GOES HERE... */}
 
             <h1>Content</h1>
