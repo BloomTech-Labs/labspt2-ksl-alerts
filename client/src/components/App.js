@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Sidebar, Segment } from "semantic-ui-react";
+import { Sidebar } from "semantic-ui-react";
 import styled from "styled-components";
 import VerticalSidebar from "./VerticalSidebar/index";
 import "semantic-ui-css/semantic.min.css";
@@ -41,7 +41,7 @@ export default class App extends Component {
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
   border: none;
 `;

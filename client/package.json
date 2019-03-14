@@ -19,21 +19,6 @@
     "eject": "react-scripts eject",
     "style": "stylelint \"src/**/*.css\" --fix"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "lint-staged": {
-    "*.js": [
-      "npm run pretty",
-      "npm run style",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "browserslist": [
     ">0.2%",
     "not dead",
