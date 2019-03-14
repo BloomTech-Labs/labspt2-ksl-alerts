@@ -22,7 +22,6 @@
     "*.js": [
       "npm run pretty",
       "npm run style",
-      "npm run test",
       "git add"
     ]
   },
