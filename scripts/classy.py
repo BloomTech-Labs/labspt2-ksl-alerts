@@ -36,8 +36,21 @@ class Alertifi_Spider:
 		# Get the page response 
 		page_response = requests.get(craig_page, timeout=10)
 		rendered_page = BS4(page_response.content,"html.parser")
-		
 		return rendered_page
+
+	def ksl_search(self,search):
+		''' Find what the user is looking for on the KSL website '''
+		
+		# Get the main URL (long and greasy)
+		ksl_page = "https://www.ksl.com/?sid=53574&nid=208&cx=partner-pub-3771868546990559%3Ar955z1-wmf4&cof=FORID%3A9&ie=ISO-8859-1&sa=Search&searchtype=kslcom&x=15&y=19&q={}#gsc.tab=0&gsc.q={}&gsc.page=1".format(search,search)
+		self.log_flag(10,"Searching KSL for {}".format(search))
+		# Get the response
+		page_response = requests.get(ksl_page, timeout=10)
+		rendered_page = BS4(page_response.content,"html.parser")
+		# Loop through and grab top 7 results from spider crawl
+		
+
+
 
 	def update_items(self, rendered_page):
 		''' Find name, cost and image of each item '''
