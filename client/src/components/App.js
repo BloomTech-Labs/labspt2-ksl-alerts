@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Sidebar, Segment } from "semantic-ui-react";
+import { Sidebar } from "semantic-ui-react";
 import styled from "styled-components";
 import VerticalSidebar from "./VerticalSidebar/index";
 import "semantic-ui-css/semantic.min.css";
@@ -11,20 +11,13 @@ export default class App extends Component {
     this.state = {
       sidebar: {
         width: "thin",
-        visible: true,
-        contentDimmed: true,
-        contentVisible: true
+        visible: true
       }
     };
   }
 
   render() {
-    const {
-      contentDimmed,
-      contentVisible,
-      visible,
-      width
-    } = this.state.sidebar;
+    const { visible, width } = this.state.sidebar;
 
     return (
       <div>
@@ -33,7 +26,7 @@ export default class App extends Component {
           <VerticalSidebar visible={visible} width={width} />
 
           {/* PAGE CONTENT CONTAINER */}
-          <Sidebar.Pusher dimmed={contentDimmed && contentVisible}>
+          <Sidebar.Pusher>
             {/* CONTENT GOES HERE... */}
 
             <h1>Content</h1>
@@ -48,7 +41,7 @@ export default class App extends Component {
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
   border: none;
 `;
