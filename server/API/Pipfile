@@ -8,7 +8,12 @@ verify_ssl = true
 [packages]
 django = "*"
 gunicorn = "*"
-django-heroku = "*"
+beautifulsoup4 = "*"
+python-decouple = "*"
+whitenoise = "*"
+djangorestframework = "*"
+django-cors-headers = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.7"
