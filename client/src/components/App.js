@@ -24,12 +24,12 @@ export default class App extends Component {
       <AppContainer>
         <VerticalSidebar visible={visible} width={width} />
         <Container>
-        { /* Add Content Here */ }
-
           <Topbar />
+          { /* Add Content Here */ }
 
 
-        { /* ................ */ }
+
+          { /* ................ */ }
         </Container>
       </AppContainer>
 
