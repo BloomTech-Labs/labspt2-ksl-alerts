@@ -8,7 +8,7 @@ const Topbar = (props) => {
   return (
 
     <TopbarContainer>
-      <Breadcrumbs sections={ [{ name: 'Home'}, { name: 'Alert'}, { name: 'Couch'}, ] }/>
+      <Breadcrumbs sections={ [{ name: 'Create Alert'}, { name: 'Alert'}, { name: 'Couch'}, ] }/>
       <Icon name='bell' size='large' fitted />
     </TopbarContainer>
 
