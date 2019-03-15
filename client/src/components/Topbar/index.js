@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Container, Icon, } from 'semantic-ui-react';
+import Breadcrumbs from '../Breadcrumbs/index';
 
 const Topbar = (props) => {
   return (
 
     <TopbarContainer>
-      <span>Home > Alert Feed</span>
+      <Breadcrumbs sections={ [{ name: 'Home'}, { name: 'Alert'}, { name: 'Couch'}, ] }/>
       <Icon name='bell' size='large' fitted />
     </TopbarContainer>
 
