@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Sidebar } from "semantic-ui-react";
 import styled from "styled-components";
 import VerticalSidebar from "./VerticalSidebar/index";
+import Topbar from './Topbar/index.js';
 import "semantic-ui-css/semantic.min.css";
 
 export default class App extends Component {
@@ -20,28 +21,36 @@ export default class App extends Component {
     const { visible, width } = this.state.sidebar;
 
     return (
-      <div>
-        <Sidebar.Pushable as={Container}>
-          {/* SIDEBAR */}
-          <VerticalSidebar visible={visible} width={width} />
+      <AppContainer>
+        <VerticalSidebar visible={visible} width={width} />
+        <Container>
+        { /* Add Content Here */ }
 
-          {/* PAGE CONTENT CONTAINER */}
-          <Sidebar.Pusher>
-            {/* CONTENT GOES HERE... */}
+          <Topbar />
 
-            <h1>Content</h1>
 
-            {/* ...... */}
-          </Sidebar.Pusher>
-        </Sidebar.Pushable>
-      </div>
+        { /* ................ */ }
+        </Container>
+      </AppContainer>
+
     );
   }
 }
 
-const Container = styled.div`
-  width: 100%;
+const AppContainer = styled.div`
+  display: flex;
+  min-width: 100%;
   min-height: 100vh;
-  margin: 0;
-  border: none;
+  padding-left: 170px;
+  padding-right: 21px;
+  /* border: 1px solid black; */
+`;
+
+const Container = styled.div`
+
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid black; */
+
 `;
