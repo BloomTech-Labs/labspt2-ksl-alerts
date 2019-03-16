@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import { Sidebar } from "semantic-ui-react";
-import styled from "styled-components";
-import VerticalSidebar from "./VerticalSidebar/index";
-import "semantic-ui-css/semantic.min.css";
-
+import Landing from "./Landing";
+import "./App.css";
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -17,8 +14,6 @@ export default class App extends Component {
   }
 
   render() {
-    const { visible, width } = this.state.sidebar;
-
     return (
       <div>
         <Sidebar.Pushable as={Container}>
@@ -38,10 +33,3 @@ export default class App extends Component {
     );
   }
 }
-
-const Container = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  margin: 0;
-  border: none;
-`;
