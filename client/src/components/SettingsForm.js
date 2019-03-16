@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Button, Form, Grid, Header, Input } from "semantic-ui-react";
 
 class SettingsForm extends Component {
@@ -9,7 +10,7 @@ class SettingsForm extends Component {
       email: "",
       oldPassword: "",
       newPassword: "",
-      phone: ""
+      phone: null
     };
   }
 
@@ -62,5 +63,12 @@ class SettingsForm extends Component {
     );
   }
 }
+
+SettingsForm.propTypes = {
+  email: PropTypes.string,
+  oldPassword: PropTypes.string,
+  newPassword: PropTypes.string,
+  phone: PropTypes.number
+};
 
 export default SettingsForm;
