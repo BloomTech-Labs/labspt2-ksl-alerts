@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Sidebar } from "semantic-ui-react";
 import styled from "styled-components";
 import VerticalSidebar from "./VerticalSidebar/index";
+import Billing from "./Billing/Billing"
 import "semantic-ui-css/semantic.min.css";
 
 export default class App extends Component {
@@ -30,7 +31,7 @@ export default class App extends Component {
             {/* CONTENT GOES HERE... */}
 
             <h1>Content</h1>
-
+            <Billing />
             {/* ...... */}
           </Sidebar.Pusher>
         </Sidebar.Pushable>
