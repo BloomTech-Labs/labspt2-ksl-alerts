@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Breadcrumb } from 'semantic-ui-react';
 
-const Breadcrumbs = (props) => {
+const Breadcrumbs = props => {
 
   const { sections } = props;
 

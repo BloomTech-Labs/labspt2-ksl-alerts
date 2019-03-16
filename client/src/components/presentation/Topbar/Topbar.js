@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Container, Icon, } from 'semantic-ui-react';
-import Breadcrumbs from '../Breadcrumbs/index';
+import Breadcrumbs from './Breadcrumbs/Breadcrumbs.js';
 
-const Topbar = (props) => {
+const Topbar = props => {
   return (
 
     <TopbarContainer>

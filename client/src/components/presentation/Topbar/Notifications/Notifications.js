@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Notifications = (props) => {
+const Notifications = props => {
   return (
     <div>
     </div>
