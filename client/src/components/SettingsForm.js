@@ -9,6 +9,7 @@ const SettingsForm = () => (
         <Form.Field label="Email" control="input" />
         <Form.Field label="Old Password" control="input" type="password" />
         <Form.Field label="New Password" control="input" type="password" />
+        <Form.Field label="Phone Number" control="input" />
         <Button type="submit">Submit</Button>
       </Form>
     </Grid.Column>
