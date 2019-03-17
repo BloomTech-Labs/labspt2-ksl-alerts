@@ -486,7 +486,7 @@ export default class CreateAlert extends Component {
 
         <FormLayerOne
           handleInputChange={ this.handleInputChange }
-          state={ this.state }
+          { ...this.state }
         />
 
         <FormLayerTwo
