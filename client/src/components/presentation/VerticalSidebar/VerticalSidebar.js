@@ -31,7 +31,13 @@ const VerticalSidebar = props => {
 
   const width = props.mobile ? 'very thin' : 'thin';
 
-  const menuItems = [
+  const menuItems = !props.signedIn ?
+  [
+    { icon: 'home',        text: 'Home',         path: 'Home',       },
+    { icon: 'sign-in',     text: 'Sign In',      path: 'SignIn',     },
+    { icon: 'signup',      text: 'Sign Up',      path: 'SignUp',     },
+  ] :
+  [
     { icon: 'home',        text: 'Home',         path: 'Home',        },
     { icon: 'exclamation', text: 'Alert Feed',   path: 'AlertFeed',   },
     { icon: 'plus',        text: 'Create Alert', path: 'CreateAlert', },

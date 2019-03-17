@@ -11,6 +11,7 @@ export default class App extends Component {
     super(props);
 
     this.state = {
+      signedIn: false,
       appContainer: {
         mobile: false,
       },
@@ -98,7 +99,10 @@ export default class App extends Component {
     return (
       <AppContainer>
         <Router>
-        <VerticalSidebar { ...this.state.sidebar } />
+        <VerticalSidebar
+          signedIn={ this.state.signedIn }
+          { ...this.state.sidebar }
+        />
         <Container>
           <Topbar />
           { /* Add Content Here */ }
