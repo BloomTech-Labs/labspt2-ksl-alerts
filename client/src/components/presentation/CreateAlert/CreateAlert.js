@@ -5,14 +5,6 @@ import { Form, Divider, Label, Input, } from 'semantic-ui-react';
 
 const FormLayerOne = props => {
 
-  /*
-  <Form.Group>
-    <Form.Input id='alertTitleInput' label='Alert Title' placeholder='Title' onChange={ props.handleInputChange } value={ props.state.alertTitleInput.value } />
-    <Form.Input id='keywordSearchInput' label='Keyword Search' placeholder='Keyword' onChange={ props.handleInputChange } value={ props.state.keywordSearchInput.value } />
-    <Form.Input id='categorySearchInput' label='Category Search' placeholder='Category' onChange={ props.handleInputChange } value={ props.state.categorySearchInput.value } />
-  </Form.Group>
-  */
-
   return (
 
     <Form.Group>
@@ -26,11 +18,11 @@ const FormLayerOne = props => {
       />
 
       <Form.Input
-        id='alertTitleInput'
-        label='Alert Title'
-        placeholder='Title'
+        id='keywordSearchInput'
+        label='Keyword Search'
+        placeholder='Keyword'
         onChange={ props.handleInputChange }
-        value={ props.state.alertTitleInput.value }
+        value={ props.state.keywordSearchInput.value }
       />
 
       <Form.Input
@@ -140,31 +132,43 @@ const FormLayerTwo = props => {
   );
 }
 
-const FormLayerThreeTest = props => {
+const FormLayerThree = props => {
 
   const InputContainer = styled.div`
 
-    width: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 141px;
     margin-left: 7px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
+
+  `;
+
+  const Label = styled.label`
+
+    font-weight: bold;
 
   `;
 
   return (
     <Form.Group>
       <InputContainer>
-        <Form.Input
+        <Label>Price Range</Label>
+        <Input
           fluid
-          label='Price Range'
+          label='$'
           placeholder='From'
+          type='number'
         />
       </InputContainer>
 
       <InputContainer>
-        <Form.Input
+        <Input
           fluid
-          label=''
+          label='$'
           placeholder='To'
+          type='number'
         />
       </InputContainer>
 
@@ -185,52 +189,6 @@ const FormLayerThreeTest = props => {
         />
       </InputContainer>
     </Form.Group>
-  );
-}
-
-const FormLayerThree = props => {
-
-  const LayerContainer = styled.div`
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-
-  `;
-
-  const Container = styled.div`
-
-    max-width: 270px;
-    min-width: 150px;
-    /* display: flex; */
-    /* flex-direction: row; */
-    flex: 1;
-    border: 1px solid black;
-
-  `;
-
-  return (
-    <LayerContainer>
-
-      <Container>
-        <GroupLabel>Price Range</GroupLabel>
-          <Group>
-            <Input placeholder='From' as={ TestContainer } />
-            <Input placeholder='To' as= { TestContainer } />
-          </Group>
-      </Container>
-
-      <Container>
-
-          <GroupLabel>Zip</GroupLabel>
-          <Group>
-            <Input type='number' as={ TestContainer } />
-            <Input placeholder='To' as={ TestContainer } />
-          </Group>
-
-      </Container>
-    </LayerContainer>
   );
 }
 
@@ -378,7 +336,7 @@ const FormLayerFive = props => {
   );
 }
 
-class CreateAlert extends Component {
+export default class CreateAlert extends Component {
   constructor(props) {
     super(props);
 
@@ -452,7 +410,10 @@ class CreateAlert extends Component {
           state={ this.state }
         />
 
-        <FormLayerThreeTest />
+        <FormLayerThree
+          handleInputChange={ this.handleInputChange }
+          state={ this.state }
+        />
 
         <FormLayerFour
           handleRadioChange={ this.handleRadioChange }
@@ -470,8 +431,6 @@ class CreateAlert extends Component {
 
 }
 
-export default CreateAlert;
-
 const FormContainer = styled.form`
 
   display: flex;
@@ -480,7 +439,7 @@ const FormContainer = styled.form`
 
 
   align-self: center;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 
 `;
 
