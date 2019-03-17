@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Sidebar } from "semantic-ui-react";
 import styled from "styled-components";
+import { BrowserRouter as Router, Link, NavLink, Route, Switch, } from 'react-router-dom';
 import { Topbar, VerticalSidebar } from '../../presentation/presentation.js';
 import { Home, AlertFeed, CreateAlert, Settings, } from '../container.js';
 import "semantic-ui-css/semantic.min.css";
@@ -96,17 +97,36 @@ export default class App extends Component {
 
     return (
       <AppContainer>
+        <Router>
         <VerticalSidebar { ...this.state.sidebar } />
         <Container>
           <Topbar />
           { /* Add Content Here */ }
-          <CreateAlert { ...this.state.createAlert } />
 
+            <Route
+              path='/Home'
+              render={ () => <Home />}
+            />
+
+            <Route
+              path='/AlertFeed'
+              render={ () => <AlertFeed /> }
+            />
+
+            <Route
+              path="/CreateAlert"
+              render={ () => <CreateAlert { ...this.state.createAlert } />}
+            />
+
+            <Route
+              path='/Settings'
+              render={ () => <Settings /> }
+            />
 
           { /* ................ */ }
         </Container>
+        </Router>
       </AppContainer>
-
     );
   }
 }

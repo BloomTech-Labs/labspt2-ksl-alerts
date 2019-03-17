@@ -1,6 +1,7 @@
 import React from "react";
 import { Menu, Sidebar, Icon } from "semantic-ui-react";
 import PropTypes from "prop-types";
+import { BrowserRouter as Router, Link, NavLink } from 'react-router-dom';
 import styled from "styled-components";
 
 const MenuItem = props => {
@@ -11,11 +12,18 @@ const MenuItem = props => {
 
   `;
 
+  const handleClick = e => {
+    document.querySelector(`#sidebar-${ props.path }-link`).click();
+  }
+
   return (
-    <Menu.Item style={{   minWidth: '0', }} as='a'>
-      <Icon name={ props.icon } />
-      <ItemText hidden={ props.mobile }>{ props.text }</ItemText>
-    </Menu.Item>
+    <>
+      <Menu.Item onClick={ handleClick } as='a'>
+        <Icon size='big' name={ props.icon } />
+        <ItemText hidden={ props.mobile }>{ props.text }</ItemText>
+      </Menu.Item>
+      <NavLink hidden id={ `sidebar-${ props.path }-link` } to={ props.path }/>
+    </>
   );
 }
 
@@ -24,11 +32,11 @@ const VerticalSidebar = props => {
   const width = props.mobile ? 'very thin' : 'thin';
 
   const menuItems = [
-    { icon: 'home',        text: 'Home',         },
-    { icon: 'exclamation', text: 'Alert Feed',   },
-    { icon: 'plus',        text: 'Create Alert', },
-    { icon: 'cog',         text: 'Settings',     },
-    { icon: 'sign-out',    text: 'Sign Out',     },
+    { icon: 'home',        text: 'Home',         path: 'Home',        },
+    { icon: 'exclamation', text: 'Alert Feed',   path: 'AlertFeed',   },
+    { icon: 'plus',        text: 'Create Alert', path: 'CreateAlert', },
+    { icon: 'cog',         text: 'Settings',     path: 'Settings',    },
+    { icon: 'sign-out',    text: 'Sign Out',     path:  ''            },
   ];
 
   const mapMenuItems = items => {
