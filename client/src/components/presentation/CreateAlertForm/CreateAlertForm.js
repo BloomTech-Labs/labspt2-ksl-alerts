@@ -5,36 +5,54 @@ import { Form, Divider, Label, Input, Dropdown, } from 'semantic-ui-react';
 
 const FormLayerOne = props => {
 
+  const style = {
+    fieldContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'flex-end',
+      width: '189px',
+      marginLeft: '7px',
+    }
+  }
+
   return (
 
     <Form.Group>
+      <div style={ style.fieldContainer }>
+        <Form.Input
+          fluid
+          id='alert-title-input'
+          name='alertTitleInput'
+          label='Alert Title'
+          placeholder='Title'
+          onChange={ props.handleChange }
+          value={ props.alertTitleInput.value }
+        />
+      </div>
 
-      <Form.Input
-        id='alert-title-input'
-        name='alertTitleInput'
-        label='Alert Title'
-        placeholder='Title'
-        onChange={ props.handleChange }
-        value={ props.alertTitleInput.value }
-      />
+      <div style={ style.fieldContainer }>
+        <Form.Input
+          fluid
+          id='keyword-search-input'
+          name='keywordSearchInput'
+          label='Keyword Search'
+          placeholder='Keyword'
+          onChange={ props.handleChange }
+          value={ props.keywordSearchInput.value }
+        />
+      </div>
 
-      <Form.Input
-        id='keyword-search-input'
-        name='keywordSearchInput'
-        label='Keyword Search'
-        placeholder='Keyword'
-        onChange={ props.handleChange }
-        value={ props.keywordSearchInput.value }
-      />
-
-      <Form.Input
-        id='category-search-input'
-        name='categorySearchInput'
-        label='Category Search'
-        placeholder='Category'
-        onChange={ props.handleChange }
-        value={ props.categorySearchInput.value }
-      />
+      <div style={ style.fieldContainer }>
+        <Form.Input
+          fluid
+          id='category-search-input'
+          name='categorySearchInput'
+          label='Category Search'
+          placeholder='Category'
+          onChange={ props.handleChange }
+          value={ props.categorySearchInput.value }
+        />
+      </div>
 
     </Form.Group>
 
@@ -149,7 +167,7 @@ const FormLayerThree = props => {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'flex-end',
-      width: '141px',
+      width: '140px',
       marginLeft: '7px',
     }
   }
@@ -394,7 +412,7 @@ const CreateAlertForm = props => {
   }
 
   return (
-    <Form style={ style.formContainer }>
+    <Form size={ props.mobile ? 'tiny' : 'small' } style={ style.formContainer }>
 
       <FormLayerOne
         { ...props }

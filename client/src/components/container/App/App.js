@@ -10,23 +10,97 @@ export default class App extends Component {
     super(props);
 
     this.state = {
+      appContainer: {
+        mobile: false,
+      },
       sidebar: {
-        width: "thin",
-        visible: true
+        visible: true,
+        mobile: false,
+      },
+      createAlert: {
+        mobile: false,
       }
     };
   }
 
+  setMobileState = () => {
+    this.setState({
+      appContainer: {
+        mobile: true,
+      },
+      sidebar: {
+        width: 'very thin',
+        visible: true,
+        mobile: true,
+      },
+      createAlert: {
+        mobile: true,
+      },
+    });
+  }
+
+  setDesktopState = () => {
+    this.setState({
+      appContainer: {
+        mobile: false,
+      },
+      sidebar: {
+        visible: true,
+        mobile: false,
+      },
+      createAlert: {
+        mobile: false,
+      },
+    });
+  }
+
+  componentDidMount() {
+
+    const setMobileState = this.setMobileState;
+    const setDesktopState = this.setDesktopState;
+
+    if (window.innerWidth <= 490) {
+      setMobileState();
+    }
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth <= 490) {
+        setMobileState();
+      } else {
+        setDesktopState();
+      }
+    });
+  }
+
   render() {
-    const { visible, width } = this.state.sidebar;
+
+    const mobile = this.state.appContainer.mobile;
+
+    const AppContainer = styled.div`
+      display: flex;
+      min-width: 100%;
+      min-height: 100vh;
+      padding-left: ${ mobile ? `78px` : `170px` };
+      padding-right: 21px;
+      /* border: 1px solid black; */
+    `;
+
+    const Container = styled.div`
+
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      /* border: 1px solid black; */
+
+    `;
 
     return (
       <AppContainer>
-        <VerticalSidebar visible={visible} width={width} />
+        <VerticalSidebar { ...this.state.sidebar } />
         <Container>
           <Topbar />
           { /* Add Content Here */ }
-          <CreateAlert />
+          <CreateAlert { ...this.state.createAlert } />
 
 
           { /* ................ */ }
@@ -36,21 +110,3 @@ export default class App extends Component {
     );
   }
 }
-
-const AppContainer = styled.div`
-  display: flex;
-  min-width: 100%;
-  min-height: 100vh;
-  padding-left: 170px;
-  padding-right: 21px;
-  /* border: 1px solid black; */
-`;
-
-const Container = styled.div`
-
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  /* border: 1px solid black; */
-
-`;

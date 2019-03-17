@@ -64,6 +64,7 @@ class CreateAlert extends Component {
       <>
         <CreateAlertForm
           { ...this.state }
+          { ...this.props }
           handleChange={ this.handleChange }
           handleDistanceFromDropdownChange={ this.handleDistanceFromDropdownChange }
         />
