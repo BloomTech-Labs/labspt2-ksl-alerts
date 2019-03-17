@@ -331,7 +331,7 @@ const FormLayerFive = props => {
 
   const Container = styled.div`
 
-
+    /* border: 1px solid black; */
 
   `;
 
@@ -395,6 +395,14 @@ const FormLayerFive = props => {
             onChange={ props.handleChange }
           />
         </Form.Group>
+      </Container>
+
+      <Container>
+        <Form.Button
+          type='submit'
+        >
+          Create
+        </Form.Button>
       </Container>
 
     </LayerContainer>
