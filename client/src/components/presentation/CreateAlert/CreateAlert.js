@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Form, Divider, Label, Input, } from 'semantic-ui-react';
+import { Form, Divider, Label, Input, Dropdown, } from 'semantic-ui-react';
 
 const FormLayerOne = props => {
 
@@ -10,27 +10,30 @@ const FormLayerOne = props => {
     <Form.Group>
 
       <Form.Input
-        id='alertTitleInput'
+        id='alert-title-input'
+        name='alertTitleInput'
         label='Alert Title'
         placeholder='Title'
         onChange={ props.handleInputChange }
-        value={ props.state.alertTitleInput.value }
+        value={ props.alertTitleInput.value }
       />
 
       <Form.Input
-        id='keywordSearchInput'
+        id='keyword-search-input'
+        name='keywordSearchInput'
         label='Keyword Search'
         placeholder='Keyword'
         onChange={ props.handleInputChange }
-        value={ props.state.keywordSearchInput.value }
+        value={ props.keywordSearchInput.value }
       />
 
       <Form.Input
-        id='categorySearchInput'
+        id='category-search-input'
+        name='categorySearchInput'
         label='Category Search'
         placeholder='Category'
         onChange={ props.handleInputChange }
-        value={ props.state.categorySearchInput.value }
+        value={ props.categorySearchInput.value }
       />
 
     </Form.Group>
@@ -55,17 +58,23 @@ const FormLayerTwo = props => {
 
   `;
 
-  const sellerTypeValue = props.state.sellerTypeRadio.value;
-  const photosValue     = props.state.photosRadio.value;
+  const Label = styled.label`
+
+    font-weight: bold;
+
+  `;
+
+  const sellerTypeValue = props.sellerTypeRadio.value;
+  const photosValue     = props.photosRadio.value;
 
   return (
     <LayerContainer>
 
       <Container>
-        <GroupLabel>Seller Type</GroupLabel>
+        <Label>Seller Type</Label>
         <Form.Group>
           <Form.Radio
-            id='sellerTypePrivateRadio'
+            id='seller-type-private-radio'
             name='sellerTypeRadio'
             label='Private'
             value='private'
@@ -74,7 +83,7 @@ const FormLayerTwo = props => {
           />
 
           <Form.Radio
-            id='sellerTypeBusinessRadio'
+            id='seller-type-business-radio'
             name='sellerTypeRadio'
             label='Business'
             value='business'
@@ -83,7 +92,7 @@ const FormLayerTwo = props => {
           />
 
           <Form.Radio
-            id='sellerTypeAllRadio'
+            id='seller-type-all-radio'
             name='sellerTypeRadio'
             label='All'
             value='all'
@@ -95,11 +104,11 @@ const FormLayerTwo = props => {
       </Container>
 
       <Container>
-        <GroupLabel>Photos</GroupLabel>
+        <Label>Photos</Label>
         <Form.Group>
 
           <Form.Radio
-            id='photosHasPhotosRadio'
+            id='photos-has-photos-radio'
             name='photosRadio'
             label='Has Photos'
             value='has photos'
@@ -108,7 +117,7 @@ const FormLayerTwo = props => {
           />
 
           <Form.Radio
-            id='photosNoPhotosRadio'
+            id='photos-no-photos-radio'
             name='photosRadio'
             label='No Photos'
             value='no photos'
@@ -117,7 +126,7 @@ const FormLayerTwo = props => {
           />
 
           <Form.Radio
-            id='photosAllRadio'
+            id='photos-all-radio'
             name='photosRadio'
             label='All'
             value='all'
@@ -133,6 +142,17 @@ const FormLayerTwo = props => {
 }
 
 const FormLayerThree = props => {
+
+  // NOTE: Had to use inline styles for this. Styled components causes an issue for some reason.
+  const style = {
+    fieldContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'flex-end',
+      width: '141px',
+      marginLeft: '7px',
+    }
+  }
 
   const InputContainer = styled.div`
 
@@ -151,43 +171,71 @@ const FormLayerThree = props => {
 
   `;
 
+  const options = [
+    { key: 'exact', text: 'Exact', value: 'exact' },
+    { key: '10',    text: '10',    value: '10',   },
+    { key: '25',    text: '25',    value: '25',   },
+    { key: '50',    text: '50',    value: '50',   },
+    { key: '100',   text: '100',   value: '100'   },
+    { key: '150',   text: '150',   value: '150',  },
+    { key: '200',   text: '200',   value: '200',  },
+    { key: '201+',  text: '201+',  value: '201+', },
+  ];
+
   return (
     <Form.Group>
-      <InputContainer>
+      <div style={ style.fieldContainer }>
         <Label>Price Range</Label>
         <Input
+          id='price-range-from-input'
+          name='priceRangeFromInput'
           fluid
           label='$'
           placeholder='From'
           type='number'
+          value={ props.priceRangeFromInput.value}
+          onChange={ props.handleInputChange }
         />
-      </InputContainer>
+      </div>
 
-      <InputContainer>
+      <div style={ style.fieldContainer }>
         <Input
+          id='price-range-to-input'
+          name='priceRangeToInput'
           fluid
           label='$'
           placeholder='To'
           type='number'
+          value={ props.priceRangeToInput.value }
+          onChange={ props.handleInputChange }
         />
-      </InputContainer>
+      </div>
 
-      <InputContainer>
+      <div style={ style.fieldContainer }>
         <Form.Input
+          id='zip-input'
+          name='zipInput'
           fluid
           label='Zip'
-          placeholder='To'
+          placeholder=''
+          value={ props.zipInput.value }
+          onChange={ props.handleInputChange }
         />
-      </InputContainer>
+      </div>
 
-      <InputContainer>
-        <Form.Input
+      <div style={ style.fieldContainer }>
+        <Label>Distance From</Label>
+        <Dropdown
+          id='distance-from-dropdown'
+          name='distanceFromDropdown'
+          selection
           fluid
-          label='Distance From'
-          disabled={ true }
-          value={ 25 }
+          options={ options }
+          value={ props.distanceFromDropdown.value || '25' }
+          onChange={ props.handleDropdownChange }
         />
-      </InputContainer>
+      </div>
+
     </Form.Group>
   );
 }
@@ -209,16 +257,22 @@ const FormLayerFour = props => {
 
   `;
 
-  const { value } = props.state.listingTypeRadio;
+  const Label = styled.label`
+
+    font-weight: bold;
+
+  `;
+
+  const { value } = props.listingTypeRadio;
 
   return (
     <LayerContainer>
 
       <Container>
-        <GroupLabel>Listing Type</GroupLabel>
+        <Label>Listing Type</Label>
         <Form.Group>
           <Form.Radio
-            id='listingTypeForSaleRadio'
+            id='listing-type-for-sale-radio'
             name='listingTypeRadio'
             label='For Sale'
             value='for sale'
@@ -227,7 +281,7 @@ const FormLayerFour = props => {
           />
 
           <Form.Radio
-            id='listingTypeInSearchOfRadio'
+            id='listing-type-in-search-of-radio'
             name='listingTypeRadio'
             label='In Search Of'
             value='in search of'
@@ -236,7 +290,7 @@ const FormLayerFour = props => {
           />
 
           <Form.Radio
-            id='listingTypeForRentRadio'
+            id='listing-type-for-rent-radio'
             name='listingTypeRadio'
             label='For Rent'
             value='for rent'
@@ -245,7 +299,7 @@ const FormLayerFour = props => {
           />
 
           <Form.Radio
-            id='listingTypeAllradio'
+            id='listing-type-all-radio'
             name='listingTypeRadio'
             label='All'
             value='all'
@@ -276,17 +330,23 @@ const FormLayerFive = props => {
 
   `;
 
-  const { value } = props.state.listingPostedRadio;
+  const Label = styled.label`
+
+    font-weight: bold;
+
+  `;
+
+  const { value } = props.listingPostedRadio;
 
   return (
     <LayerContainer>
 
       <Container>
-        <GroupLabel>Listing Posted</GroupLabel>
+        <Label>Listing Posted</Label>
         <Form.Group>
 
           <Form.Radio
-            id='listingPosted1HourRadio'
+            id='listing-posted-1-hour-radio'
             name='listingPostedRadio'
             label='1 Hour'
             value='1 hour'
@@ -295,7 +355,7 @@ const FormLayerFive = props => {
           />
 
           <Form.Radio
-            id='listingPosted1DayRadio'
+            id='listing-posted-1-day-radio'
             name='listingPostedRadio'
             label='1 Day'
             value='1 day'
@@ -304,7 +364,7 @@ const FormLayerFive = props => {
           />
 
           <Form.Radio
-            id='listingPosted7DaysRadio'
+            id='listing-posted-7-days-radio'
             name='listingPostedRadio'
             label='7 Days'
             value='7 days'
@@ -313,7 +373,7 @@ const FormLayerFive = props => {
           />
 
           <Form.Radio
-            id='listingPosted30DaysRadio'
+            id='listing-posted-30-days-radio'
             name='listingPostedRadio'
             label='30 Days'
             value='30 days'
@@ -322,7 +382,7 @@ const FormLayerFive = props => {
           />
 
           <Form.Radio
-            id='listingPostedAllRadio'
+            id='listing-posted-all-radio'
             name='listingPostedRadio'
             label='All'
             value='all'
@@ -341,6 +401,9 @@ export default class CreateAlert extends Component {
     super(props);
 
     this.state = {
+      input: {
+        value: '',
+      },
       alertTitleInput: {
         value: '',
       },
@@ -354,6 +417,12 @@ export default class CreateAlert extends Component {
         value: '',
       },
       priceRangeToInput: {
+        value: '',
+      },
+      zipInput: {
+        value: '',
+      },
+      distanceFromDropdown: {
         value: '',
       },
       sellerTypeRadio: {
@@ -375,7 +444,7 @@ export default class CreateAlert extends Component {
   handleInputChange = e => {
 
     this.setState({
-      [e.target.id]: {
+      [e.target.name]: {
         value: e.target.value,
       }
     });
@@ -384,8 +453,6 @@ export default class CreateAlert extends Component {
 
   handleRadioChange = e => {
 
-    console.log(e.target.name);
-
     this.setState({
       [e.target.name]: {
         value: e.target.value,
@@ -393,9 +460,26 @@ export default class CreateAlert extends Component {
     })
   }
 
+  handleDistanceFromDropdownChange = (e, { value }) => {
+
+    this.setState({
+      distanceFromDropdown: {
+        value,
+      }
+    });
+
+  }
+
   render() {
 
-    const { value } = this.state;
+    const FormContainer = styled.form`
+
+      display: flex;
+      flex-direction: column;
+      align-self: center;
+      /* border: 1px solid black; */
+
+    `;
 
     return (
       <Form as={ FormContainer }>
@@ -407,61 +491,26 @@ export default class CreateAlert extends Component {
 
         <FormLayerTwo
           handleRadioChange={ this.handleRadioChange }
-          state={ this.state }
+          { ...this.state }
         />
 
         <FormLayerThree
           handleInputChange={ this.handleInputChange }
-          state={ this.state }
+          handleDropdownChange={ this.handleDistanceFromDropdownChange }
+          { ...this.state }
         />
 
         <FormLayerFour
           handleRadioChange={ this.handleRadioChange }
-          state={ this.state }
+          { ...this.state }
         />
 
         <FormLayerFive
           handleRadioChange={ this.handleRadioChange }
-          state={ this.state }
+          { ...this.state }
         />
 
       </Form>
     );
   }
-
 }
-
-const FormContainer = styled.form`
-
-  display: flex;
-  flex-direction: column;
-  /* justify-content: space-between; */
-
-
-  align-self: center;
-  /* border: 1px solid black; */
-
-`;
-
-const GroupLabel = styled.label`
-
-  font-weight: bold;
-
-`;
-
-const Group = styled.div`
-
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  width: 100%;
-
-`;
-
-const TestContainer = styled.div`
-
-  width: 130px;
-  min-width: 130px;
-  /* border: 1px solid black; */
-
-`;
