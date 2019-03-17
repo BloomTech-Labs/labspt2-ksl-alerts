@@ -219,7 +219,7 @@ const FormLayerThree = props => {
           fluid
           options={ options }
           value={ props.distanceFromDropdown.value || '25' }
-          onChange={ props.handleDropdownChange }
+          onChange={ props.handleDistanceFromDropdownChange }
         />
       </div>
 
@@ -383,106 +383,41 @@ const FormLayerFive = props => {
   );
 }
 
-export default class CreateAlert extends Component {
-  constructor(props) {
-    super(props);
+const CreateAlertForm = props => {
 
-    this.state = {
-      alertTitleInput: {
-        value: '',
-      },
-      keywordSearchInput: {
-        value: '',
-      },
-      categorySearchInput: {
-        value: '',
-      },
-      priceRangeFromInput: {
-        value: '',
-      },
-      priceRangeToInput: {
-        value: '',
-      },
-      zipInput: {
-        value: '',
-      },
-      distanceFromDropdown: {
-        value: '',
-      },
-      sellerTypeRadio: {
-        value: '',
-      },
-      photosRadio: {
-        value: '',
-      },
-      listingTypeRadio: {
-        value: '',
-      },
-      listingPostedRadio: {
-        value: '',
-      }
-    };
-
-  }
-
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: {
-        value: e.target.value,
-      }
-    });
-  }
-
-  handleDistanceFromDropdownChange = (e, { value }) => {
-
-    this.setState({
-      distanceFromDropdown: {
-        value,
-      }
-    });
-
-  }
-
-  render() {
-
-    const style = {
-      formContainer: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignSelf: 'center',
-      }
+  const style = {
+    formContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignSelf: 'center',
     }
-
-    return (
-      <Form style={ style.formContainer }>
-
-        <FormLayerOne
-          handleChange={ this.handleChange }
-          { ...this.state }
-        />
-
-        <FormLayerTwo
-          handleChange={ this.handleChange }
-          { ...this.state }
-        />
-
-        <FormLayerThree
-          handleDropdownChange={ this.handleDistanceFromDropdownChange }
-          handleChange={ this.handleChange }
-          { ...this.state }
-        />
-
-        <FormLayerFour
-          handleChange={ this.handleChange }
-          { ...this.state }
-        />
-
-        <FormLayerFive
-          handleChange={ this.handleChange }
-          { ...this.state }
-        />
-
-      </Form>
-    );
   }
+
+  return (
+    <Form style={ style.formContainer }>
+
+      <FormLayerOne
+        { ...props }
+      />
+
+      <FormLayerTwo
+        { ...props }
+      />
+
+      <FormLayerThree
+        { ...props }
+      />
+
+      <FormLayerFour
+        { ...props }
+      />
+
+      <FormLayerFive
+        { ...props }
+      />
+
+    </Form>
+  );
 }
+
+export default CreateAlertForm;
