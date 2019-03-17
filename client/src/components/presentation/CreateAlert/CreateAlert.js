@@ -14,7 +14,7 @@ const FormLayerOne = props => {
         name='alertTitleInput'
         label='Alert Title'
         placeholder='Title'
-        onChange={ props.handleInputChange }
+        onChange={ props.handleChange }
         value={ props.alertTitleInput.value }
       />
 
@@ -23,7 +23,7 @@ const FormLayerOne = props => {
         name='keywordSearchInput'
         label='Keyword Search'
         placeholder='Keyword'
-        onChange={ props.handleInputChange }
+        onChange={ props.handleChange }
         value={ props.keywordSearchInput.value }
       />
 
@@ -32,7 +32,7 @@ const FormLayerOne = props => {
         name='categorySearchInput'
         label='Category Search'
         placeholder='Category'
-        onChange={ props.handleInputChange }
+        onChange={ props.handleChange }
         value={ props.categorySearchInput.value }
       />
 
@@ -79,7 +79,7 @@ const FormLayerTwo = props => {
             label='Private'
             value='private'
             checked={ sellerTypeValue === 'private' }
-            onChange={ props.handleRadioChange }
+            onChange={ props.handleChange }
           />
 
           <Form.Radio
@@ -88,7 +88,7 @@ const FormLayerTwo = props => {
             label='Business'
             value='business'
             checked={ sellerTypeValue === 'business' }
-            onChange={ props.handleRadioChange }
+            onChange={ props.handleChange }
           />
 
           <Form.Radio
@@ -97,7 +97,7 @@ const FormLayerTwo = props => {
             label='All'
             value='all'
             checked={ sellerTypeValue === 'all' }
-            onChange={ props.handleRadioChange }
+            onChange={ props.handleChange }
           />
 
         </Form.Group>
@@ -113,7 +113,7 @@ const FormLayerTwo = props => {
             label='Has Photos'
             value='has photos'
             checked={ photosValue === 'has photos' }
-            onChange={ props.handleRadioChange }
+            onChange={ props.handleChange }
           />
 
           <Form.Radio
@@ -122,7 +122,7 @@ const FormLayerTwo = props => {
             label='No Photos'
             value='no photos'
             checked={ photosValue === 'no photos' }
-            onChange={ props.handleRadioChange }
+            onChange={ props.handleChange }
           />
 
           <Form.Radio
@@ -131,7 +131,7 @@ const FormLayerTwo = props => {
             label='All'
             value='all'
             checked={ photosValue === 'all' }
-            onChange={ props.handleRadioChange }
+            onChange={ props.handleChange }
           />
 
         </Form.Group>
@@ -153,17 +153,6 @@ const FormLayerThree = props => {
       marginLeft: '7px',
     }
   }
-
-  const InputContainer = styled.div`
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    width: 141px;
-    margin-left: 7px;
-    /* border: 1px solid black; */
-
-  `;
 
   const Label = styled.label`
 
@@ -194,7 +183,7 @@ const FormLayerThree = props => {
           placeholder='From'
           type='number'
           value={ props.priceRangeFromInput.value}
-          onChange={ props.handleInputChange }
+          onChange={ props.handleChange }
         />
       </div>
 
@@ -207,7 +196,7 @@ const FormLayerThree = props => {
           placeholder='To'
           type='number'
           value={ props.priceRangeToInput.value }
-          onChange={ props.handleInputChange }
+          onChange={ props.handleChange }
         />
       </div>
 
@@ -219,15 +208,13 @@ const FormLayerThree = props => {
           label='Zip'
           placeholder=''
           value={ props.zipInput.value }
-          onChange={ props.handleInputChange }
+          onChange={ props.handleChange }
         />
       </div>
 
       <div style={ style.fieldContainer }>
         <Label>Distance From</Label>
         <Dropdown
-          id='distance-from-dropdown'
-          name='distanceFromDropdown'
           selection
           fluid
           options={ options }
@@ -277,7 +264,7 @@ const FormLayerFour = props => {
             label='For Sale'
             value='for sale'
             checked={ value === 'for sale' }
-            onChange={ props.handleRadioChange }
+            onChange={ props.handleChange }
           />
 
           <Form.Radio
@@ -286,7 +273,7 @@ const FormLayerFour = props => {
             label='In Search Of'
             value='in search of'
             checked={ value === 'in search of' }
-            onChange={ props.handleRadioChange }
+            onChange={ props.handleChange }
           />
 
           <Form.Radio
@@ -295,7 +282,7 @@ const FormLayerFour = props => {
             label='For Rent'
             value='for rent'
             checked={ value === 'for rent' }
-            onChange={ props.handleRadioChange }
+            onChange={ props.handleChange }
           />
 
           <Form.Radio
@@ -304,7 +291,7 @@ const FormLayerFour = props => {
             label='All'
             value='all'
             checked={ value === 'all' }
-            onChange={ props.handleRadioChange }
+            onChange={ props.handleChange }
           />
         </Form.Group>
       </Container>
@@ -351,7 +338,7 @@ const FormLayerFive = props => {
             label='1 Hour'
             value='1 hour'
             checked={ value === '1 hour' }
-            onChange={ props.handleRadioChange }
+            onChange={ props.handleChange }
           />
 
           <Form.Radio
@@ -360,7 +347,7 @@ const FormLayerFive = props => {
             label='1 Day'
             value='1 day'
             checked={ value === '1 day' }
-            onChange={ props.handleRadioChange }
+            onChange={ props.handleChange }
           />
 
           <Form.Radio
@@ -369,7 +356,7 @@ const FormLayerFive = props => {
             label='7 Days'
             value='7 days'
             checked={ value === '7 days' }
-            onChange={ props.handleRadioChange }
+            onChange={ props.handleChange }
           />
 
           <Form.Radio
@@ -378,7 +365,7 @@ const FormLayerFive = props => {
             label='30 Days'
             value='30 days'
             checked={ value === '30 days' }
-            onChange={ props.handleRadioChange }
+            onChange={ props.handleChange }
           />
 
           <Form.Radio
@@ -387,7 +374,7 @@ const FormLayerFive = props => {
             label='All'
             value='all'
             checked={ value === 'all' }
-            onChange={ props.handleRadioChange }
+            onChange={ props.handleChange }
           />
         </Form.Group>
       </Container>
@@ -438,23 +425,12 @@ export default class CreateAlert extends Component {
 
   }
 
-  handleInputChange = e => {
-
+  handleChange = e => {
     this.setState({
       [e.target.name]: {
         value: e.target.value,
       }
     });
-
-  }
-
-  handleRadioChange = e => {
-
-    this.setState({
-      [e.target.name]: {
-        value: e.target.value,
-      }
-    })
   }
 
   handleDistanceFromDropdownChange = (e, { value }) => {
@@ -468,7 +444,7 @@ export default class CreateAlert extends Component {
   }
 
   render() {
-    
+
     const style = {
       formContainer: {
         display: 'flex',
@@ -481,28 +457,28 @@ export default class CreateAlert extends Component {
       <Form style={ style.formContainer }>
 
         <FormLayerOne
-          handleInputChange={ this.handleInputChange }
+          handleChange={ this.handleChange }
           { ...this.state }
         />
 
         <FormLayerTwo
-          handleRadioChange={ this.handleRadioChange }
+          handleChange={ this.handleChange }
           { ...this.state }
         />
 
         <FormLayerThree
-          handleInputChange={ this.handleInputChange }
           handleDropdownChange={ this.handleDistanceFromDropdownChange }
+          handleChange={ this.handleChange }
           { ...this.state }
         />
 
         <FormLayerFour
-          handleRadioChange={ this.handleRadioChange }
+          handleChange={ this.handleChange }
           { ...this.state }
         />
 
         <FormLayerFive
-          handleRadioChange={ this.handleRadioChange }
+          handleChange={ this.handleChange }
           { ...this.state }
         />
 
