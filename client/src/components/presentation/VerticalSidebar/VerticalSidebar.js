@@ -18,7 +18,7 @@ const MenuItem = props => {
 
   return (
     <>
-      <Menu.Item onClick={ handleClick } as='a'>
+      <Menu.Item style={{ minWidth: '0', }} onClick={ handleClick } as='a'>
         <Icon size='big' name={ props.icon } />
         <ItemText hidden={ props.mobile }>{ props.text }</ItemText>
       </Menu.Item>
