@@ -401,9 +401,6 @@ export default class CreateAlert extends Component {
     super(props);
 
     this.state = {
-      input: {
-        value: '',
-      },
       alertTitleInput: {
         value: '',
       },
@@ -471,18 +468,17 @@ export default class CreateAlert extends Component {
   }
 
   render() {
-
-    const FormContainer = styled.form`
-
-      display: flex;
-      flex-direction: column;
-      align-self: center;
-      /* border: 1px solid black; */
-
-    `;
+    
+    const style = {
+      formContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignSelf: 'center',
+      }
+    }
 
     return (
-      <Form as={ FormContainer }>
+      <Form style={ style.formContainer }>
 
         <FormLayerOne
           handleInputChange={ this.handleInputChange }
