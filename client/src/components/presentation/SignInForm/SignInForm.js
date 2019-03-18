@@ -10,8 +10,13 @@ const FormLayerOne = props => {
 
       <FieldContainer>
         <Form.Input
+          id='sign-in-username-input'
+          name='signInUsernameInput'
           label='Username'
           placeholder='Username'
+          type='text'
+          value={ props.signInUsernameInput }
+          onChange={ props.handleChange }
         />
       </FieldContainer>
 
@@ -26,8 +31,13 @@ const FormLayerTwo = props => {
 
       <FieldContainer>
         <Form.Input
+          id='sign-in-password-input'
+          name='signInPasswordInput'
           label='Password'
           placeholder='Password'
+          type='password'
+          value={ props.signInPasswordInput }
+          onChange={ props.handleChange }
         />
       </FieldContainer>
 
@@ -42,7 +52,7 @@ const FormLayerThree = props => {
 
       <FieldContainer>
         <Form.Button
-
+          onClick={ props.handleSubmit }
         >
           Sign In
         </Form.Button>
@@ -56,11 +66,20 @@ const SignInForm = props => {
   return (
     <Form as={ FormContainer }>
 
-      <FormLayerOne />
+      <FormLayerOne
+        { ...props }
+        handleChange={ props.handleChange }
+      />
 
-      <FormLayerTwo />
+      <FormLayerTwo
+        { ...props }
+        handleChange={ props.handleChange }
+      />
 
-      <FormLayerThree />
+      <FormLayerThree
+        { ...props }
+        handleSubmit={ props.handleSubmit }
+      />
 
     </Form>
   );

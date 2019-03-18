@@ -65,6 +65,13 @@ class UserAccount extends Component {
 
   signIn = info => {
 
+    axios.post('http://localhost:8080/api/users/signin', info)
+         .then(res => {
+           const token = res.data.token;
+           this.props.authenticate(token);
+         }).catch(err => {
+           console.log(err);
+         })
   }
 
   signUp = info => {
@@ -72,13 +79,7 @@ class UserAccount extends Component {
     axios.post('http://localhost:8080/api/users/signup', info)
          .then(res => {
            const token = res.data.token;
-           if (token) {
-             localStorage.setItem('ALERTIFI-USER-AUTHENTICATION-TOKEN', token);
-             this.props.authenticate(token);
-             document.querySelector(`#sidebar-Home-link`).click();
-           } else {
-             alert('Unable to authenticate');
-           }
+           this.props.authenticate(token);
          }).catch(err => {
            console.log(err);
          });

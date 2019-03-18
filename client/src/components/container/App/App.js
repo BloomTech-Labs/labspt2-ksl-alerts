@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Sidebar } from "semantic-ui-react";
 import styled from "styled-components";
+import axios from 'axios';
 import { BrowserRouter as Router, Link, NavLink, Route, Switch, } from 'react-router-dom';
 import { Topbar, VerticalSidebar } from '../../presentation/presentation.js';
 import { Home, AlertFeed, CreateAlert, Settings, UserAccount, } from '../container.js';
@@ -13,6 +14,14 @@ export default class App extends Component {
     this.state = {
       signedIn: false,
       authToken: '',
+      user: {
+        _id: '',
+        username: '',
+        email: '',
+        firstName: '',
+        lastName: '',
+        alerts: [],
+      },
       appContainer: {
         mobile: false,
       },
@@ -58,13 +67,49 @@ export default class App extends Component {
   }
 
   authenticate = (authToken) => {
-    this.setState({ signedIn: true, authToken, });
+
+    if (authToken) {
+      localStorage.setItem('ALERTIFI-USER-AUTHENTICATION-TOKEN', authToken);
+      this.setState({ signedIn: true, authToken, });
+      document.querySelector(`#sidebar-Home-link`).click();
+    } else {
+      alert('Unable to authenticate');
+    }
+
+
+
+  }
+
+  signOut = () => {
+    this.setState({
+      signedIn: false,
+      authToken: '',
+    });
+    localStorage.removeItem('ALERTIFI-USER-AUTHENTICATION-TOKEN');
   }
 
   componentDidMount() {
 
     const setMobileState = this.setMobileState;
     const setDesktopState = this.setDesktopState;
+    const authToken = localStorage.getItem('ALERTIFI-USER-AUTHENTICATION-TOKEN');
+
+    if (authToken) {
+
+      axios.get('http://localhost:8080/api/users/verify', { headers: { 'Authorization': authToken, }})
+           .then(res => {
+
+             if (res.error) {
+               console.log(res.error);
+             }
+
+             const { user, } = res.data;
+             this.setState({ signedIn: true, authToken, });
+             this.setState({ user, })
+           }).catch(err => {
+             console.log(err);
+           })
+    }
 
     if (window.innerWidth <= 490) {
       setMobileState();
@@ -106,6 +151,7 @@ export default class App extends Component {
         <Router>
         <VerticalSidebar
           signedIn={ this.state.signedIn }
+          signOut={ this.signOut }
           { ...this.state.sidebar }
         />
         <Container>

@@ -12,8 +12,14 @@ const MenuItem = props => {
 
   `;
 
-  const handleClick = e => {
-    document.querySelector(`#sidebar-${ props.path }-link`).click();
+  const handleClick = (e, text) => {
+
+    if (props.signOut) {
+      props.signOut();
+      document.querySelector('#sidebar-Home-link').click();
+    } else {
+      document.querySelector(`#sidebar-${ props.path }-link`).click();
+    }
   }
 
   return (
@@ -52,6 +58,7 @@ const VerticalSidebar = props => {
           key={ i }
           { ...props }
           { ...item }
+          signOut={ item.text === 'Sign Out' ? props.signOut : null }
         />
       );
     });
