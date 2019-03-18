@@ -3,7 +3,7 @@ import { Sidebar } from "semantic-ui-react";
 import styled from "styled-components";
 import { BrowserRouter as Router, Link, NavLink, Route, Switch, } from 'react-router-dom';
 import { Topbar, VerticalSidebar } from '../../presentation/presentation.js';
-import { Home, AlertFeed, CreateAlert, Settings, } from '../container.js';
+import { Home, AlertFeed, CreateAlert, Settings, UserAccount, } from '../container.js';
 import "semantic-ui-css/semantic.min.css";
 
 export default class App extends Component {
@@ -11,7 +11,7 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      signedIn: true,
+      signedIn: false,
       appContainer: {
         mobile: false,
       },
@@ -125,6 +125,16 @@ export default class App extends Component {
             <Route
               path='/Settings'
               render={ () => <Settings /> }
+            />
+
+            <Route
+              path='/SignIn'
+              render={ () => <UserAccount form='SignIn' /> }
+            />
+
+            <Route
+              path='/SignUp'
+              render={ () => <UserAccount form='SignUp' /> }
             />
 
           { /* ................ */ }
