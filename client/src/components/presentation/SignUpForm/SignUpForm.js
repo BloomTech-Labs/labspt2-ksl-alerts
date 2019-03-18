@@ -10,19 +10,27 @@ const FormLayerOne = props => {
 
       <FieldContainer>
         <Form.Input
+          id='sign-up-username-input'
+          name='signUpUsernameInput'
           fluid
           label='Username'
           placeholder='Username'
           type='text'
+          value={ props.signUpUsernameInput }
+          onChange={ props.handleChange }
         />
       </FieldContainer>
 
       <FieldContainer>
         <Form.Input
+          id='sign-up-email-input'
+          name='signUpEmailInput'
           fluid
           label='Email'
           placeholder='Email'
           type='email'
+          value={ props.signUpEmailInput }
+          onChange={ props.handleChange }
         />
       </FieldContainer>
 
@@ -36,18 +44,26 @@ const FormLayerTwo = props => {
     <Form.Group>
       <FieldContainer>
         <Form.Input
+          id='sign-up-password-input'
+          name='signUpPasswordInput'
           fluid
           label='Password'
           placeholder='Password'
           type='password'
+          value={ props.signUpPasswordInput }
+          onChange={ props.handleChange }
         />
       </FieldContainer>
 
       <FieldContainer>
         <Form.Input
+          id='sign-up-re-type-password-input'
+          name='signUpReTypePasswordInput'
           fluid
           placeholder='Re-Type Password'
           type='password'
+          value={ props.signUpReTypePasswordInput }
+          onChange={ props.handleChange }
         />
       </FieldContainer>
     </Form.Group>
@@ -60,7 +76,9 @@ const FormLayerThree = props => {
     <Form.Group>
       <FieldContainer>
         <Form.Button
-
+          disabled={ false }
+          type='submit'
+          onClick={ props.handleSubmit }
         >
           Sign Up
         </Form.Button>
@@ -73,11 +91,21 @@ const SignUpForm = props => {
   return (
     <Form as={ FormContainer }>
 
-      <FormLayerOne />
+      <FormLayerOne
+        { ...props }
+        handleChange={ props.handleChange }
+      />
 
-      <FormLayerTwo />
+      <FormLayerTwo
+        { ...props }
+        handleChange={ props.handleChange }
+      />
 
-      <FormLayerThree />
+      <FormLayerThree
+        { ...props }
+        handleChange={ props.handleChange }
+        handleSubmit={ props.handleSubmit }
+      />
 
     </Form>
   );
@@ -91,7 +119,7 @@ export default SignUpForm;
 
 const FormContainer = styled.form`
 
-  /* border: 1px solid black; */ 
+  /* border: 1px solid black; */
   /* max-width: 600px; */
   align-self: center;
 

@@ -33,9 +33,9 @@ const VerticalSidebar = props => {
 
   const menuItems = !props.signedIn ?
   [
-    { icon: 'home',        text: 'Home',         path: 'Home',       },
-    { icon: 'sign-in',     text: 'Sign In',      path: 'SignIn',     },
-    { icon: 'signup',      text: 'Sign Up',      path: 'SignUp',     },
+    { icon: 'home',        text: 'Home',         path: 'Home',        },
+    { icon: 'sign-in',     text: 'Sign In',      path: 'SignIn',      },
+    { icon: 'signup',      text: 'Sign Up',      path: 'SignUp',      },
   ] :
   [
     { icon: 'home',        text: 'Home',         path: 'Home',        },

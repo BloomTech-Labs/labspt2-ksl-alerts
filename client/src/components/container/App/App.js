@@ -12,6 +12,7 @@ export default class App extends Component {
 
     this.state = {
       signedIn: false,
+      authToken: '',
       appContainer: {
         mobile: false,
       },
@@ -54,6 +55,10 @@ export default class App extends Component {
         mobile: false,
       },
     });
+  }
+
+  authenticate = (authToken) => {
+    this.setState({ signedIn: true, authToken, });
   }
 
   componentDidMount() {
@@ -129,12 +134,12 @@ export default class App extends Component {
 
             <Route
               path='/SignIn'
-              render={ () => <UserAccount form='SignIn' /> }
+              render={ () => <UserAccount authenticate={ this.authenticate } renderForm='SignIn' /> }
             />
 
             <Route
               path='/SignUp'
-              render={ () => <UserAccount form='SignUp' /> }
+              render={ () => <UserAccount authenticate={ this.authenticate } renderForm='SignUp' /> }
             />
 
           { /* ................ */ }
