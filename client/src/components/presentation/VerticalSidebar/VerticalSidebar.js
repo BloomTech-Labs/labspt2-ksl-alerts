@@ -51,8 +51,8 @@ const VerticalSidebar = props => {
 };
 
 VerticalSidebar.propTypes = {
-  width: PropTypes.string,
-  visible: PropTypes.bool
+  width: PropTypes.string.isRequired,
+  visible: PropTypes.bool.isRequired
 };
 
 export default VerticalSidebar;
