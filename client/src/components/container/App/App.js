@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Sidebar } from "semantic-ui-react";
 import styled from "styled-components";
-import { CreateAlert, Topbar, VerticalSidebar } from '../../presentation/presentation.js';
+import { CreateAlert, Settings, Topbar, VerticalSidebar } from '../../presentation/presentation.js';
 import "semantic-ui-css/semantic.min.css";
 
 export default class App extends Component {
@@ -27,7 +27,7 @@ export default class App extends Component {
           { /* Add Content Here */ }
           <CreateAlert />
 
-
+          <Settings />
           { /* ................ */ }
         </Container>
       </AppContainer>
