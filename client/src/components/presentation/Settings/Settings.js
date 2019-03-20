@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Button, Form, Grid, Header, Input } from "semantic-ui-react";
 
-class SettingsForm extends Component {
+class Settings extends Component {
   constructor(props) {
     super(props);
 
@@ -64,11 +64,11 @@ class SettingsForm extends Component {
   }
 }
 
-SettingsForm.propTypes = {
+Settings.propTypes = {
   email: PropTypes.string,
   oldPassword: PropTypes.string,
   newPassword: PropTypes.string,
   phone: PropTypes.number
 };
 
-export default SettingsForm;
+export default Settings;
