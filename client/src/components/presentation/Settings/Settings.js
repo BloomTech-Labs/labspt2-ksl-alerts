@@ -20,50 +20,45 @@ class Settings extends Component {
     });
   };
 
-  onSubmit = e => {
+  handleSubmit = e => {
     // will need to an ajax post to update user settings
   };
 
   render() {
     return (
-      <Grid columns={4}>
-        <Grid.Column>
-          <Header as="h2">Settings</Header>
-          <Form>
-            <Form.Input
-              name="email"
-              label="Email"
-              control="input"
-              value={this.state.email}
-              onChange={this.handleInputChange}
-            />
-            <Form.Input
-              name="oldPassword"
-              label="Old Password"
-              control="input"
-              type="password"
-              value={this.state.oldPassword}
-              onChange={this.handleInputChange}
-            />
-            <Form.Input
-              name="newPassword"
-              label="New Password"
-              control="input"
-              type="password"
-              value={this.state.newPassword}
-              onChange={this.handleInputChange}
-            />
-            <Form.Input
-              name="phone"
-              label="Phone Number"
-              control="input"
-              value={this.state.phone}
-              onChange={this.handleInputChange}
-            />
-            <Button type="submit">Submit</Button>
-          </Form>
-        </Grid.Column>
-      </Grid>
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Input
+          name="email"
+          label="Email"
+          control="input"
+          value={this.state.email}
+          onChange={this.handleInputChange}
+        />
+        <Form.Input
+          name="oldPassword"
+          label="Old Password"
+          control="input"
+          type="password"
+          value={this.state.oldPassword}
+          onChange={this.handleInputChange}
+        />
+        <Form.Input
+          name="newPassword"
+          label="New Password"
+          control="input"
+          type="password"
+          value={this.state.newPassword}
+          onChange={this.handleInputChange}
+        />
+        <Form.Input
+          name="phone"
+          label="Phone Number"
+          control="input"
+          value={this.state.phone}
+          onChange={this.handleInputChange}
+        />
+        <Button type="submit">Submit</Button>
+      </Form>
     );
   }
 }
