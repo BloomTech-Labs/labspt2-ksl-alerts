@@ -10,7 +10,13 @@ class CreateAlert extends Component {
     this.state = {
       alertTitle: {
         value: '',
-      }
+      },
+      keywordSearch:'',
+      categorySearch:'',
+      alertTitleError: '',
+      keywordSearchError:'',
+      categorySearchError:''
+
     };
 
   }
@@ -19,6 +25,50 @@ class CreateAlert extends Component {
 
   }
 
+  validate = () => {
+    let isError = false;
+    const errors = {};
+
+    if(this.state.alertTitle.length < 1) {  
+      isError = true;
+     errors.alertTitleError = 'Please enter alert title';
+  }
+
+  if(this.state.categorySearch.length < 1) {  
+    isError = true;
+   errors.categorySearchError = 'Please enter category';
+}
+
+if(this.state.keywordSearch.length < 1) {  
+  isError = true;
+ errors.keywordSearchError = 'Please enter keyword';
+}
+
+  
+  if (isError) {
+      this.setState({
+          ...this.state,
+          ...errors
+      });
+  } 
+  
+  return isError;
+
+  }
+
+  OnSubmit = e => {
+    e.preventDefault();
+    const err = this.validate();
+    if (!err){
+
+      //NEEDS RETURN STATEMENT COMPLETION
+      return 
+    }
+    
+}
+
+
+
   render() {
 
     const { value } = this.state;
@@ -26,9 +76,25 @@ class CreateAlert extends Component {
     return (
       <Form as={ FormContainer }>
         <Form.Group>
-          <Form.Input label='Alert Title' placeholder='Title' onChange={ this.handleInputChange } value={ this.state.alertTitle.value } />
-          <Form.Input label='Keyword Search' placeholder='Keyword' />
-          <Form.Input label='Category Search' placeholder='Category' />
+          <Form.Input 
+          label='Alert Title' 
+          placeholder='Title'  
+          onChange={ this.handleInputChange } 
+          value={ this.state.alertTitle.value } 
+          errorText={this.state.alertTitleError}
+          />
+          <Form.Input 
+          label='Keyword Search' 
+          placeholder='Keyword'
+          onChange={ this.handleInputChange } 
+          value={ this.state.keywordSearch.value }  
+          />
+          <Form.Input 
+          label='Category Search' 
+          placeholder='Category'
+          onChange={ this.handleInputChange } 
+          value={ this.state.categorySearch.value }  
+          />
         </Form.Group>
 
 
