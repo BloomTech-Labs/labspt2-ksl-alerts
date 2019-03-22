@@ -11,16 +11,15 @@ const Breadcrumbs = props => {
 
     return sections.map((section, i) => {
       return (
-        <>
-          <Breadcrumb.Section
-            link={ i === sections.length -1 ? false : true}
-            active={ i === sections.length -1 ? true : false }
-            onClick={ i === sections.length -1 ? null : (e) => { alert(section.name) } }
-          >
-            { section.name }
-            { i !== sections.length -1 && <Breadcrumb.Divider icon='right angle' /> }
-          </Breadcrumb.Section>
-        </>
+        <Breadcrumb.Section
+          key={ i }
+          link={ i === sections.length -1 ? false : true}
+          active={ i === sections.length -1 ? true : false }
+          onClick={ i === sections.length -1 ? null : (e) => { alert(section.name) } }
+        >
+          { section.name }
+          { i !== sections.length -1 && <Breadcrumb.Divider icon='right angle' /> }
+        </Breadcrumb.Section>
       );
     });
   }
