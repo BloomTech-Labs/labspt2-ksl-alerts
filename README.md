@@ -7,3 +7,15 @@
 # labspt2-ksl-alerts
 
 ## [Front End working URL](https://5c871dd85a0e9e0008a338af--lucid-jones-3a4163.netlify.com/)
+
+Environment Variables:
+
+In order to run the applciation, you will need to configure the following environment variables:
+
+Deployment - In the Heroku CLI, use this command to set an environment variable: heroku config:set <ENV_VAR>=<VALUE>
+Local - Create a .env file in the root directory
+
+* MONGO_URI
+* PRIVATE_KEY
+* PUBLIC_KEY
+* COMMANDER_PASSWORD
