@@ -110,7 +110,8 @@ export default class App extends Component {
         }, 
       });
 
-      document.querySelector(`#sidebar-Home-link`).click();
+      window.location.href = appUrl + '/Home?success=true';
+
     } else {
       alert('Unable to authenticate');
     }
@@ -387,9 +388,15 @@ export default class App extends Component {
   }
 
   verifyAlertifiUser = () => {
+
+    // This function is used to verify Alertifi user after signing up.
+    // It is similar to verifyOAuthUser, but this checks search query params
+    // rather than local storage.
+
+
     const { success, token, } = this.getSearchParams();
 
-    if (token && success === 'true') {
+    if (token) {
       axios({
         method: 'get',
         url: `${ appUrl }/api/users/verify`,
@@ -434,6 +441,14 @@ export default class App extends Component {
     this.authenticateOAuthUser();
     this.verifyOAuthUser();
     this.verifyAlertifiUser();
+
+    if (this.getSearchParams().success) {
+      this.setState({
+        signedInModal: {
+          open: true,
+        }
+      });
+    }
 
     const setMobileState = this.setMobileState;
     const setDesktopState = this.setDesktopState;
