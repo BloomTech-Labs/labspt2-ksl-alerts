@@ -1,4 +1,5 @@
 const axios            = require('axios');
+const stripe           = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const randomize        = require('randomatic');
 const nodemailer       = require('nodemailer');
 const shortid          = require('shortid');
@@ -87,6 +88,21 @@ const authenticate = (req, res, next) => {
   }
   
 }
+
+router.post('/api/users/payment', authenticate, (req, res, next) => {
+
+  console.log(req.body);
+
+   stripe.charges.create({
+    amount: 2000,
+    currency: 'usd',
+    description: 'An example charge',
+    source: req.body.tokenId,
+  }).then(({ status }) => {
+    res.json(status);
+  }).catch(console.log);
+
+});
 
 router.get('/api/users/email-verify/:url', (req, res, next) => {
   
