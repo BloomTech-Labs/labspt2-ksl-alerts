@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from 'axios';
 import { BrowserRouter as Router, Link, NavLink, Route, Switch, } from 'react-router-dom';
 import { Topbar, VerticalSidebar, SignedInModal, CheckoutForm, } from '../../presentation/presentation.js';
-import { Home, AlertFeed, CreateAlert, Settings, UserAccount, } from '../container.js';
+import { Home, AlertFeed, CreateAlert, Settings, UserAccount, Billing, } from '../container.js';
 import { appUrl, googleDiscoveryDocUrl, } from '../../../constants.js';
 import { Elements, StripeProvider, } from 'react-stripe-elements';
 import "semantic-ui-css/semantic.min.css";
@@ -16,7 +16,7 @@ export default class App extends Component {
     this.state = {
       signedIn: false,
       signedInModal: {
-        open: false,
+        open: true,
       },
       authorization: {
         type: '',
@@ -492,14 +492,7 @@ export default class App extends Component {
           <Topbar />
 
 
-            <StripeProvider apiKey='pk_test_5S7b3sU9cayM2p0lyZCGZR5e00mmeHbCML'>
-              <div>
-                <h1>React Stripe Example</h1>
-                <Elements>
-                  <CheckoutForm { ...this.state } />
-                </Elements>
-              </div>
-            </StripeProvider>
+            <Billing />
             
 
 
