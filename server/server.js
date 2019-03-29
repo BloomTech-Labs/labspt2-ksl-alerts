@@ -19,7 +19,7 @@ server.use(apiRouter);
 
 // kslScraper('https://classifieds.ksl.com/search?category[]=Home%20and%20Garden&subCategory[]=Bathroom&keyword=bath&priceFrom=&priceTo=&zip=&miles=25&sellerType[]=Private&marketType[]=Sale&hasPhotos[]=Has%20Photos&postedTime[]=30DAYS');
 
-const routes = ['/', '/Home', '/AlertFeed', '/CreateAlert', '/Settings', '/SignOut', '/SignIn', '/SignUp', ];
+const routes = ['/', '/Home', '/AlertFeed', '/CreateAlert', '/Settings', '/SignOut', '/SignIn', '/SignUp', "/ForgotPassword", ];
 
 server.use(routes, express.static(path.join(__dirname, '../client/build')));
 

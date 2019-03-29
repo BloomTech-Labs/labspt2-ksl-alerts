@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { style, } from './style/inline/inline.js';
+import { ForgotPassword } from '../../ForgotPassword/ForgotPassword.js';
 
 const SignInForm = props => {
 
@@ -112,8 +113,9 @@ const SignInForm = props => {
               disabled={ props.signInButton.disabled }
             />
           </Form.Field>
-
-          <p style={ style.forgotPassword }><a href='#'>Forgot Password</a></p>
+          
+	  //<p style={ style.forgotPassword }><a href='/ForgotPassword'>Forgot Password</a></p>
+          <p style={ style.forgotPassword }><a href={ ForgotPassword }>Forgot Password</a></p>
 
           <p style={ style.createAccount }>Not Registered? <Link to='/SignUp'>Create an Account</Link></p>
 
