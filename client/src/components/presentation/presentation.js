@@ -9,3 +9,4 @@ export { default as CheckoutForm        } from './CheckoutForm/CheckoutForm.js';
 export { default as PremiumForm         } from './PremiumForm/PremiumForm.js';
 export { default as BillingModal        } from './BillingModal/BillingModal.js';
 export { default as PaymentSuccessModal } from './PaymentSuccessModal/PaymentSuccessModal.js';
+export { default as SettingsTabs        } from './SettingsTabs/SettingsTabs.js';

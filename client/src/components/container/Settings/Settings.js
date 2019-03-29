@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { SettingsTabs, } from '../../presentation/presentation.js';
 
 class Settings extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class Settings extends Component {
   render() {
     return (
       <>
-        Settings
+        <SettingsTabs { ...this.state } { ...this.props } />
       </>
     );
   }

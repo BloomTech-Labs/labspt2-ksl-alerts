@@ -457,6 +457,7 @@ export default class App extends Component {
       min-height: 100vh;
       padding-left: ${ mobile ? `78px` : `170px` };
       padding-right: 21px;
+      padding-bottom: 21px;
       /* border: 1px solid black; */
     `;
 
@@ -504,7 +505,7 @@ export default class App extends Component {
 
             <Route
               path='/Settings'
-              render={ () => <Settings /> }
+              render={ () => <Settings { ...this.state } /> }
             />
 
             <Route
