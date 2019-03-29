@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Button, } from 'semantic-ui-react';
+import { Modal, Button, Segment, } from 'semantic-ui-react';
 import { style, } from './style/inline.js';
+import { Billing, } from '../../container/container.js';
 
 
 const ModalContentStandard = props => {
@@ -32,8 +33,6 @@ const ModalContentPremium = props => {
   );
 }
 
-
-
 const SignedInModal = props => {
 
   return (
@@ -42,8 +41,10 @@ const SignedInModal = props => {
       name='signedInModal'
       style={ style.modalContainer }
       open={ props.signedInModal.open }
-      size='small'
-      closeIcon={ true }
+      closeOnEscape={ false }
+      closeOnDimmerClick={ false }
+      closeIcon={ false }
+      onClose={ props.handleClose }
     >
       <Modal.Header style={ style.modalHeader }>
         Welcome to Alertifi!
@@ -53,21 +54,17 @@ const SignedInModal = props => {
 
       { props.accountType === 'standard' && <ModalContentStandard /> }
       { props.accountType === 'premium' && <ModalContentPremium /> }
-
-
-      <Modal.Actions
-        style={ style.modalActions }
-      >
-
+      
+      <Modal.Actions>
         <Button
-          primary
+          negative
           style={ style.modalActionsCloseButton }
           onClick={ props.handleClose }
         >
           Close
         </Button>
-
       </Modal.Actions>
+
     </Modal>
   );
 }

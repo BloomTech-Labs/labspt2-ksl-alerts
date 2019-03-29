@@ -3,9 +3,10 @@ import { Sidebar } from "semantic-ui-react";
 import styled from "styled-components";
 import axios from 'axios';
 import { BrowserRouter as Router, Link, NavLink, Route, Switch, } from 'react-router-dom';
-import { Topbar, VerticalSidebar, SignedInModal, } from '../../presentation/presentation.js';
-import { Home, AlertFeed, CreateAlert, Settings, UserAccount, } from '../container.js';
+import { Topbar, VerticalSidebar, SignedInModal, CheckoutForm, } from '../../presentation/presentation.js';
+import { Home, AlertFeed, CreateAlert, Settings, UserAccount, Billing, } from '../container.js';
 import { appUrl, googleDiscoveryDocUrl, } from '../../../constants.js';
+import { Elements, StripeProvider, } from 'react-stripe-elements';
 import "semantic-ui-css/semantic.min.css";
 
 export default class App extends Component {
@@ -15,7 +16,7 @@ export default class App extends Component {
     this.state = {
       signedIn: false,
       signedInModal: {
-        open: false,
+        open: true,
       },
       authorization: {
         type: '',
@@ -109,7 +110,8 @@ export default class App extends Component {
         }, 
       });
 
-      document.querySelector(`#sidebar-Home-link`).click();
+      window.location.href = appUrl + '/Home?success=true';
+
     } else {
       alert('Unable to authenticate');
     }
@@ -386,9 +388,15 @@ export default class App extends Component {
   }
 
   verifyAlertifiUser = () => {
+
+    // This function is used to verify Alertifi user after signing up.
+    // It is similar to verifyOAuthUser, but this checks search query params
+    // rather than local storage.
+
+
     const { success, token, } = this.getSearchParams();
 
-    if (token && success === 'true') {
+    if (token) {
       axios({
         method: 'get',
         url: `${ appUrl }/api/users/verify`,
@@ -433,6 +441,14 @@ export default class App extends Component {
     this.authenticateOAuthUser();
     this.verifyOAuthUser();
     this.verifyAlertifiUser();
+
+    if (this.getSearchParams().success) {
+      this.setState({
+        signedInModal: {
+          open: true,
+        }
+      });
+    }
 
     const setMobileState = this.setMobileState;
     const setDesktopState = this.setDesktopState;
@@ -481,7 +497,7 @@ export default class App extends Component {
           { ...this.state.sidebar }
         />
 
-        <SignedInModal 
+        <SignedInModal
           { ...this.state } 
           handleClose={ this.handleSignedInModal }
           accountType={ this.state.user.accountType }
@@ -489,6 +505,11 @@ export default class App extends Component {
 
         <Container>
           <Topbar />
+
+
+            <Billing />
+            
+
 
             <Route
               path='/Home'

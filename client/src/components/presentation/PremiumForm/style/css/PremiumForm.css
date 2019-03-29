@@ -1,0 +1,50 @@
+.premium-form-input {
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  padding: 9px 9px;
+  background-color: white;
+  text-align: center;
+}
+
+.premium-form-card-element {
+  width: 160px;
+}
+
+.premium-form-expiry-element {
+  width: 80px;
+}
+
+.premium-form-group {
+  display: flex;
+  justify-content: space-between;
+  /* border: 1px solid black; */
+}
+
+.premium-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 280px;
+  min-width: 140px;
+  /* border: 1px solid black; */
+}
+
+.premium-form > div {
+  margin-bottom: 20px;
+}
+
+.premium-form-name-input {
+  width: 100%;
+  min-width: 140px;
+}
+
+.premium-form-postal-code-element {
+  width: 160px;
+}
+
+.premium-form-cvc-element {
+  width: 80px;
+}
+
+.premium-form-submit-button {
+  width: 100%;
+}

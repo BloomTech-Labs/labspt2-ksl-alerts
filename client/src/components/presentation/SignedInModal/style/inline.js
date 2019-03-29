@@ -5,6 +5,8 @@ export const style = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
+    height: '310px',
+    maxWidth: '400px',
   },
   modalHeader: {
     fontSize: '24px',
@@ -22,7 +24,7 @@ export const style = {
     fontSize: '18px',
   },
   modalContentPremiumButton: {
-    width: '220px',
+    width: '160px',
   },
   modalActions: {
     flex: '1',
