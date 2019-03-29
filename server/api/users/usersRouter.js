@@ -88,6 +88,8 @@ const authenticate = (req, res, next) => {
   
 }
 
+
+/* VERIFYING EMAIL URL ROUTE */
 router.get('/api/users/email-verify/:url', (req, res, next) => {
   
   const { url } = req.params;
@@ -123,6 +125,8 @@ router.get('/api/users/email-verify/:url', (req, res, next) => {
   });
 });
 
+
+/* CHECK EMAIL */
 router.post('/api/users/email-check', (req, res, next) => {
   const { email } = req.body;
 
@@ -138,6 +142,8 @@ router.post('/api/users/email-check', (req, res, next) => {
   });
 });
 
+
+/* CHECK PASSWORD */
 router.post('/api/users/password-check', (req, res, next) => {
 
   const { email, password, } = req.body;
@@ -156,6 +162,8 @@ router.post('/api/users/password-check', (req, res, next) => {
   });
 });
 
+
+/* CHECK USERNAME */
 router.post('/api/users/username-check', (req, res, next) => {
 
   const { username, } = req.body;
@@ -175,6 +183,8 @@ router.post('/api/users/username-check', (req, res, next) => {
 
 });
 
+
+/* VALIDATE USERNAME ROUTE */
 router.post('/api/users/username-validate', (req, res, next) => {
 
   const { username, } = req.body;
@@ -186,6 +196,8 @@ router.post('/api/users/username-validate', (req, res, next) => {
   }
 });
 
+
+/* VALIDATE EMAIL ROUTE */
 router.post('/api/users/email-validate', (req, res, next) => {
 
   const { email, } = req.body;
@@ -199,6 +211,8 @@ router.post('/api/users/email-validate', (req, res, next) => {
   }
 });
 
+
+/* VALIDATE PASSWORD ROUTE */
 router.post('/api/users/password-validate', (req, res, next) => {
 
   const { password } = req.body;
@@ -228,6 +242,8 @@ router.post('/api/users/password-validate', (req, res, next) => {
 
 });
 
+
+/* SIGN UP FORM ROUTE */
 router.post('/api/users/signup', (req, res, next) => {
 
   const _id = shortid.generate();
@@ -291,6 +307,8 @@ router.post('/api/users/signup', (req, res, next) => {
   });
 });
 
+
+/* SIGN IN FORM ROUTE */
 router.post('/api/users/signin', (req, res, next) => {
 
   const { email, password, } = req.body;
@@ -313,6 +331,20 @@ router.post('/api/users/signin', (req, res, next) => {
       res.status(200).json({ error: 'incorrect password', });
     }
   });
+});
+
+/* FORGOT PASSWORD ROUTE */
+router.post('api/users/signin', (req, res, next) => {
+	
+	/*
+	const { email, } = req.body;
+	
+	helpers.findByEmail({ email, }, (error, foundUserData) => {
+		const foundUser = {
+		
+		
+		}
+	}); */
 });
 
 // Verifies user on refresh or when re visiting the application and when verifying by email.
