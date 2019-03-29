@@ -3,11 +3,10 @@ import { Sidebar } from "semantic-ui-react";
 import styled from "styled-components";
 import axios from 'axios';
 import { BrowserRouter as Router, Link, NavLink, Route, Switch, } from 'react-router-dom';
-import { Topbar, VerticalSidebar, SignedInModal, } from '../../presentation/presentation.js';
+import { Topbar, VerticalSidebar, SignedInModal,Billing } from '../../presentation/presentation.js';
 import { Home, AlertFeed, CreateAlert, Settings, UserAccount, } from '../container.js';
 import { appUrl, googleDiscoveryDocUrl, } from '../../../constants.js';
 import "semantic-ui-css/semantic.min.css";
-
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -519,7 +518,7 @@ export default class App extends Component {
               path='/SignUp'
               render={ () => <UserAccount authenticate={ this.authenticate } renderForm='SignUp' /> }
             />
-
+    <Billing />
         </Container>
         </Router>
       </AppContainer>
