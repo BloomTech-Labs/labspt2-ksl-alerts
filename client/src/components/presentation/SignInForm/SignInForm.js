@@ -1,87 +1,130 @@
 import React from 'react';
-import { Form, } from 'semantic-ui-react';
+import { OAuthForm, } from '../presentation.js';
+import { Segment, Form, Input, Label, Button, Divider, Icon, } from 'semantic-ui-react';
+import { BrowserRouter as Router, Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
-const FormLayerOne = props => {
-
-  return (
-    <Form.Group>
-
-      <FieldContainer>
-        <Form.Input
-          id='sign-in-username-input'
-          name='signInUsernameInput'
-          label='Username'
-          placeholder='Username'
-          type='text'
-          value={ props.signInUsernameInput }
-          onChange={ props.handleChange }
-        />
-      </FieldContainer>
-
-    </Form.Group>
-  );
-}
-
-const FormLayerTwo = props => {
-
-  return (
-    <Form.Group>
-
-      <FieldContainer>
-        <Form.Input
-          id='sign-in-password-input'
-          name='signInPasswordInput'
-          label='Password'
-          placeholder='Password'
-          type='password'
-          value={ props.signInPasswordInput }
-          onChange={ props.handleChange }
-        />
-      </FieldContainer>
-
-    </Form.Group>
-  );
-}
-
-const FormLayerThree = props => {
-
-  return (
-    <Form.Group>
-
-      <FieldContainer>
-        <Form.Button
-          onClick={ props.handleSubmit }
-        >
-          Sign In
-        </Form.Button>
-      </FieldContainer>
-
-    </Form.Group>
-  );
-}
+import { style, } from './style/inline/inline.js';
 
 const SignInForm = props => {
+
+
+  
+
   return (
-    <Form as={ FormContainer }>
 
-      <FormLayerOne
-        { ...props }
-        handleChange={ props.handleChange }
-      />
 
-      <FormLayerTwo
-        { ...props }
-        handleChange={ props.handleChange }
-      />
+      <Segment style={ style.segment }>
+        <Form>
 
-      <FormLayerThree
-        { ...props }
-        handleSubmit={ props.handleSubmit }
-      />
+          <h2 style={ style.formHeader }>Sign In</h2>
 
-    </Form>
+
+
+
+
+
+          <Form.Field
+            style={ style.inputContainer }
+            error={ props.signInEmailInput.error }
+          >
+            
+            
+            <label
+              style={ style.label }
+            >
+              Email
+              <span
+                style={ style.error }
+                hidden={ props.signInEmailInput.label.hidden }
+              >
+                { props.signInEmailInput.label.value }
+              </span>
+            </label>
+
+
+
+
+
+            <Input
+              id='sign-in-email-input'
+              name='signInEmailInput'
+              fluid
+              placeholder='Enter your email'
+              type='email'
+              icon={ () => <Icon color={ props.signInEmailInput.icon.color } name={ props.signInEmailInput.icon.name || 'mail' } /> }
+              value={ props.signInEmailInput.value }
+              onChange={ props.handleChange }
+              onBlur={ props.handleBlur }
+              loading={ props.signInEmailInput.loading }
+            >
+            </Input>
+          </Form.Field>
+
+
+
+
+
+
+
+
+          <Form.Field
+            style={ style.inputContainer }
+            error={ props.signInPasswordInput.error }
+          >
+            <label
+              style={ style.label }
+            >
+              Password
+              <span
+                style={ style.error }
+                hidden={ props.signInPasswordInput.label.hidden }
+              >
+                { props.signInPasswordInput.label.value }
+              </span>
+            </label>
+            <Input
+              id='sign-in-password-input'
+              name='signInPasswordInput'
+              fluid
+              placeholder='Enter your password'
+              type='password'
+              icon={ () => <Icon color={ props.signInPasswordInput.icon.color } name={ props.signInPasswordInput.icon.name || 'lock' } /> }
+              value={ props.signInPasswordInput.value }
+              onChange={ props.handleChange }
+              onBlur={ props.handleBlur }
+              loading={ props.signInPasswordInput.loading }
+            />
+          </Form.Field>
+
+          <Form.Field
+            style={ style.buttonContainer }
+          >
+            <Button
+              id='alertifi-sign-in-button'
+              name='alertifiSignInButton'
+              content='Sign In'
+              fluid
+              positive
+              icon='sign-in'
+              labelPosition='left'
+              onClick={ props.handleSubmit }
+              disabled={ props.signInButton.disabled }
+            />
+          </Form.Field>
+
+          <p style={ style.forgotPassword }><a href='#'>Forgot Password</a></p>
+
+          <p style={ style.createAccount }>Not Registered? <Link to='/SignUp'>Create an Account</Link></p>
+
+          <span style={ style.dividerContainer }>
+            <Divider horizontal>OR</Divider>
+          </span>
+
+        </Form>
+
+        <OAuthForm handleSubmit={ props.handleSubmit } />
+      </Segment>
   );
 }
 
@@ -91,20 +134,3 @@ SignInForm.propTypes = {
 
 export default SignInForm;
 
-const FormContainer = styled.form`
-
-  /* border: 1px solid black; */
-  align-self: center;
-
-`;
-
-const FieldContainer = styled.div`
-
-  width: 200px;
-  margin-left: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  min-height: 65px;
-
-`;
