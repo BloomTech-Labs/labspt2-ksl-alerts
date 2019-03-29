@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button, Segment, } from 'semantic-ui-react';
 import { style, } from './style/inline.js';
+import { Billing, } from '../../container/container.js';
 
 
 const ModalContentStandard = props => {

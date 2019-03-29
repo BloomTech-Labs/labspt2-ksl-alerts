@@ -16,7 +16,7 @@ export default class App extends Component {
     this.state = {
       signedIn: false,
       signedInModal: {
-        open: false,
+        open: true,
       },
       authorization: {
         type: '',
