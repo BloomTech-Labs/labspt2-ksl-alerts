@@ -6,3 +6,5 @@ export { default as SignInForm      } from './SignInForm/SignInForm.js';
 export { default as OAuthForm       } from './OAuthForm/OAuthForm.js';
 export { default as SignedInModal   } from './SignedInModal/SignedInModal.js';
 export { default as Billing } from './Billing/Billing.js';
+export { default as CheckoutForm    } from './CheckoutForm/CheckoutForm.js';
+export { default as PremiumForm     } from './PremiumForm/PremiumForm.js';
