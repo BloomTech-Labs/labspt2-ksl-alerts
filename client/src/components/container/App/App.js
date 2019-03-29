@@ -477,10 +477,6 @@ export default class App extends Component {
 
     `;
 
-    const modalHandlers = {
-      handleSignedInModal: this.handleSignedInModal,
-    }
-
     return (
       <AppContainer>
         <Router>
@@ -492,7 +488,6 @@ export default class App extends Component {
 
         <Modals
           { ...this.state    } 
-          { ...modalHandlers }
         />
 
         <Container>

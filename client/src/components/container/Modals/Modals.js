@@ -18,7 +18,7 @@ class Modals extends Component {
 
   handleSignedInModal = e => {
 
-    const isOpen = this.state.billingModal.open;
+    const isOpen = this.state.signedInModal.open;
 
     this.setState({
       signedInModal: {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Button, Segment, Icon, } from 'semantic-ui-react';
+import { Modal, Button, Segment, Icon, List, } from 'semantic-ui-react';
 import { Elements, StripeProvider, } from 'react-stripe-elements';
 import { style, } from './style/inline.js';
 import { PremiumForm, } from '../presentation';
@@ -11,6 +11,24 @@ const ModalContentStandard = props => {
     <>
       <div style={ style.modalContent }>
         <h3 style={ style.modalContentHeader }>Get unlimited access to all Alertifi features when you sign up for a premium membership</h3>
+
+        <List relaxed>
+          <List.Item style={ style.listItem }>
+            <List.Icon name='bullhorn' style={ style.listIcon } />
+            <List.Content style={ style.listContent }>Premium Feature One</List.Content>
+          </List.Item>
+
+          <List.Item style={ style.listItem }>
+            <List.Icon name='calendar alternate' style={ style.listIcon }  />
+            <List.Content style={ style.listContent }>Premium Feature Two</List.Content>
+          </List.Item>
+
+          <List.Item style={ style.listItem }>
+            <List.Icon name='globe' style={ style.listIcon }  />
+            <List.Content style={ style.listContent }>Premium Feature Three</List.Content>
+          </List.Item>
+        </List>
+
         <Button 
           positive
           style={ style.modalContentPremiumButton }
@@ -46,7 +64,6 @@ const SignedInModal = props => {
       closeOnEscape={ false }
       closeOnDimmerClick={ false }
       closeIcon={ false }
-      onClose={ props.handleClose }
     >
       
       <Modal.Header style={ style.modalHeader }>

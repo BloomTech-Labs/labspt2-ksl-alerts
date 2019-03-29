@@ -9,7 +9,7 @@ import './style/css/PremiumForm.css';
 const PremiumForm = props => {
 
   return (
-    <form 
+    <Form 
       className='premium-form'
     >
 
@@ -34,7 +34,7 @@ const PremiumForm = props => {
       { /* Card Number */ }
       <div>
         <label>Card Number</label>
-        <CardNumberElement 
+        <CardNumberElement
           className='premium-form-input premium-form-card-element'
           placeholder='#### #### #### ####'
         />
@@ -86,7 +86,7 @@ const PremiumForm = props => {
         />
       </div>
 
-    </form>
+    </Form>
   );
 }
 

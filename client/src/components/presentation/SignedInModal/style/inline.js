@@ -5,7 +5,7 @@ export const style = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    height: '310px',
+    height: '485px',
     maxWidth: '400px',
   },
   modalHeader: {
@@ -22,8 +22,10 @@ export const style = {
   modalContentHeader: {
     textAlign: 'center',
     fontSize: '18px',
+    lineHeight: '1.4',
   },
   modalContentPremiumButton: {
+    marginTop: '15px',
     width: '160px',
   },
   modalActions: {
@@ -35,4 +37,16 @@ export const style = {
   paymentIcon: {
     marginRight: '10px',
   },
+  listItem: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '10px',
+  },
+  listIcon: {
+    fontSize: '22px',
+    paddingTop: '3px',
+  },
+  listContent: {
+    fontSize: '18px',
+  }
 };
