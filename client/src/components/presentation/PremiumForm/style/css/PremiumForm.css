@@ -16,12 +16,35 @@
 
 .premium-form-group {
   display: flex;
-  flex-direction: column;
-  border: 1px solid black;
+  justify-content: space-between;
+  /* border: 1px solid black; */
 }
 
 .premium-form {
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
+  max-width: 280px;
+  min-width: 140px;
+  /* border: 1px solid black; */
+}
+
+.premium-form > div {
+  margin-bottom: 20px;
+}
+
+.premium-form-name-input {
+  width: 100%;
+  min-width: 140px;
+}
+
+.premium-form-postal-code-element {
+  width: 160px;
+}
+
+.premium-form-cvc-element {
+  width: 80px;
+}
+
+.premium-form-submit-button {
+  width: 100%;
 }

@@ -91,8 +91,6 @@ const authenticate = (req, res, next) => {
 
 router.post('/api/users/payment', authenticate, (req, res, next) => {
 
-  console.log(req.body);
-
    stripe.charges.create({
     amount: 2000,
     currency: 'usd',
