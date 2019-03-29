@@ -1,6 +1,6 @@
 
 export const style = {
-  modalContainer: {
+  modalContainerStandard: {
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
@@ -8,6 +8,14 @@ export const style = {
     height: '480px',
     maxWidth: '400px',
   },
+  modalContainerPremium: {
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    height: '235px',
+    maxWidth: '400px',
+  }, 
   modalHeader: {
     fontSize: '24px',
     textAlign: 'center',
