@@ -5,7 +5,7 @@ export const style = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    height: '485px',
+    height: '480px',
     maxWidth: '400px',
   },
   modalHeader: {

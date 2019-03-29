@@ -8,12 +8,15 @@ import './style/css/PremiumForm.css';
 
 const PremiumForm = props => {
 
+  const handleSubmit = e => {
+    let { token } = props.stripe.createToken({name: props.premiumFormNameInput.value });
+    console.log(props.premiumFormNameInput.value);
+  }
+
   return (
     <Form 
       className='premium-form'
     >
-
-
     
     <div className='premium-form-group'>
 
@@ -23,6 +26,7 @@ const PremiumForm = props => {
         placeholder='Name on card'
         label='Name on card'
         className='premium-form-name-input'
+        onChange={ props.handleChange }
       />
 
     </div>
@@ -83,6 +87,7 @@ const PremiumForm = props => {
           className='premium-form-submit-button'
           content='Submit'
           primary
+          onClick={ handleSubmit }
         />
       </div>
 

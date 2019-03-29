@@ -8,7 +8,7 @@ class Modals extends Component {
 
     this.state = {
       signedInModal: {
-        open: true,
+        open: false,
       },
       billingModal: {
         open: false,
@@ -60,13 +60,11 @@ class Modals extends Component {
           handleGoPremiumClick={ this.handleGoPremiumClick }
         />
 
-
-        
-
         <BillingModal 
           { ...this.props }
           { ...this.state }
           handleClose={ this.handleBillingModal }
+          handleChange={ this.props.handleChange }
         />
 
       </>

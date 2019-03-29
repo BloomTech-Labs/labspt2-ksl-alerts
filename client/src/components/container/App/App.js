@@ -28,6 +28,9 @@ export default class App extends Component {
         accountType: 'standard',
         alerts: [],
       },
+      premiumFormNameInput: {
+        value: '',
+      },
       appContainer: {
         mobile: false,
       },
@@ -39,6 +42,14 @@ export default class App extends Component {
         mobile: false,
       }
     };
+  }
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: {
+        value: e.target.value,
+      }
+    })
   }
 
   getSearchParams = () => {
@@ -488,6 +499,7 @@ export default class App extends Component {
 
         <Modals
           { ...this.state    } 
+          handleChange={ this.handleChange }
         />
 
         <Container>
