@@ -14,11 +14,14 @@
   width: 80px;
 }
 
-.premium-form-input-container {
+.premium-form-group {
   display: flex;
+  flex-direction: column;
+  border: 1px solid black;
 }
 
 .premium-form {
   display: flex;
   flex-direction: column;
+  border: 1px solid black;
 }

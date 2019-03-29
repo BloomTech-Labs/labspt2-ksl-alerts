@@ -1,4 +1,5 @@
 import React from 'react';
+import { Form, Segment, } from 'semantic-ui-react';
 import { injectStripe, CardElement, CardNumberElement, 
         CardExpiryElement, CardCVCElement, PostalCodeElement, 
         IdealBankElement, } from 'react-stripe-elements';
@@ -8,9 +9,23 @@ import './style/css/PremiumForm.css';
 const PremiumForm = props => {
 
   return (
-    <form className='premium-form'>
+    <Form 
+      className='premium-form'
+    >
 
-    <div className='premium-form-input-container'>
+    <Form.Group 
+      className='premium-form-group'
+    >
+      <label>Name on card</label>
+      <Form.Input
+        placeholder='Name on card'
+      />
+
+    </Form.Group>
+
+
+
+    <Form.Group className='premium-form-group'>
 
       { /* Card Number */ }
       <div>
@@ -25,9 +40,9 @@ const PremiumForm = props => {
         <CardExpiryElement className='premium-form-input premium-form-expiry-element' />
       </div>
 
-      </div>
+      </Form.Group>
 
-    </form>
+    </Form>
   );
 }
 

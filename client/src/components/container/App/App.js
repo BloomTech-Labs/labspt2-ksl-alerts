@@ -16,7 +16,7 @@ export default class App extends Component {
     this.state = {
       signedIn: false,
       signedInModal: {
-        open: true,
+        open: false,
       },
       authorization: {
         type: '',
@@ -497,7 +497,7 @@ export default class App extends Component {
           { ...this.state.sidebar }
         />
 
-        <SignedInModal 
+        <SignedInModal
           { ...this.state } 
           handleClose={ this.handleSignedInModal }
           accountType={ this.state.user.accountType }
