@@ -39,7 +39,12 @@ const BillingModal = props => {
 
         <StripeProvider apiKey='pk_test_5S7b3sU9cayM2p0lyZCGZR5e00mmeHbCML'>
           <Elements>
-            <PremiumForm { ...props } handleChange={ props.handleChange } />
+            <PremiumForm 
+              { ...props } 
+              handleChange={ props.handleChange } 
+              handleSubmit={ props.handleSubmit } 
+              handlePaymentSuccessModal={ props.handlePaymentSuccessModal }
+            />
           </Elements>
         </StripeProvider>
       

@@ -25,11 +25,8 @@ export default class App extends Component {
         email: '',
         firstName: '',
         lastName: '',
-        accountType: 'standard',
+        accountType: '',
         alerts: [],
-      },
-      premiumFormNameInput: {
-        value: '',
       },
       appContainer: {
         mobile: false,
@@ -42,14 +39,6 @@ export default class App extends Component {
         mobile: false,
       }
     };
-  }
-
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: {
-        value: e.target.value,
-      }
-    })
   }
 
   getSearchParams = () => {
@@ -442,14 +431,6 @@ export default class App extends Component {
     this.verifyOAuthUser();
     this.verifyAlertifiUser();
 
-    if (this.getSearchParams().success) {
-      this.setState({
-        signedInModal: {
-          open: true,
-        }
-      });
-    }
-
     const setMobileState = this.setMobileState;
     const setDesktopState = this.setDesktopState;
 
@@ -498,6 +479,7 @@ export default class App extends Component {
         />
 
         <Modals
+          getSearchParams={ this.getSearchParams }
           { ...this.state    } 
           handleChange={ this.handleChange }
         />

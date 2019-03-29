@@ -64,5 +64,24 @@ module.exports = {
         done(null, user);
       }
     });
+  },
+  changeAccountType: function(data, done) {
+
+    const { email, accountType, } = data;
+
+    models.User.findOneAndUpdate({ email, }, { accountType, }, (error, user) => {
+
+      if (error) {
+        done(error);
+      } else {
+
+        const updatedUser = Object.assign({}, user._doc, { accountType, });
+
+        done(null, updatedUser);
+      }
+
+    });
+
+
   }
 }

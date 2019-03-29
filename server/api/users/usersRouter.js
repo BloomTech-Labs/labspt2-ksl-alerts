@@ -91,14 +91,38 @@ const authenticate = (req, res, next) => {
 
 router.post('/api/users/payment', authenticate, (req, res, next) => {
 
-   stripe.charges.create({
-    amount: 2000,
-    currency: 'usd',
-    description: 'An example charge',
-    source: req.body.tokenId,
-  }).then(({ status }) => {
-    res.json(status);
-  }).catch(console.log);
+    const { email, } = req.body;
+    const { tokenId, amount, } = req.body.charge;
+
+    stripe.charges.create({
+      amount,
+      currency: 'usd',
+      description: 'Alertifi Subscription',
+      source: tokenId,
+    }).then(({ status }) => {
+
+      if (status === 'succeeded') {
+
+        helpers.changeAccountType({ email, accountType: 'premium', }, (changeError, updatedUserData) => {
+          if (changeError) {
+            console.log(changeError);
+            res.status(500).json({ error: changeError, });
+          } else {
+            console.log(updatedUserData);
+            const user = updatedUserData;
+            res.status(200).json({ status, user, });
+          }
+        });
+      }
+
+    }).catch(err => {
+
+      console.log(err);
+
+      res.status(500).json({ status: 'failed', });
+
+    
+    });
 
 });
 

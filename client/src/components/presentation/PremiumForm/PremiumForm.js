@@ -1,37 +1,35 @@
 import React from 'react';
+import axios from 'axios';
 import { Form, Segment, Button, } from 'semantic-ui-react';
 import { injectStripe, CardElement, CardNumberElement, 
         CardExpiryElement, CardCVCElement, PostalCodeElement, 
         IdealBankElement, PaymentRequestButtonElement, } from 'react-stripe-elements';
-import { style, } from './style/inline/inline.js';
 import './style/css/PremiumForm.css';
 
 const PremiumForm = props => {
 
-  const handleSubmit = e => {
-    let { token } = props.stripe.createToken({name: props.premiumFormNameInput.value });
-    console.log(props.premiumFormNameInput.value);
-  }
-
   return (
     <Form 
       className='premium-form'
+      loading={ props.premiumForm.loading }
     >
     
     <div className='premium-form-group'>
 
     { /* Name on card */ }
       <Form.Input
+        id='premium-form-name-input'
+        name='premiumFormNameInput'
         fluid
         placeholder='Name on card'
         label='Name on card'
         className='premium-form-name-input'
+        type='text'
         onChange={ props.handleChange }
+        value={ props.premiumFormNameInput.value }
       />
 
     </div>
-
-
 
     <div className='premium-form-group'>
 
@@ -74,9 +72,10 @@ const PremiumForm = props => {
       
       </div>
 
+      { /* Total */ }
       <div className='premium-form-total'>
         <span>Total: </span>
-        <span>$7.99</span>
+        <span>${ props.premiumForm.price / 100 }</span>
       </div>
 
       { /* Submit Button */ }
@@ -86,8 +85,11 @@ const PremiumForm = props => {
           name='premiumFormSubmitButton'
           className='premium-form-submit-button'
           content='Submit'
+          type='submit'
           primary
-          onClick={ handleSubmit }
+          loading={ props.premiumFormSubmitButton.loading    }
+          disabled={ props.premiumFormSubmitButton.disabled  }
+          onClick={ e => props.handleSubmit(e, props.stripe) }
         />
       </div>
 
