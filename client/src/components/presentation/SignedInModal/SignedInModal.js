@@ -1,24 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Button, Segment, } from 'semantic-ui-react';
+import { Modal, Button, Segment, Icon, } from 'semantic-ui-react';
+import { Elements, StripeProvider, } from 'react-stripe-elements';
 import { style, } from './style/inline.js';
-import { Billing, } from '../../container/container.js';
+import { PremiumForm, } from '../presentation';
 
 
 const ModalContentStandard = props => {
   return (
     <>
-      <Modal.Content>
-        <div style={ style.modalContent }>
-          <h3 style={ style.modalContentHeader }>Get unlimited access to all Alertifi features when you sign up for a premium membership</h3>
-          <Button 
-            positive
-            style={ style.modalContentPremiumButton }
-          >
-            Go Premium!
-          </Button>
-        </div>
-      </Modal.Content>
+      <div style={ style.modalContent }>
+        <h3 style={ style.modalContentHeader }>Get unlimited access to all Alertifi features when you sign up for a premium membership</h3>
+        <Button 
+          positive
+          style={ style.modalContentPremiumButton }
+          onClick={ props.handleClick }
+        >
+          Go Premium!
+        </Button>
+      </div>
     </>
   );
 }
@@ -35,6 +35,8 @@ const ModalContentPremium = props => {
 
 const SignedInModal = props => {
 
+
+
   return (
     <Modal
       id='signed-in-modal'
@@ -46,14 +48,17 @@ const SignedInModal = props => {
       closeIcon={ false }
       onClose={ props.handleClose }
     >
+      
       <Modal.Header style={ style.modalHeader }>
         Welcome to Alertifi!
       </Modal.Header>
 
+      <Modal.Content>
      
-
-      { props.accountType === 'standard' && <ModalContentStandard /> }
-      { props.accountType === 'premium' && <ModalContentPremium /> }
+        { props.user.accountType === 'standard' && <ModalContentStandard handleClick={ props.handleGoPremiumClick } /> }
+        { props.user.accountType === 'premium' && <ModalContentPremium /> }
+      
+      </Modal.Content>
       
       <Modal.Actions>
         <Button

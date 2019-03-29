@@ -70,6 +70,11 @@ const PremiumForm = props => {
       
       </div>
 
+      <div className='premium-form-total'>
+        <span>Total: </span>
+        <span>$7.99</span>
+      </div>
+
       { /* Submit Button */ }
       <div className='premium-form-group'>
         <Button

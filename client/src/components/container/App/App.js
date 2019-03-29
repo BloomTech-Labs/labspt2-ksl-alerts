@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from 'axios';
 import { BrowserRouter as Router, Link, NavLink, Route, Switch, } from 'react-router-dom';
 import { Topbar, VerticalSidebar, SignedInModal, CheckoutForm, } from '../../presentation/presentation.js';
-import { Home, AlertFeed, CreateAlert, Settings, UserAccount, Billing, } from '../container.js';
+import { Home, AlertFeed, CreateAlert, Settings, UserAccount, Modals, } from '../container.js';
 import { appUrl, googleDiscoveryDocUrl, } from '../../../constants.js';
 import { Elements, StripeProvider, } from 'react-stripe-elements';
 import "semantic-ui-css/semantic.min.css";
@@ -15,9 +15,6 @@ export default class App extends Component {
 
     this.state = {
       signedIn: false,
-      signedInModal: {
-        open: true,
-      },
       authorization: {
         type: '',
         token: '',
@@ -428,14 +425,6 @@ export default class App extends Component {
     }
   }
 
-  handleSignedInModal = e => {
-    this.setState({
-      signedInModal: {
-        open: false,
-      }
-    });
-  }
-
   componentDidMount() {
 
     this.authenticateOAuthUser();
@@ -488,28 +477,26 @@ export default class App extends Component {
 
     `;
 
+    const modalHandlers = {
+      handleSignedInModal: this.handleSignedInModal,
+    }
+
     return (
       <AppContainer>
         <Router>
         <VerticalSidebar
           signedIn={ this.state.signedIn }
-          signOut={ this.signOut }
-          { ...this.state.sidebar }
+          signOut={ this.signOut         }
+          { ...this.state.sidebar        }
         />
 
-        <SignedInModal
-          { ...this.state } 
-          handleClose={ this.handleSignedInModal }
-          accountType={ this.state.user.accountType }
+        <Modals
+          { ...this.state    } 
+          { ...modalHandlers }
         />
 
         <Container>
           <Topbar />
-
-
-            <Billing />
-            
-
 
             <Route
               path='/Home'

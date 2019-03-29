@@ -21,6 +21,7 @@
 }
 
 .premium-form {
+  margin: auto;
   display: flex;
   flex-direction: column;
   max-width: 280px;
@@ -47,4 +48,16 @@
 
 .premium-form-submit-button {
   width: 100%;
+}
+
+.premium-form-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baselilne;
+
+}
+
+.premium-form-total > span {
+  font-weight: bold;
+  font-size: 18px;
 }

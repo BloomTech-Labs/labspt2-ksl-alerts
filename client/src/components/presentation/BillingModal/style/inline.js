@@ -5,12 +5,22 @@ export const style = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    height: '310px',
-    maxWidth: '400px',
+    height: '440px',
+    maxWidth: '380px',
   },
   modalHeader: {
-    fontSize: '24px',
-    textAlign: 'center',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  modalTitle: {
+    display: 'inline',
+    fontSize: '22px',
+    marginLeft: '10px',
+  },
+  closeIcon: {
+    // border: '1px solid/ black',
+    cursor: 'pointer',
   },
   modalContent: {
     margin: '20px 0px',
