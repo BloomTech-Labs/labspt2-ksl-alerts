@@ -31,9 +31,19 @@
     "nodemailer": "^5.1.1",
     "nodemon": "^1.18.10",
     "password-validate": "0.0.2",
+    "prop-types": "^15.7.2",
     "randomatic": "^3.1.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "^6.0.1",
+    "react-router-dom": "^5.0.0",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "scrapoxy": "^3.1.1",
-    "shortid": "^2.2.14"
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.86.0",
+    "shortid": "^2.2.14",
+    "styled-components": "^4.2.0"
   },
   "devDependencies": {}
 }
