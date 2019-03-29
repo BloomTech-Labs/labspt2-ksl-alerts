@@ -23,6 +23,7 @@ export default class App extends Component {
         _id: '',
         username: '',
         email: '',
+        profileImg: '',
         firstName: '',
         lastName: '',
         accountType: '',
@@ -445,6 +446,10 @@ export default class App extends Component {
         setDesktopState();
       }
     });
+  }
+
+  componentDidUpdate() {
+    console.log(this.state.user);
   }
 
   render() {

@@ -31,7 +31,6 @@ const Interface = props => {
 
 const SettingsTabs = props => {
 
-
     const panes = [
         { menuItem: 'Account',   render: AccountSettings },
         { menuItem: 'Billing',   render: BillingSettings },
