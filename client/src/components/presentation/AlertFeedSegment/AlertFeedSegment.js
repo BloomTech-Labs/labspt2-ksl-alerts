@@ -50,11 +50,14 @@ const AlertFeedSegment = props => {
         
         const items = props.user.alerts[props.alertFeedDropdown.value].items;
 
-        return items.map((item, i) => {
-            return (
-                <AlertFeedItem key={ i } { ...item } />
-            );
-        });
+        if (items.length > 0) {
+            return items.map((item, i) => {
+                // return (
+                    // <AlertFeedItem key={ i } { ...item } />
+                // );
+            });
+        }
+        
     }
 
     // console.log(props.alertFeedDropdown.value);

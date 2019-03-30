@@ -136,11 +136,11 @@ router.get('/api/users/email-verify/:url', (req, res, next) => {
       res.send({ err });
     } else {
 
-      const { _id, username, email, password, firstName, lastName, accountType, } = tempUserData;
+      const { _id, username, email, password, firstName, lastName, accountType, alerts, } = tempUserData;
 
       const token = jwt.sign({ _id, email, }, process.env.PRIVATE_KEY);
 
-      helpers.createUser({ _id, username, email, password, firstName, lastName, accountType, }, (createError, createdUserData) => {
+      helpers.createUser({ _id, username, email, password, firstName, lastName, accountType, alerts, }, (createError, createdUserData) => {
         if (createError) {
           console.log(createError);
           res.status(500).json({ createError, });
@@ -273,6 +273,9 @@ router.post('/api/users/signup', (req, res, next) => {
   const firstName = '';
   const lastName = '';
   const accountType = 'standard';
+  const alerts = [{
+    
+  }];
 
   const hash = bcrypt.hashSync(password, 10);
 
@@ -288,7 +291,7 @@ router.post('/api/users/signup', (req, res, next) => {
     } else {
       if (!foundUserData) {
         
-        helpers.createTempUser({_id, username, email, password: hash, url, firstName, lastName, accountType, }, (error, data) => {
+        helpers.createTempUser({_id, username, email, password: hash, url, firstName, lastName, accountType, alerts, }, (error, data) => {
 
           const transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',

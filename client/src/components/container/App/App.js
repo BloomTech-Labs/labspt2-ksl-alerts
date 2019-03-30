@@ -475,7 +475,7 @@ export default class App extends Component {
   }
 
   componentDidUpdate() {
-    // console.log(this.state.user);
+    console.log(this.state.user);
   }
 
   render() {
@@ -531,7 +531,7 @@ export default class App extends Component {
 
             <Route
               path="/CreateAlert"
-              render={ () => <CreateAlert { ...this.state.createAlert } /> }
+              render={ () => <CreateAlert { ...this.state } /> }
             />
 
             <Route
