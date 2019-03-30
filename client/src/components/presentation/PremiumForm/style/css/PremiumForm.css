@@ -28,9 +28,11 @@
 }
 
 .premium-form {
+  margin: auto;
   display: flex;
   flex-direction: column;
   max-width: 280px;
+  width: 85%;
   min-width: 140px;
   /* border: 1px solid black; */
   margin-top: 25px;
@@ -58,6 +60,7 @@
   width: 100%;
 }
 
+<<<<<<< HEAD
 .subscription-checkbox {
   border: 1px solid black;
   display: flex;
@@ -87,3 +90,16 @@
   
 
 }
+=======
+.premium-form-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baselilne;
+
+}
+
+.premium-form-total > span {
+  font-weight: bold;
+  font-size: 18px;
+}
+>>>>>>> eff0bb941d07345f9053963ad1c98470b5c2626b

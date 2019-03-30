@@ -91,14 +91,38 @@ const authenticate = (req, res, next) => {
 
 router.post('/api/users/payment', authenticate, (req, res, next) => {
 
-   stripe.charges.create({
-    amount: 2000,
-    currency: 'usd',
-    description: 'An example charge',
-    source: req.body.tokenId,
-  }).then(({ status }) => {
-    res.json(status);
-  }).catch(console.log);
+    const { email, } = req.body;
+    const { tokenId, amount, } = req.body.charge;
+
+    stripe.charges.create({
+      amount,
+      currency: 'usd',
+      description: 'Alertifi Subscription',
+      source: tokenId,
+    }).then(({ status }) => {
+
+      if (status === 'succeeded') {
+
+        helpers.changeAccountType({ email, accountType: 'premium', }, (changeError, updatedUserData) => {
+          if (changeError) {
+            console.log(changeError);
+            res.status(500).json({ error: changeError, });
+          } else {
+            console.log(updatedUserData);
+            const user = updatedUserData;
+            res.status(200).json({ status, user, });
+          }
+        });
+      }
+
+    }).catch(err => {
+
+      console.log(err);
+
+      res.status(500).json({ status: 'failed', });
+
+    
+    });
 
 });
 
@@ -112,11 +136,11 @@ router.get('/api/users/email-verify/:url', (req, res, next) => {
       res.send({ err });
     } else {
 
-      const { _id, username, email, password, firstName, lastName, accountType, } = tempUserData;
+      const { _id, username, email, password, firstName, lastName, accountType, alerts, } = tempUserData;
 
       const token = jwt.sign({ _id, email, }, process.env.PRIVATE_KEY);
 
-      helpers.createUser({ _id, username, email, password, firstName, lastName, accountType, }, (createError, createdUserData) => {
+      helpers.createUser({ _id, username, email, password, firstName, lastName, accountType, alerts, }, (createError, createdUserData) => {
         if (createError) {
           console.log(createError);
           res.status(500).json({ createError, });
@@ -249,6 +273,9 @@ router.post('/api/users/signup', (req, res, next) => {
   const firstName = '';
   const lastName = '';
   const accountType = 'standard';
+  const alerts = [{
+    
+  }];
 
   const hash = bcrypt.hashSync(password, 10);
 
@@ -264,7 +291,7 @@ router.post('/api/users/signup', (req, res, next) => {
     } else {
       if (!foundUserData) {
         
-        helpers.createTempUser({_id, username, email, password: hash, url, firstName, lastName, accountType, }, (error, data) => {
+        helpers.createTempUser({_id, username, email, password: hash, url, firstName, lastName, accountType, alerts, }, (error, data) => {
 
           const transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
