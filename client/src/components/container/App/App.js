@@ -449,7 +449,7 @@ export default class App extends Component {
   }
 
   componentDidUpdate() {
-    console.log(this.state.user);
+    // console.log(this.state.user);
   }
 
   render() {
@@ -495,12 +495,12 @@ export default class App extends Component {
 
             <Route
               path='/Home'
-              render={ () => <Home /> }
+              render={ () => <Home { ...this.state } /> }
             />
 
             <Route
               path='/AlertFeed'
-              render={ () => <AlertFeed /> }
+              render={ () => <AlertFeed { ...this.state } /> }
             />
 
             <Route

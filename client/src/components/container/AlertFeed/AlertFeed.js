@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { AlertFeedSegment, } from '../../presentation/presentation.js';
 
 class AlertFeed extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class AlertFeed extends Component {
   render() {
     return (
       <>
-        Alert Feed
+        <AlertFeedSegment { ...this.props } />
       </>
     );
   }
