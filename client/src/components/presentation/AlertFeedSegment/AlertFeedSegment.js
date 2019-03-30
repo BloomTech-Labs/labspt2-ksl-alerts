@@ -20,15 +20,16 @@ const AlertFeedItem = props => {
             <Card.Content>
                 <Card.Header>{ props.listingDetails.title }</Card.Header>
                 <Card.Meta>{ props.listingDetails.location }</Card.Meta>
-                <p style={ style.alertFeedItemPrice }>{ props.listingDetails.price }</p>
+                
                 <Card.Description style={ style.alertFeedItemDescription }>{ props.listingDetails.description }</Card.Description>
             </Card.Content>
 
-            <Card.Content extra>
-                <a>
-                    <Icon name='user' />
-                    10 Friends
-                </a>
+            <Card.Content 
+                extra
+                style={ style.alertFeedItemExtra }
+            >
+                <p style={ style.alertFeedItemPrice }>{ props.listingDetails.price }</p>
+                <p style={ style.alertFeedItemSellerType }>{ props.pageStats.sellerType }</p>
             </Card.Content>
         </Card>
     );
@@ -76,11 +77,8 @@ const AlertFeedSegment = props => {
 
         <Card.Group 
             style={ style.alertFeedItemsContainer }
-            centered
         >
-
             { mapAlertItems() }
-
         </Card.Group>
 
         </Segment>
