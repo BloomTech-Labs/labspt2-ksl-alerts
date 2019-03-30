@@ -2,7 +2,7 @@ const express = require('express')
 const router  = express.Router();
 const jwt     = require('jsonwebtoken');
 const helpers = require('../../database/helpers/helpers.js');
-const kslScraper = require('./scripts/scraper.js');
+const kslScraper = require('../../scripts/scraper.js');
 const productionUrl = 'https://belzy-alertifi.herokuapp.com';
 const developmentUrl = 'http://localhost:8080';
 
