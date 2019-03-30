@@ -6,15 +6,27 @@ class AlertFeed extends Component {
     super(props);
 
     this.state = {
-
+      alertFeedDropdown: {
+        value: 0,
+      }
     };
+
+  }
+
+  handleAlertSelect = (e, {value, }) => {
+
+    this.setState({
+      alertFeedDropdown: {
+        value,
+      }
+    });
 
   }
 
   render() {
     return (
       <>
-        <AlertFeedSegment { ...this.props } />
+        <AlertFeedSegment { ...this.props } { ...this.state } handleAlertSelect={ this.handleAlertSelect } />
       </>
     );
   }

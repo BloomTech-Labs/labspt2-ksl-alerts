@@ -27,7 +27,33 @@ export default class App extends Component {
         firstName: '',
         lastName: '',
         accountType: '',
-        alerts: [],
+        alerts: [{
+          items: [{
+            contactInfo: {
+              firstName: '',
+              homePhone: '',
+              cellPhone: '',
+            },
+            pageStats: {
+              expirationDate: '',
+              favorited: '',
+              listingNumber: '',
+              memberSince: '',
+              pageViews: '',
+              sellerType: '',
+            },
+            listingDetails: {
+              description: '',
+              location: '',
+              price: '',
+              title: '',
+            },
+            images: [{
+              small: '',
+              large: '',
+            }]
+          }]
+        }],
       },
       appContainer: {
         mobile: false,
