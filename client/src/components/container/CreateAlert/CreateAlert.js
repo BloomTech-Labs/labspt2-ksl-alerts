@@ -70,6 +70,8 @@ class CreateAlert extends Component {
     const { username, email, } = this.props.user;
     const urlQuery = `https://classifieds.ksl.com/search?category[]=${ this.state.categorySearchInput.value }&subCategory[]=&keyword=${ this.state.keywordSearchInput.value }&priceFrom=${ this.state.priceRangeFromInput.value }&priceTo=${ this.state.priceRangeToInput.value }&zip=${ this.state.zipInput.value }&miles=${ this.state.distanceFromDropdown.value }&sellerType[]=${ this.state.sellerTypeRadio.value }&marketType[]=${ this.state.listingTypeRadio.value }&hasPhotos[]=${ this.state.photosRadio.value }&postedTime[]=${ this.state.listingPostedRadio.value }`;
 
+    
+
     axios({
       method: 'post',
       url: appUrl + '/api/alerts/create',

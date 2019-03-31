@@ -476,7 +476,7 @@ export default class App extends Component {
   }
 
   componentDidUpdate() {
-    console.log(this.state.user);
+    // console.log(this.state.user);
   }
 
   render() {
@@ -548,7 +548,7 @@ export default class App extends Component {
               path='/SignUp'
               render={ () => <UserAccount authenticate={ this.authenticate } renderForm='SignUp' /> }
             />
-    <Billing />
+
         </Container>
         </Router>
       </AppContainer>

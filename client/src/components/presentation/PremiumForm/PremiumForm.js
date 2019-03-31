@@ -9,35 +9,13 @@ import './style/css/PremiumForm.css';
 const PremiumForm = props => {
 
   return (
-<<<<<<< HEAD
-    <div>
-
-          <h2>Subscription</h2>
-                <div class="ui checkbox" className="subscription-checkbox">
-                  <div className="subscription-row">
-                  <input id="checkbox" type="checkbox" name="one-month"/>
-                  <label>1 Month Subscription - $20</label>
-                  </div>
-                  <div className="subscription-row">
-                  <input id="checkbox" type="checkbox" name="one-client"/>
-                  <label>1 Client - $1.99</label>
-                  </div>
-                </div>
-
-    <div>
-    <h1>Billing</h1>
-    </div>
-    <form 
-=======
     <Form 
->>>>>>> eff0bb941d07345f9053963ad1c98470b5c2626b
       className='premium-form'
       loading={ props.premiumForm.loading }
     >
     
     <div className='premium-form-name'>
     
-    <h2>Payment Info</h2>
     { /* Name on card */ }
       <Form.Input
         id='premium-form-name-input'
@@ -93,12 +71,6 @@ const PremiumForm = props => {
         </div>
       
       </div>
-      <div className="total">
-        <h3><strong>Amount: </strong></h3>
-        <div className="amount">
-          <h3>this.props.amount</h3>
-        </div>
-      </div>
 
       { /* Total */ }
       <div className='premium-form-total'>
@@ -121,16 +93,7 @@ const PremiumForm = props => {
         />
       </div>
 
-<<<<<<< HEAD
-    </form>
-
-
-
-    </div>
-    
-=======
     </Form>
->>>>>>> eff0bb941d07345f9053963ad1c98470b5c2626b
   );
 }
 

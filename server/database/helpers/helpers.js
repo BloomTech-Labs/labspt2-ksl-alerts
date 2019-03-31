@@ -108,8 +108,8 @@ module.exports = {
       alerts.push(alert);
 
       models.User.findOneAndUpdate({ email, }, { alerts, }, { new: true, }, (foundError, updatedUserData) => {
-        if (error) {
-          done(error);
+        if (foundError) {
+          done(foundError);
         } else {
           done(null, updatedUserData);
         }
@@ -118,10 +118,62 @@ module.exports = {
   },
   addAlertItem: function(data, done) {
 
-    const { email, title, } = data;
+    const { email, title, item} = data;
 
     models.User.findOne({ email, }, (error, user) => {
 
+      const items = [];
+
+      // Get current items in alerts and add to items array.
+      for (let i in user.alerts) {
+        if (title === user.alerts[i].title) {
+          items.push(user.alerts[i].items);
+        }
+      }
+
+      const newItems = [];
+
+      // Look for duplicate item.
+      for (let i in items) {
+        if (items.length > 0) {
+          if (items[i].pageStats.listingNumber !== item.pageStats.listingNumber) {
+            newItems.push(item);
+          }
+        } else {
+          newItems.push(item);
+        }
+        
+      }
+
+      // Add new item to array.
+      newItems.push(item);
+
+
+      const alerts = [];
+
+      for (let i in user.alerts) {
+        if (title !== user.alerts[i].title) {
+          alerts.push(user.alerts[i]);
+        } else if (title === user.alerts[i].title) {
+
+          const newAlert = {
+            title: user.alerts[i].title,
+            urlQuery: user.alerts[i].urlQuery,
+            items: newItems,
+          };
+
+          alerts.push(newAlert);
+
+        }
+      }
+
+      models.User.findOneAndUpdate({ email, }, { alerts, }, { new: true, }, (foundError, updatedUserData) => {
+        if (foundError) {
+          done(foundError);
+        } else {
+          done(null, updatedUserData);
+        }
+      });
     });
 
 
