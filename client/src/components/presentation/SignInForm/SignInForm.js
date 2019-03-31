@@ -113,7 +113,7 @@ const SignInForm = props => {
             />
           </Form.Field>
           
-          <p style={ style.forgotPassword }><a href='#'>Forgot Password</a></p>
+          <p style={ style.forgotPassword }><a href='/ForgotPassword'>Forgot Password</a></p>
 
           <p style={ style.createAccount }>Not Registered? <Link to='/SignUp'>Create an Account</Link></p>
 

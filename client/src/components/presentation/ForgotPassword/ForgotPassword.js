@@ -13,6 +13,7 @@ const ForgotPassword = props => {
 	return (
 		<Segment style={ style.Segment }>
 			// Big input box that takes up the middle
+			<h2> TEST </h2>
 			<Form>
 				// Title with embedded reference style
 				<h2 style={ style.FormHeader }>Forgotten Password?</h2>
@@ -23,7 +24,7 @@ const ForgotPassword = props => {
 				>
 				
 				
-				// Box for email input
+				// Container for input
 				<label
 					style={ style.label }
 				>
@@ -38,17 +39,30 @@ const ForgotPassword = props => {
 				</label>
 				
 				
-				
+				// Details for input
 				<Input
-				
+					id="forgot-password-email-input"
+					name="forgotPasswordEmailInput"
+					fluid
+					placeholder="Please enter your email..."
+					type="email"
+					//icon={}
+					//value={}
+					//onChange={}
+					//onBlur={}
+					//loading={}
 				>
 				</Input>
-				
-				
-					
+			</Form.Field>
+		 </Form>
+		</Segment>
 	
 	
 	);
+
+};
+
+ForgotPassword.propTypes = {
 
 };
 
