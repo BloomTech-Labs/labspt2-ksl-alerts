@@ -17,7 +17,7 @@ const options = {
   // }
 };
 
-const itemScraper = (url, i, done) => {
+async function itemScraper(url, i, done) {
 
   const session_id = (1000000 * Math.random())|0;
   const nightmare = new Nightmare(options);
@@ -168,7 +168,7 @@ const aslScraper = (url, done) => {
       });
 }
 
-module.exports = kslScraper = (urlQuery, done) => {
+module.exports = async function kslScraper(urlQuery, done) {
 
   const session_id = (1000000 * Math.random())|0;
   // const urlQuery = 'https://classifieds.ksl.com/search?category[]=&subCategory[]=&keyword=chair&priceFrom=&priceTo=&zip=&miles=25&sellerType[]=Private&marketType[]=Sale&hasPhotos[]=Has%20Photos&postedTime[]=1HOUR';
@@ -201,6 +201,6 @@ module.exports = kslScraper = (urlQuery, done) => {
 
       }).catch(error => {
         // console.log(error);
-        kslScraper();
+        // kslScraper();
       });
 }

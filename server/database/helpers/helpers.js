@@ -122,61 +122,85 @@ module.exports = {
 
     models.User.findOne({ email, }, (error, user) => {
 
-      const items = [];
+      // console.log(item);
+      console.log('Item extracted');
 
-      // Get current items in alerts and add to items array.
+
+     
+
       for (let i in user.alerts) {
-        if (title === user.alerts[i].title) {
-          items.push(user.alerts[i].items);
-        }
-      }
+        if (user.alerts[i].title === title) {
+          // console.log(user.alerts[i].title);
 
-      const newItems = [];
+          const items = user.alerts[i].items;
 
-      // Look for duplicate item.
-      for (let i in items) {
-        if (items.length > 0) {
-          if (items[i].pageStats.listingNumber !== item.pageStats.listingNumber) {
-            newItems.push(item);
-          }
-        } else {
-          newItems.push(item);
-        }
+          for (let j in items) {
+            if (items[j].hasOwnProperty('pageStats')) {
+              if (!(items[j].pageStats.listingNumber === item.pageStats.listingNumber)) {
+                items.push(item);
+              }
+            } else {
+              items.push(item);
+            }
+              
+            console.log(items);
+
+            let alert = {
+              title: user.alerts[i].title,
+              urlQuery: user.alerts[i].urlQuery,
+              items,
+            };
+
+            // console.log(alert.items);
+
+
+            
+            const alerts = [];
+
+            // for (let k in user.alerts) {
+            //   if (user.alerts[k].title !== title) {
+            //     alerts.push(user.alerts[k]);
+            //   }
+            // }
+
+            alerts.push(alert);
+
+            // console.log(alerts);
+
+            const alertsArr = [];
+
+            for (let k in user.alerts) {
+                alertsArr.push({
+                  title: user.alerts[k].title,
+                  urlQuery: user.alerts[k].urlQuery,
+                  items: user.alerts[k].items,
+                });
+            }
+
+            
+
+            for (let k in alertsArr) {
+              if (!(typeof alertsArr[k].title === 'undefined')) {
+                alerts.push(alertsArr[k]);
+              }
+            }
+
         
-      }
-
-      // Add new item to array.
-      newItems.push(item);
+            // console.log(alerts);
 
 
-      const alerts = [];
 
-      for (let i in user.alerts) {
-        if (title !== user.alerts[i].title) {
-          alerts.push(user.alerts[i]);
-        } else if (title === user.alerts[i].title) {
-
-          const newAlert = {
-            title: user.alerts[i].title,
-            urlQuery: user.alerts[i].urlQuery,
-            items: newItems,
-          };
-
-          alerts.push(newAlert);
-
+            models.User.findOneAndUpdate({ email, }, { alerts, }, { new: true, }, (foundError, updatedUserData) => {
+              if (foundError) {
+                done(foundError);
+              } else {
+                done(null, updatedUserData);
+              }
+            });
+          }
         }
       }
-
-      models.User.findOneAndUpdate({ email, }, { alerts, }, { new: true, }, (foundError, updatedUserData) => {
-        if (foundError) {
-          done(foundError);
-        } else {
-          done(null, updatedUserData);
-        }
-      });
     });
-
-
   }
 }
 

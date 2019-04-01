@@ -455,6 +455,8 @@ export default class App extends Component {
 
   componentDidMount() {
 
+    console.log('User: ' + this.state.user);
+
     this.authenticateOAuthUser();
     this.verifyOAuthUser();
     this.verifyAlertifiUser();

@@ -5,8 +5,6 @@ import { style, } from './style/inline/inline.js';
 
 const AlertFeedItem = props => {
 
-    console.log(props);
-
     return (
         <Card
             link
@@ -48,14 +46,18 @@ const AlertFeedSegment = props => {
 
     const mapAlertItems = () => {
         
-        if (props.user.alerts[0].title) {
+        if (props.user.alerts.length > 0) {
+
             const items = props.user.alerts[props.alertFeedDropdown.value].items;
 
             return items.map((item, i) => {
-                return (
-                    <AlertFeedItem key={ i } { ...item } />
-                );
+                if (i >= 1) {
+                    return (
+                        <AlertFeedItem key={ i } { ...item } />
+                    );
+                }
             });
+
         }
 
     }

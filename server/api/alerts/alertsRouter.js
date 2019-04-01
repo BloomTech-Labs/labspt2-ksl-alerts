@@ -92,22 +92,21 @@ router.post('/api/alerts/create', authenticate, (req, res, next) => {
       res.status(500).json(createError);
     } else {
 
-      console.log(urlQuery);
-
       // Run scraper once when alert is created.
       kslScraper(urlQuery, (data) => {
           
         const item = data;
 
         helpers.addAlertItem({ email, title, item, }, (error, user) => {
-          console.log(user);
+
+          // use socket io here to send on received item event. When client recieves the event, will query database to get
+          // data.
+          // console.log(user);
         });
       });
 
-
       // 20 minutes.
       const interval = 1200000
-
 
       // Set scraper interval
       setInterval(() => {
