@@ -8,14 +8,46 @@
 
 ## [Front End working URL](https://5c871dd85a0e9e0008a338af--lucid-jones-3a4163.netlify.com/)
 
-Environment Variables:
+# Pull Request Checklist:
 
-In order to run the applciation, you will need to configure the following environment variables:
+*Be sure to fill out and include this PR check list*
 
-Deployment - In the Heroku CLI, use this command to set an environment variable: heroku config:set <ENV_VAR>=<VALUE>
-Local - Create a .env file in the root directory
+# Description
 
-* MONGO_URI
-* PRIVATE_KEY
-* PUBLIC_KEY
-* COMMANDER_PASSWORD
+Please include a summary of the change and a link to which issue is fixed. Please also include relevant motivation and context. List any dependencies that are required for this change.
+
+Fixes # (issue)
+
+## Type of change
+
+Please delete options that are not relevant.
+
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
+- [ ] This change requires a documentation update
+
+## Change status
+
+- [ ] Complete, tested, ready to review and merge
+- [ ] Complete, but not tested (may need new tests)
+- [ ] Incomplete/work-in-progress, PR is for discussion/feedback
+
+# How Has This Been Tested?
+
+Please describe the tests that you ran to verify your changes. Provide instructions so we can reproduce. Please also list any relevant details for your test configuration
+
+- [ ] Test A
+- [ ] Test B
+
+# Checklist:
+
+- [ ] My code follows the style guidelines of this project
+- [ ] I have performed a self-review of my own code
+- [ ] My code has been reviewed by at least one peer
+- [ ] I have commented my code, particularly in hard-to-understand areas
+- [ ] I have made corresponding changes to the documentation
+- [ ] My changes generate no new warnings
+- [ ] I have added tests that prove my fix is effective or that my feature works
+- [ ] New and existing unit tests pass locally with my changes
+- [ ] There are no merge conflicts
