@@ -334,7 +334,7 @@ router.post('/api/users/signin', (req, res, next) => {
 });
 
 /* FORGOT PASSWORD ROUTE */
-router.post('api/users/signin', (req, res, next) => {
+router.post('api/users/forgotpassword', (req, res, next) => {
 	
 	/*
 	const { email, } = req.body;

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from 'axios';
 import { BrowserRouter as Router, Link, NavLink, Route, Switch, } from 'react-router-dom';
 import { Topbar, VerticalSidebar, SignedInModal, } from '../../presentation/presentation.js';
-import { Home, AlertFeed, CreateAlert, Settings, UserAccount, } from '../container.js';
+import { Home, AlertFeed, CreateAlert, Settings, UserAccount, ForgotPassword, } from '../container.js';
 import { appUrl, googleDiscoveryDocUrl, } from '../../../constants.js';
 import "semantic-ui-css/semantic.min.css";
 
@@ -519,6 +519,11 @@ export default class App extends Component {
               path='/SignUp'
               render={ () => <UserAccount authenticate={ this.authenticate } renderForm='SignUp' /> }
             />
+
+	    <Route
+	      path='/ForgotPassword'
+	      render={ () => <ForgotPassword /> }
+	    />
         </Container>
         </Router>
       </AppContainer>
