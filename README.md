@@ -14,14 +14,11 @@
 
 # Description
 
-<<<<<<< HEAD
 * MONGO_URI
 * PRIVATE_KEY
 * PUBLIC_KEY
 * COMMANDER_PASSWORD
-=======
-=======
->>>>>>> 12fef4674c726d68fdbc389434e24119b898469b
+
 Please include a summary of the change and a link to which issue is fixed. Please also include relevant motivation and context. List any dependencies that are required for this change.
 
 Fixes # (issue)
