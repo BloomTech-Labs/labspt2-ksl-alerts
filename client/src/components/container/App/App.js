@@ -506,7 +506,12 @@ export default class App extends Component {
 
         <Container>
           <Topbar />
+<<<<<<< HEAD
+
+
+=======
        
+>>>>>>> Development
             <Route
               path='/Home'
               render={ () => <Home /> }

@@ -19,4 +19,3 @@ Local - Create a .env file in the root directory
 * PRIVATE_KEY
 * PUBLIC_KEY
 * COMMANDER_PASSWORD
-
