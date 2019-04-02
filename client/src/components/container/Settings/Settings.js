@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SettingsForm } from '../../presentation/presentation.js';
+import { SettingsTabs, SettingsForm } from '../../presentation/presentation.js';
 
 class Settings extends Component {
   constructor(props) {
@@ -33,6 +33,7 @@ class Settings extends Component {
           handleChange={this.handleInputChange}
           handleSubmit={this.handleSubmit}
         />
+        <SettingsTabs { ...this.state } { ...this.props } />
       </>
     );
   }

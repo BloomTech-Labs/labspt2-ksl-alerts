@@ -29,8 +29,34 @@ const tempUserSchema = new Schema({
   accountType: String,
   alerts: [{
     title: String,
-    query: String,
+    urlQuery: String,
+    items: [{
+      contactInfo: {
+        firstName: String,
+        homePhone: String,
+        cellPhone: String,
+      },
+      pageStats: {
+        listingNumber: String,
+        expirationDate: String,
+        pageViews: String,
+        favorited: String,
+        sellerType: String,
+        memberSince: String,
+      },
+      listingDetails: {
+        title: String,
+        location: String,
+        price: String,
+        description: String,
+      },
+      images: [{
+        small: String,
+        large: String,
+      }],
+    }],
   }],
+  
   url: String, 
 });
 
