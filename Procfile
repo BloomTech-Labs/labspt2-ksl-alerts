@@ -1,1 +1,1 @@
-web: gunicorn server/server.wsgi
+web: node server/server.js
