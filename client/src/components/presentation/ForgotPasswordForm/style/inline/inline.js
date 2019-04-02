@@ -12,5 +12,11 @@ export const style = {
   dividerContainer: {
     width: '220px', 
     display: 'block',
+  },
+  formHeader: {
+    fontSize: '24px'
+  },
+  inputContainer: {
+    width: '220px'
   }
 };

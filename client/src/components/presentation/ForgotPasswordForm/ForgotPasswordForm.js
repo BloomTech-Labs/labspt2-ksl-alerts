@@ -10,22 +10,21 @@ import { style, } from './style/inline/inline.js';
 const ForgotPasswordForm = props => {
 
 		return (
-			<Segment style={style.Segment}>
+			<Segment style={ style.segment }>
 				<Form>
-					<h2>Forgotten Password?</h2>
+					<h2 style={ style.formHeader }>Forgotten Password?</h2>
 						<Form.Field
-							// Update with actual style
-							style={ style.replaceMe }
+							style={ style.inputContainer }
 							error="ERROR"
 						>
 							<label>
-								Email
-								<span>
+								Email<br/>
+								<span style={ style.error }>
 									Dummy Data
 								</span>
 							</label>
 							
-							<Input>
+							<Input
 								id='forgot-password-email-input'
 								name='forgotPasswordEmailInput'
 								fluid
@@ -39,7 +38,7 @@ const ForgotPasswordForm = props => {
 								loading=...
 								*/
 								
-							</Input>
+							/>
 							
 						</Form.Field>
 				</Form>
