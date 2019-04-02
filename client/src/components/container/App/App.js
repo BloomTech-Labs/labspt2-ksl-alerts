@@ -103,12 +103,12 @@ export default class App extends Component {
       localStorage.setItem('ALERTIFI-USER-AUTHENTICATION-TYPE', type);
       localStorage.setItem('ALERTIFI-USER-AUTHENTICATION-TOKEN', token);
 
-      this.setState({ 
-        signedIn: true, 
+      this.setState({
+        signedIn: true,
         authorization: {
           type,
           token,
-        }, 
+        },
       });
 
       window.location.href = appUrl + '/Home?success=true';
@@ -164,7 +164,7 @@ export default class App extends Component {
               }
             })
             .then(res => {
-              
+
               const data = {
                 username: res.data.name,
                 email: res.data.email,
@@ -184,15 +184,15 @@ export default class App extends Component {
                   token: res.headers.authorization,
                   type: authType,
                 };
-  
+
                 const user = res.data;
-  
+
                 this.setState({
                   signedIn: true,
                   authorization,
                   user,
                 });
-  
+
                 localStorage.setItem('ALERTIFI-USER-AUTHENTICATION-TOKEN', authorization.token);
                 localStorage.setItem('ALERTIFI-USER-AUTHENTICATION-TYPE', authorization.type);
 
@@ -248,7 +248,7 @@ export default class App extends Component {
           }).catch(console.log);
 
           break;
-        default: 
+        default:
           break;
       }
 
@@ -288,7 +288,7 @@ export default class App extends Component {
           break;
         case 'google':
 
-          axios({ 
+          axios({
             method: 'get',
             url: googleDiscoveryDocUrl,
           }).then(result => {
@@ -301,7 +301,7 @@ export default class App extends Component {
               }
             })
             .then(res => {
-              
+
               console.log(res.data);
 
               const data = {
@@ -499,19 +499,14 @@ export default class App extends Component {
         />
 
         <SignedInModal
-          { ...this.state } 
+          { ...this.state }
           handleClose={ this.handleSignedInModal }
           accountType={ this.state.user.accountType }
         />
 
         <Container>
           <Topbar />
-<<<<<<< HEAD
 
-
-=======
-       
->>>>>>> Development
             <Route
               path='/Home'
               render={ () => <Home /> }
