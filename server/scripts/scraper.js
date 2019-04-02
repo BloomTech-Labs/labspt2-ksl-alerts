@@ -8,16 +8,17 @@ const proxy = 'http://zproxy.lum-superproxy.io:22225';
 
 const options = {
   show: false,
+  executionTimeout: 300000,
   gotoTimeout: 300000,
   waitTimeout: 300000,
-  loadTimeout: 300000,  // 60 seconds
+  // loadTimeout: 300000,  // 60 seconds
   // switches: {
   //   'proxy-server': proxy,
   //   'ignore-certificate-errors': true,
   // }
 };
 
-async function itemScraper(url, i, done) {
+function itemScraper(url, i, done) {
 
   const session_id = (1000000 * Math.random())|0;
   const nightmare = new Nightmare(options);
@@ -35,12 +36,12 @@ async function itemScraper(url, i, done) {
     .end()
     .then((html) => {
 
-      const $ = cheerio.load(html);
+      let $ = cheerio.load(html);
 
-      const pageStatsArr = $('.listingStats-value').map((i, el) => $(el).text()).get();
-      const imageSrcArr  = $('.photoViewer-carouselItemPhoto > .smartImage').map((i, el) => $(el).attr('src')).get();
+      let pageStatsArr = $('.listingStats-value').map((i, el) => $(el).text()).get();
+      let imageSrcArr  = $('.photoViewer-carouselItemPhoto > .smartImage').map((i, el) => $(el).attr('src')).get();
 
-      const data = {
+      let data = {
         contactInfo: {
           firstName: $('.listingContactSeller-firstName-value').text(),
           homePhone: $('.listingContactSeller-homePhone > .listingContactSeller-optionText').text(),
@@ -58,12 +59,12 @@ async function itemScraper(url, i, done) {
           title:       $('.listingDetails-title').text(),
           location:    $('.listingDetails-location').text(),
           price:       $('.listingDetails-price').text(),
-          description: $('.lsitingDescription-text').text(),
+          description: $('.listingDescription-text').text(),
         },
         images: imageSrcArr.map((img, i) => {
 
-          const small = img;
-          const large = img.substring(0, img.length - 13) + '664x500';
+          let small = img;
+          let large = img.substring(0, img.length - 13) + '664x500';
 
           return {
             small,
@@ -72,19 +73,21 @@ async function itemScraper(url, i, done) {
         }),
       };
 
+      
       return data;
 
     })
     .then(data => {
-
       
       done(data);
-
 
     })
     .catch(err => {
       // console.log(err);
-      itemScraper(url, done);
+      setTimeout(() => {
+        console.log(`Extracting item... (retry)\n`);
+        itemScraper(url, done);
+      }, 5000);
     });
 }
 
@@ -168,7 +171,10 @@ const aslScraper = (url, done) => {
       });
 }
 
-module.exports = async function kslScraper(urlQuery, done) {
+module.exports = function kslScraper(urlQuery, done) {
+
+
+  let interval = 0;
 
   const session_id = (1000000 * Math.random())|0;
   // const urlQuery = 'https://classifieds.ksl.com/search?category[]=&subCategory[]=&keyword=chair&priceFrom=&priceTo=&zip=&miles=25&sellerType[]=Private&marketType[]=Sale&hasPhotos[]=Has%20Photos&postedTime[]=1HOUR';
@@ -182,7 +188,7 @@ module.exports = async function kslScraper(urlQuery, done) {
       .evaluate((selector) => {
         return document.querySelector(selector).innerHTML;
       }, 'body')
-      // .end()
+      .end()
       .then((html) => {
 
         const $ = cheerio.load(html);
@@ -193,14 +199,17 @@ module.exports = async function kslScraper(urlQuery, done) {
 
           const url = `https://classifieds.ksl.com${ item.attribs.href }`;
           setTimeout(() => {
+            console.log(`Extracting item...\n`)
             itemScraper(url, i, done);
-          }, 1000);
+            interval += 5000;
+            console.log(interval);
+          }, interval);
 
         });
         
 
       }).catch(error => {
         // console.log(error);
-        // kslScraper();
+        kslScraper();
       });
 }

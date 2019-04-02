@@ -122,84 +122,133 @@ module.exports = {
 
     models.User.findOne({ email, }, (error, user) => {
 
-      // console.log(item);
-      console.log('Item extracted');
 
+      console.log('Item extracted:\n');
+      console.log(`${ item }\n`);
 
-     
+      let userAlert;
 
-      for (let i in user.alerts) {
+      for (let i = 0; i < user.alerts.length; i++) {
         if (user.alerts[i].title === title) {
-          // console.log(user.alerts[i].title);
-
-          const items = user.alerts[i].items;
-
-          for (let j in items) {
-            if (items[j].hasOwnProperty('pageStats')) {
-              if (!(items[j].pageStats.listingNumber === item.pageStats.listingNumber)) {
-                items.push(item);
-              }
-            } else {
-              items.push(item);
-            }
-              
-            console.log(items);
-
-            let alert = {
-              title: user.alerts[i].title,
-              urlQuery: user.alerts[i].urlQuery,
-              items,
-            };
-
-            // console.log(alert.items);
-
-
-            
-            const alerts = [];
-
-            // for (let k in user.alerts) {
-            //   if (user.alerts[k].title !== title) {
-            //     alerts.push(user.alerts[k]);
-            //   }
-            // }
-
-            alerts.push(alert);
-
-            // console.log(alerts);
-
-            const alertsArr = [];
-
-            for (let k in user.alerts) {
-                alertsArr.push({
-                  title: user.alerts[k].title,
-                  urlQuery: user.alerts[k].urlQuery,
-                  items: user.alerts[k].items,
-                });
-            }
-
-            
-
-            for (let k in alertsArr) {
-              if (!(typeof alertsArr[k].title === 'undefined')) {
-                alerts.push(alertsArr[k]);
-              }
-            }
-
-        
-            // console.log(alerts);
-
-
-
-            models.User.findOneAndUpdate({ email, }, { alerts, }, { new: true, }, (foundError, updatedUserData) => {
-              if (foundError) {
-                done(foundError);
-              } else {
-                done(null, updatedUserData);
-              }
-            });
-          }
+          userAlert = user.alerts[i];
+          i = user.alerts.length;
         }
       }
+
+      const items = userAlert.items;
+
+      items.push(item);
+
+      let alert = {
+        title: userAlert.title,
+        urlQuery: userAlert.urlQuery,
+        items,
+      };
+
+      const alerts = user.alerts;
+
+      const newAlerts = [];
+
+      for (let i = 0; i < alerts.length; i++) {
+        if (!(alerts[i].title === title)) {
+          newAlerts.push(alerts[i]);
+        } else if (alerts[i].title === title) {
+          if (alerts[i].items < alert.items) {
+            newAlerts.push(alert);
+          } else {
+            newAlerts.push(alerts[i]);
+          }
+        }
+        
+      }
+
+      // console.log(`\n\n${ newAlerts }`);
+
+      models.User.findOneAndUpdate({ email, }, { alerts: newAlerts, }, { new: true, }, (foundError, updatedUserData) => {
+        if (foundError) {
+          done(foundError);
+        } else {
+          done(null, updatedUserData);
+        }
+      });
+
+
+
+
+
+
+
+
+
+      // for (let i in user.alerts) {
+      //   if (user.alerts[i].title === title) {
+      //     // console.log(user.alerts[i].title);
+
+      //     const items = user.alerts[i].items;
+
+
+      //     for (let j in items) {
+      //       if (items[j].hasOwnProperty('pageStats')) {
+      //         if (!(items[j].pageStats.listingNumber === item.pageStats.listingNumber)) {
+      //           items.push(item);
+      //         }
+      //       } else {
+      //         items.push(item);
+      //       }
+              
+      //       // console.log(items);
+
+            
+
+      //       // console.log(alert.items);
+
+
+            
+      //       const alerts = [];
+
+      //       // for (let k in user.alerts) {
+      //       //   if (user.alerts[k].title !== title) {
+      //       //     alerts.push(user.alerts[k]);
+      //       //   }
+      //       // }
+
+      //       alerts.push(alert);
+
+      //       // console.log(alerts);
+
+      //       const alertsArr = [];
+
+      //       for (let k in user.alerts) {
+      //           alertsArr.push({
+      //             title: user.alerts[k].title,
+      //             urlQuery: user.alerts[k].urlQuery,
+      //             items: user.alerts[k].items,
+      //           });
+      //       }
+
+            
+
+      //       for (let k in alertsArr) {
+      //         if (!(typeof alertsArr[k].title === 'undefined')) {
+      //           alerts.push(alertsArr[k]);
+      //         }
+      //       }
+
+        
+      //       // console.log(alerts);
+
+
+
+      //       models.User.findOneAndUpdate({ email, }, { alerts, }, { new: true, }, (foundError, updatedUserData) => {
+      //         if (foundError) {
+      //           done(foundError);
+      //         } else {
+      //           done(null, updatedUserData);
+      //         }
+      //       });
+      //     }
+      //   }
+      // }
     });
   }
 }

@@ -15,7 +15,9 @@ const AlertFeedItem = props => {
                 style={ style.alertFeedItemImage }
             />
 
-            <Card.Content>
+            <Card.Content
+                style={ style.cardContentContainer }            
+            >
                 <Card.Header>{ props.listingDetails.title }</Card.Header>
                 <Card.Meta>{ props.listingDetails.location }</Card.Meta>
                 

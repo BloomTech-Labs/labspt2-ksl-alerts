@@ -21,8 +21,10 @@ export const style = {
         height: '225.90px',
     },
     alertFeedItemDescription: {
-        height: '84px',
+        // height: '84px',
         // border: '1px solid black',
+        flex: '1',
+        overflow: 'hidden',
     },
     alertFeedItemPrice: {
         // border: '1px solid black',
@@ -43,5 +45,12 @@ export const style = {
         flex: '1',
         justifyContent: 'space-between',
         // border: '1px solid black',
+    },
+    cardContentContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        // border: '1px solid black',
+        height: '160px',
+        paddingBottom: '2px',
     }
 };
