@@ -12,7 +12,7 @@ const ForgotPasswordForm = props => {
 		return (
 			<Segment style={ style.segment }>
 				<Form>
-					<h2 style={ style.formHeader }>Forgotten Password?</h2>
+					<h2 style={ style.formHeader }>Forgot Password?</h2>
 						<Form.Field
 							style={ style.inputContainer }
 							error="ERROR"
@@ -20,7 +20,7 @@ const ForgotPasswordForm = props => {
 							<label>
 								Email<br/>
 								<span style={ style.error }>
-									Dummy Data
+									Replace Me
 								</span>
 							</label>
 							
