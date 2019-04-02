@@ -9,7 +9,9 @@ class ForgotPassword extends Component{
 	
 	render() {
 		return (
-			<h1> TEST </h1>
+			<>
+				ForgotPassword
+			</>
 		)
 	}
 

@@ -10,7 +10,13 @@ import { style, } from './style/inline/inline.js';
 const ForgotPassword = props => {
 
 		return (
-			<h1> FORGOT PASSWORD </h1>
+			//<h1> FORGOT PASSWORD </h1>
+			//<h1> We working baby </h1>
+			<Segment style={style.Segment}>
+				<Form>
+					<h2 style={ style.formHeader }>Forgotten Password?</h2>
+				</Form>
+			</Segment>
 		);
 	
 };
