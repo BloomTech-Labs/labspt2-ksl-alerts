@@ -536,7 +536,6 @@ export default class App extends Component {
               path='/SignUp'
               render={ () => <UserAccount authenticate={ this.authenticate } renderForm='SignUp' /> }
             />
-    <Billing />
         </Container>
         </Router>
       </AppContainer>
