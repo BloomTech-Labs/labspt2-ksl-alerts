@@ -3,8 +3,19 @@ import { Form, Segment, Label, Input, Icon, Button, } from 'semantic-ui-react';
 import { style } from './style/inline.js';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Tooltip, OverlayTrigger } from 'react-bootstrap';
+
 
 const SignUpForm = props => {
+
+  const tooltip = (
+    <Tooltip id="tooltip">
+        <p>
+            Password must include one uppercase letter and one number.
+        </p>
+    </Tooltip>
+);
+
   return (
       <Segment style={ style.segment }>
         <Form>
@@ -94,6 +105,7 @@ const SignUpForm = props => {
                 { props.signUpPasswordInput.label.value }
               </span>
             </label>
+            <OverlayTrigger placement="bottom" overlay={tooltip}>
 
             <Input
               id='sign-up-password-input'
@@ -108,6 +120,8 @@ const SignUpForm = props => {
               loading={ props.signUpPasswordInput.loading }
             >
             </Input>
+            </OverlayTrigger>
+
           </Form.Field>
 
           <Form.Field

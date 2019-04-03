@@ -6,13 +6,16 @@ import { injectStripe, CardElement, CardNumberElement,
 import { style, } from './style/inline/inline.js';
 import './style/css/PremiumForm.css';
 
+
 const PremiumForm = props => {
+
 
   return (
     <div>
 
-          <h2>Subscription</h2>
+          
                 <div class="ui checkbox" className="subscription-checkbox">
+                <h2>Subscription</h2>
                   <div className="subscription-row">
                   <input id="checkbox" type="checkbox" name="one-month"/>
                   <label>1 Month Subscription - $20</label>
@@ -23,9 +26,7 @@ const PremiumForm = props => {
                   </div>
                 </div>
 
-    <div>
-    <h1>Billing</h1>
-    </div>
+
     <form 
       className='premium-form'
     >
@@ -86,12 +87,7 @@ const PremiumForm = props => {
           />
         </div>
       
-      </div>
-      <div className="total">
-        <h3><strong>Amount: </strong></h3>
-        <div className="amount">
-          <h3>this.props.amount</h3>
-        </div>
+  
       </div>
 
       { /* Submit Button */ }
