@@ -12,18 +12,20 @@ const ForgotPasswordForm = props => {
 		return (
 			<Segment style={ style.segment }>
 				<Form>
+					{ /* Form Header */ }
 					<h2 style={ style.formHeader }>Forgot Password?</h2>
 						<Form.Field
 							style={ style.inputContainer }
 							error="ERROR"
 						>
 							<label>
-								Email<br/>
+								Enter your email to continue<br/>
 								<span style={ style.error }>
-									Replace Me
+									Send recovery Email
 								</span>
 							</label>
 							
+							{/* Email Input Box */}
 							<Input
 								id='forgot-password-email-input'
 								name='forgotPasswordEmailInput'
@@ -41,6 +43,23 @@ const ForgotPasswordForm = props => {
 							/>
 							
 						</Form.Field>
+						
+						{/* Email Send Button */}
+						<Form.Field
+							style={ style.buttonContainer }
+						>
+							<Button
+								id='alertifi-forgot-password-button'
+								name='alertifiForgotPasswordButton'
+								content='Send Verification Email'
+								fluid
+								positive
+								icon='forgot-password'
+								labelPosition='left'
+								onClick='replaceme'
+								
+							/>
+						</Form.Field>
 				</Form>
 			</Segment>
 		);
@@ -53,10 +72,3 @@ ForgotPasswordForm.propTypes = {
 
 export default ForgotPasswordForm;
 
-// User inputs email & username
-
-// User gets sent an email
-
-// User follows email
-
-// Password reset screen
