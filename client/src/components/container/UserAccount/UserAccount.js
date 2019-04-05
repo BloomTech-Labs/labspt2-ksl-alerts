@@ -10,6 +10,9 @@ class UserAccount extends Component {
 
     this.state = {
       renderForm: this.props.renderForm,
+      signInForm: {
+        loading: false,
+      },
       signInEmailInput: {
         value: '',
         error: false,

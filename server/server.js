@@ -1,17 +1,15 @@
 'use strict';
 
 require('dotenv').config();
-const path = require('path');
+const path       = require('path');
 const bodyParser = require('body-parser');
-const cors = require('cors');
-const express = require('express');
-const server = express();
-const kslScraper = require('./scripts/newScraper.js');
-const apiRouter = require('./api/apiRouter.js');
-const PORT = process.env.PORT || 8080;
+const cors       = require('cors');
+const express    = require('express');
+const server     = express();
+const apiRouter  = require('./api/apiRouter.js');
+const PORT       = process.env.PORT || 8080;
 
 const appUrlArr = ['http://localhost:8080', 'https://belzy-alertifi.herokuapp.com'];
-
 
 server.use(cors());
 server.use(express.json());

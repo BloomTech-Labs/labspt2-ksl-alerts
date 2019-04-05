@@ -95,8 +95,8 @@ const FormLayerTwo = props => {
             id='seller-type-private-radio'
             name='sellerTypeRadio'
             label='Private'
-            value='private'
-            checked={ sellerTypeValue === 'private' }
+            value='Private'
+            checked={ sellerTypeValue === 'Private' }
             onChange={ props.handleChange }
           />
 
@@ -104,8 +104,8 @@ const FormLayerTwo = props => {
             id='seller-type-business-radio'
             name='sellerTypeRadio'
             label='Business'
-            value='business'
-            checked={ sellerTypeValue === 'business' }
+            value='Business'
+            checked={ sellerTypeValue === 'Business' }
             onChange={ props.handleChange }
           />
 
@@ -113,8 +113,8 @@ const FormLayerTwo = props => {
             id='seller-type-all-radio'
             name='sellerTypeRadio'
             label='All'
-            value='all'
-            checked={ sellerTypeValue === 'all' }
+            value=''
+            checked={ sellerTypeValue === '' }
             onChange={ props.handleChange }
           />
 
@@ -129,8 +129,8 @@ const FormLayerTwo = props => {
             id='photos-has-photos-radio'
             name='photosRadio'
             label='Has Photos'
-            value='has photos'
-            checked={ photosValue === 'has photos' }
+            value='Has Photos'
+            checked={ photosValue === 'Has Photos' }
             onChange={ props.handleChange }
           />
 
@@ -138,8 +138,8 @@ const FormLayerTwo = props => {
             id='photos-no-photos-radio'
             name='photosRadio'
             label='No Photos'
-            value='no photos'
-            checked={ photosValue === 'no photos' }
+            value='No Photos'
+            checked={ photosValue === 'No Photos' }
             onChange={ props.handleChange }
           />
 
@@ -147,8 +147,8 @@ const FormLayerTwo = props => {
             id='photos-all-radio'
             name='photosRadio'
             label='All'
-            value='all'
-            checked={ photosValue === 'all' }
+            value=''
+            checked={ photosValue === '' }
             onChange={ props.handleChange }
           />
 
@@ -280,8 +280,8 @@ const FormLayerFour = props => {
             id='listing-type-for-sale-radio'
             name='listingTypeRadio'
             label='For Sale'
-            value='for sale'
-            checked={ value === 'for sale' }
+            value='Sale'
+            checked={ value === 'Sale' }
             onChange={ props.handleChange }
           />
 
@@ -289,8 +289,8 @@ const FormLayerFour = props => {
             id='listing-type-in-search-of-radio'
             name='listingTypeRadio'
             label='In Search Of'
-            value='in search of'
-            checked={ value === 'in search of' }
+            value='Wanted'
+            checked={ value === 'Wanted' }
             onChange={ props.handleChange }
           />
 
@@ -298,8 +298,8 @@ const FormLayerFour = props => {
             id='listing-type-for-rent-radio'
             name='listingTypeRadio'
             label='For Rent'
-            value='for rent'
-            checked={ value === 'for rent' }
+            value='Rent'
+            checked={ value === 'Rent' }
             onChange={ props.handleChange }
           />
 
@@ -307,8 +307,8 @@ const FormLayerFour = props => {
             id='listing-type-all-radio'
             name='listingTypeRadio'
             label='All'
-            value='all'
-            checked={ value === 'all' }
+            value=''
+            checked={ value === '' }
             onChange={ props.handleChange }
           />
         </Form.Group>
@@ -354,8 +354,8 @@ const FormLayerFive = props => {
             id='listing-posted-1-hour-radio'
             name='listingPostedRadio'
             label='1 Hour'
-            value='1 hour'
-            checked={ value === '1 hour' }
+            value='1HOUR'
+            checked={ value === '1HOUR' }
             onChange={ props.handleChange }
           />
 
@@ -363,8 +363,8 @@ const FormLayerFive = props => {
             id='listing-posted-1-day-radio'
             name='listingPostedRadio'
             label='1 Day'
-            value='1 day'
-            checked={ value === '1 day' }
+            value='1DAY'
+            checked={ value === '1DAY' }
             onChange={ props.handleChange }
           />
 
@@ -372,8 +372,8 @@ const FormLayerFive = props => {
             id='listing-posted-7-days-radio'
             name='listingPostedRadio'
             label='7 Days'
-            value='7 days'
-            checked={ value === '7 days' }
+            value='7DAYS'
+            checked={ value === '7DAYS' }
             onChange={ props.handleChange }
           />
 
@@ -381,8 +381,8 @@ const FormLayerFive = props => {
             id='listing-posted-30-days-radio'
             name='listingPostedRadio'
             label='30 Days'
-            value='30 days'
-            checked={ value === '30 days' }
+            value='30DAYS'
+            checked={ value === '30DAYS' }
             onChange={ props.handleChange }
           />
 
@@ -390,8 +390,8 @@ const FormLayerFive = props => {
             id='listing-posted-all-radio'
             name='listingPostedRadio'
             label='All'
-            value='all'
-            checked={ value === 'all' }
+            value=''
+            checked={ value === '' }
             onChange={ props.handleChange }
           />
         </Form.Group>
@@ -400,6 +400,7 @@ const FormLayerFive = props => {
       <Container>
         <Form.Button
           type='submit'
+          onClick={ props.handleSubmit }
         >
           Create
         </Form.Button>
