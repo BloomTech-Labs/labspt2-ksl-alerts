@@ -4,8 +4,8 @@ import { Sidebar } from "semantic-ui-react";
 import styled from "styled-components";
 import axios from 'axios';
 import { BrowserRouter as Router, Link, NavLink, Route, Switch, } from 'react-router-dom';
-import { Topbar, VerticalSidebar, SignedInModal, CheckoutForm, } from '../../presentation/presentation.js';
-import { Home, AlertFeed, CreateAlert, Settings, UserAccount, Modals, } from '../container.js';
+import { Topbar, VerticalSidebar, SignedInModal, } from '../../presentation/presentation.js';
+import { Home, AlertFeed, CreateAlert, Settings, UserAccount, ForgotPassword, } from '../container.js';
 import { appUrl, googleDiscoveryDocUrl, } from '../../../constants.js';
 import { Elements, StripeProvider, } from 'react-stripe-elements';
 import "semantic-ui-css/semantic.min.css";
@@ -555,7 +555,10 @@ export default class App extends Component {
               path='/SignUp'
               render={ () => <UserAccount authenticate={ this.authenticate } renderForm='SignUp' /> }
             />
-    <Billing />
+	    <Route
+	      path='/ForgotPassword'
+	      render={ () => <ForgotPassword /> }
+	    />
         </Container>
         </Router>
       </AppContainer>
