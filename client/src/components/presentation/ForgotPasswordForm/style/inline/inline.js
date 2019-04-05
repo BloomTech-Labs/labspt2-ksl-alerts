@@ -18,5 +18,10 @@ export const style = {
   },
   inputContainer: {
     width: '220px'
-  }
+  },
+  menuItemContainer: {
+    width: '220px',
+    textAlign: 'center',
+    background: 'lightblue',
+  },
 };
