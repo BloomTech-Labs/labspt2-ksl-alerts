@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import { Sidebar } from "semantic-ui-react";
 import styled from "styled-components";
@@ -6,6 +7,7 @@ import { BrowserRouter as Router, Link, NavLink, Route, Switch, } from 'react-ro
 import { Topbar, VerticalSidebar, SignedInModal, } from '../../presentation/presentation.js';
 import { Home, AlertFeed, CreateAlert, Settings, UserAccount, ForgotPassword, } from '../container.js';
 import { appUrl, googleDiscoveryDocUrl, } from '../../../constants.js';
+import { Elements, StripeProvider, } from 'react-stripe-elements';
 import "semantic-ui-css/semantic.min.css";
 
 export default class App extends Component {
@@ -14,9 +16,6 @@ export default class App extends Component {
 
     this.state = {
       signedIn: false,
-      signedInModal: {
-        open: false,
-      },
       authorization: {
         type: '',
         token: '',
@@ -25,10 +24,37 @@ export default class App extends Component {
         _id: '',
         username: '',
         email: '',
+        profileImg: '',
         firstName: '',
         lastName: '',
-        accountType: 'standard',
-        alerts: [],
+        accountType: '',
+        alerts: [{
+          items: [{
+            contactInfo: {
+              firstName: '',
+              homePhone: '',
+              cellPhone: '',
+            },
+            pageStats: {
+              expirationDate: '',
+              favorited: '',
+              listingNumber: '',
+              memberSince: '',
+              pageViews: '',
+              sellerType: '',
+            },
+            listingDetails: {
+              description: '',
+              location: '',
+              price: '',
+              title: '',
+            },
+            images: [{
+              small: '',
+              large: '',
+            }]
+          }]
+        }],
       },
       appContainer: {
         mobile: false,
@@ -101,15 +127,16 @@ export default class App extends Component {
       localStorage.setItem('ALERTIFI-USER-AUTHENTICATION-TYPE', type);
       localStorage.setItem('ALERTIFI-USER-AUTHENTICATION-TOKEN', token);
 
-      this.setState({ 
-        signedIn: true, 
+      this.setState({
+        signedIn: true,
         authorization: {
           type,
           token,
-        }, 
+        },
       });
 
-      document.querySelector(`#sidebar-Home-link`).click();
+      window.location.href = appUrl + '/Home?success=true';
+
     } else {
       alert('Unable to authenticate');
     }
@@ -161,7 +188,7 @@ export default class App extends Component {
               }
             })
             .then(res => {
-              
+
               const data = {
                 username: res.data.name,
                 email: res.data.email,
@@ -181,15 +208,15 @@ export default class App extends Component {
                   token: res.headers.authorization,
                   type: authType,
                 };
-  
+
                 const user = res.data;
-  
+
                 this.setState({
                   signedIn: true,
                   authorization,
                   user,
                 });
-  
+
                 localStorage.setItem('ALERTIFI-USER-AUTHENTICATION-TOKEN', authorization.token);
                 localStorage.setItem('ALERTIFI-USER-AUTHENTICATION-TYPE', authorization.type);
 
@@ -245,7 +272,7 @@ export default class App extends Component {
           }).catch(console.log);
 
           break;
-        default: 
+        default:
           break;
       }
 
@@ -285,7 +312,7 @@ export default class App extends Component {
           break;
         case 'google':
 
-          axios({ 
+          axios({
             method: 'get',
             url: googleDiscoveryDocUrl,
           }).then(result => {
@@ -298,7 +325,7 @@ export default class App extends Component {
               }
             })
             .then(res => {
-              
+
               console.log(res.data);
 
               const data = {
@@ -386,9 +413,15 @@ export default class App extends Component {
   }
 
   verifyAlertifiUser = () => {
+
+    // This function is used to verify Alertifi user after signing up.
+    // It is similar to verifyOAuthUser, but this checks search query params
+    // rather than local storage.
+
+
     const { success, token, } = this.getSearchParams();
 
-    if (token && success === 'true') {
+    if (token) {
       axios({
         method: 'get',
         url: `${ appUrl }/api/users/verify`,
@@ -420,14 +453,6 @@ export default class App extends Component {
     }
   }
 
-  handleSignedInModal = e => {
-    this.setState({
-      signedInModal: {
-        open: false,
-      }
-    });
-  }
-
   componentDidMount() {
 
     this.authenticateOAuthUser();
@@ -450,6 +475,10 @@ export default class App extends Component {
     });
   }
 
+  componentDidUpdate() {
+    console.log(this.state.user);
+  }
+
   render() {
 
     const mobile = this.state.appContainer.mobile;
@@ -460,6 +489,7 @@ export default class App extends Component {
       min-height: 100vh;
       padding-left: ${ mobile ? `78px` : `170px` };
       padding-right: 21px;
+      padding-bottom: 21px;
       /* border: 1px solid black; */
     `;
 
@@ -477,14 +507,20 @@ export default class App extends Component {
         <Router>
         <VerticalSidebar
           signedIn={ this.state.signedIn }
-          signOut={ this.signOut }
-          { ...this.state.sidebar }
+          signOut={ this.signOut         }
+          { ...this.state.sidebar        }
         />
 
-        <SignedInModal 
-          { ...this.state } 
+        <SignedInModal
+          { ...this.state }
           handleClose={ this.handleSignedInModal }
           accountType={ this.state.user.accountType }
+        />
+        
+        <Modals
+          getSearchParams={ this.getSearchParams }
+          { ...this.state    }
+          handleChange={ this.handleChange }
         />
 
         <Container>
@@ -492,22 +528,22 @@ export default class App extends Component {
 
             <Route
               path='/Home'
-              render={ () => <Home /> }
+              render={ () => <Home { ...this.state } /> }
             />
 
             <Route
               path='/AlertFeed'
-              render={ () => <AlertFeed /> }
+              render={ () => <AlertFeed { ...this.state } /> }
             />
 
             <Route
               path="/CreateAlert"
-              render={ () => <CreateAlert { ...this.state.createAlert } /> }
+              render={ () => <CreateAlert { ...this.state } /> }
             />
 
             <Route
               path='/Settings'
-              render={ () => <Settings /> }
+              render={ () => <Settings { ...this.state } /> }
             />
 
             <Route
@@ -519,7 +555,6 @@ export default class App extends Component {
               path='/SignUp'
               render={ () => <UserAccount authenticate={ this.authenticate } renderForm='SignUp' /> }
             />
-
 	    <Route
 	      path='/ForgotPassword'
 	      render={ () => <ForgotPassword /> }
