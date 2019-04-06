@@ -6,7 +6,9 @@ import { injectStripe, CardElement, CardNumberElement,
         IdealBankElement, PaymentRequestButtonElement, } from 'react-stripe-elements';
 import './style/css/PremiumForm.css';
 
+
 const PremiumForm = props => {
+
 
   return (
     <Form 
@@ -69,7 +71,6 @@ const PremiumForm = props => {
             className='premium-form-input premium-form-cvc-element' 
           />
         </div>
-      
       </div>
 
       { /* Total */ }
