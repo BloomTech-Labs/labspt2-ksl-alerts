@@ -85,6 +85,7 @@ router.post('/api/alerts/create', authenticate, (req, res, next) => {
   const { email, } = req.body;
   const { title, urlQuery, } = req.body.alert;
 
+  /*
   helpers.createNewAlert({ email, title, urlQuery, }, (createError, data)=> {
     
     if (createError) {
@@ -131,7 +132,7 @@ router.post('/api/alerts/create', authenticate, (req, res, next) => {
 
 
   });
-
+*/
   
 });
 

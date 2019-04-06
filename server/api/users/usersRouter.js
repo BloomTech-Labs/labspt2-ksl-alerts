@@ -150,9 +150,9 @@ router.get('/api/users/email-verify/:url', (req, res, next) => {
           helpers.deleteByUrlTemp({ url, }, (deleteError, deletedUserData) => {
             if (deleteError) {
               console.log(deleteError);
-              res.redirect(`${ appUrl }/Home?success=false`);
+              res.redirect(`${ productionUrl }/Home?success=false`);
             } else {
-              res.redirect(`${ appUrl }/Home?success=true&token=${ token }`);
+              res.redirect(`${ productionUrl }/Home?success=true&token=${ token }`);
             }
           });
         }
@@ -303,7 +303,7 @@ router.post('/api/users/signup', (req, res, next) => {
             }
           });
       
-          const linkUrl = `${ appUrl }/api/users/email-verify/${ url }/`;
+          const linkUrl = `${ productionUrl }/api/users/email-verify/${ url }/`;
       
           const mailOptions = {
             from: process.env.ALERTFIFI_GMAIL_EMAIL,
