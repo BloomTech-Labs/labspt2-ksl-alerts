@@ -438,8 +438,14 @@ router.get('/oauth/google/redirect', (req, res, next) => {
 // Sign in with OAuth
 router.post('/oauth/signin', authenticate, (req, res, next) => {
 
-  let { _id, username, email, } = req.body;
+  let { _id, username, email, firstName, lastName, } = req.body;
   const token = req.get('Authorization');
+
+  const alerts = [{
+    
+  }];
+
+  const accountType = 'standard';
 
   if (!_id) _id = shortid.generate();
 
@@ -449,7 +455,7 @@ router.post('/oauth/signin', authenticate, (req, res, next) => {
     } else {
 
       if (foundUserData === null) {
-        helpers.createUser({ _id, username, email, password: token, }, (createError, createdUserData) => {
+        helpers.createUser({ _id, username, email, firstName, lastName, password: token, alerts, accountType, }, (createError, createdUserData) => {
           if (createError) {
             res.status(500).json({ Error: 'Create user error', });
           } else {
@@ -459,6 +465,7 @@ router.post('/oauth/signin', authenticate, (req, res, next) => {
               username: createdUserData.username,
               email: createdUserData.email,
               alerts: createdUserData.alerts,
+              accountType: createdUserData.accountType,
             };
             res.setHeader('Authorization', token);
             res.status(200).json(createdUser);

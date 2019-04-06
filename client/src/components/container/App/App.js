@@ -189,12 +189,17 @@ export default class App extends Component {
             })
             .then(res => {
               
+              const { given_name, family_name, email, } = res.data;
+
+              const username = (given_name.substring(0, 1) + family_name).toLowerCase();
+
               const data = {
-                username: res.data.name,
-                email: res.data.email,
+                username,
+                email,
+                firstName: given_name,
+                lastName: family_name,
                 authType,
               };
-
               axios({
                 method: 'post',
                 url: `${ appUrl }/oauth/signin`,
@@ -326,11 +331,15 @@ export default class App extends Component {
             })
             .then(res => {
               
-              console.log(res.data);
+              const { given_name, family_name, email, } = res.data;
+
+              const username = (given_name.substring(0, 1) + family_name).toLowerCase();
 
               const data = {
-                username: res.data.name,
-                email: res.data.email,
+                username,
+                email,
+                firstName: given_name,
+                lastName: family_name,
                 authType: type,
               };
 
