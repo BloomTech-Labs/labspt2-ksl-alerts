@@ -1,0 +1,4 @@
+.ccContainer {
+    display: flex;
+    flex-direction: column
+}

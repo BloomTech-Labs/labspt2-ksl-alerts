@@ -3,6 +3,8 @@ import { Form, } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { ButtonContainer, GitHubButton, GoogleButton, ButtonIcon, ButtonText } from './style/styledComponents/styled.js';
+import FacebookLogin from "react-facebook-login";
+
 
 const OAuthForm = props => {
   return (
@@ -24,6 +26,14 @@ const OAuthForm = props => {
         <ButtonIcon className="fab fa-github fa-lg"></ButtonIcon>
         <ButtonText>Sign in with GitHub</ButtonText>
       </GitHubButton>
+
+      <FacebookLogin
+          appId="566781370495932"
+          autoLoad={true}
+          fields="name,email,picture"
+          onClick={props.handleSubmi}
+          >
+          </FacebookLogin>
 
     </ButtonContainer>
   );
