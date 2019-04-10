@@ -1,71 +1,31 @@
 require('dotenv').config();
-const axios     = require('axios');
-const cheerio   = require('cheerio');
-const Nightmare = require('nightmare');
+const axios      = require('axios');
+const cheerio    = require('cheerio');
+const Nightmare  = require('nightmare');
+const port       = 8080;
+
+const proxy = 'http://zproxy.lum-superproxy.io:22225';
 
 const options = {
   show: false,
+  executionTimeout: 300000,
   gotoTimeout: 300000,
   waitTimeout: 300000,
-  loadTimeout: 60000,
-  switches: {
-    'proxy-server': 'http://localhost:8888',
-    'ignore-certificate-errors': true,
-  }
+  // loadTimeout: 300000,  // 60 seconds
+  // switches: {
+  //   'proxy-server': proxy,
+  //   'ignore-certificate-errors': true,
+  // }
 };
 
-const stopScrapoxyInstance = () => {
-  // Stop the scrapoxy instance. Instance is auto replaced with a new IP address. No more blacklisting! =]
+function itemScraper(url, i, done) {
 
-  console.log('Replacing Scrapoxy instance and assigning new IP address...');
+  const session_id = (1000000 * Math.random())|0;
+  const nightmare = new Nightmare(options);
 
-  // Get the proxy server IP address from ipchicken.com
-  Nightmare(options)
-      .goto('http://www.ipchicken.com')
-      .evaluate(() => {
-        return document.querySelector('b').innerText.replace(/[^\d\.]/g, '');
-      })
-      .end()
-      .then(ip => {
-
-        const auth = Buffer.from(process.env.COMMANDER_PASSWORD).toString('base64');
-
-        axios({
-          method: 'get',
-          url: 'http://localhost:8889/api/instances',
-          headers: {
-            'Authorization': auth
-          }
-        }).then(res => {
-
-          // Find current scrapoxy instance
-          for (let i in res.data) {
-
-            if (ip === res.data[i].address.hostname) {
-
-              // Stop the current scrapoxy instance.
-              axios({
-                method: 'post',
-                url: 'http://localhost:8889/api/instances/stop',
-                headers: {
-                  'Authorization': auth
-                },
-                data: {
-                  name: res.data[i].name
-                }
-              }).then(res => {
-                console.log('Instance stopped.\nInstances alive: ' + res.data.alive)
-              }).catch(console.log);
-            }
-          }
-        }).catch(console.log);
-      }).catch(console.log);
-}
-
-
-const itemScraper = (url) => {
-
-  Nightmare(options)
+  nightmare
+    // .authentication('lum-customer-hl_479f83dd-zone-alertifi-route_err-pass_dyn-country-us-session-' + session_id, 'ddnxl64zgbk4')
+    // .useragent('Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36')
     .goto(url)
     .wait('#listingContainer')
     // .wait('.photoDesktop-photoContainer   > .smartImage')
@@ -73,15 +33,15 @@ const itemScraper = (url) => {
     .evaluate(() => {
       return document.querySelector('body').innerHTML;
     })
-    // .end()
+    .end()
     .then((html) => {
 
-      const $ = cheerio.load(html);
+      let $ = cheerio.load(html);
 
-      const pageStatsArr = $('.listingStats-value').map((i, el) => $(el).text()).get();
-      const imageSrcArr  = $('.photoViewer-carouselItemPhoto > .smartImage').map((i, el) => $(el).attr('src')).get();
+      let pageStatsArr = $('.listingStats-value').map((i, el) => $(el).text()).get();
+      let imageSrcArr  = $('.photoViewer-carouselItemPhoto > .smartImage').map((i, el) => $(el).attr('src')).get();
 
-      const data = {
+      let data = {
         contactInfo: {
           firstName: $('.listingContactSeller-firstName-value').text(),
           homePhone: $('.listingContactSeller-homePhone > .listingContactSeller-optionText').text(),
@@ -99,12 +59,12 @@ const itemScraper = (url) => {
           title:       $('.listingDetails-title').text(),
           location:    $('.listingDetails-location').text(),
           price:       $('.listingDetails-price').text(),
-          description: $('.lsitingDescription-text').text(),
+          description: $('.listingDescription-text').text(),
         },
         images: imageSrcArr.map((img, i) => {
 
-          const small = img;
-          const large = img.substring(0, img.length - 13) + '664x500';
+          let small = img;
+          let large = img.substring(0, img.length - 13) + '664x500';
 
           return {
             small,
@@ -113,27 +73,32 @@ const itemScraper = (url) => {
         }),
       };
 
+      
       return data;
 
     })
     .then(data => {
+      
+      done(data);
 
-      console.log(data);
     })
     .catch(err => {
-      // stopScrapoxyInstance();
-      // itemScraper(url);
-      console.log(err);
+      // console.log(err);
+      setTimeout(() => {
+        console.log(`Extracting item... (retry)\n`);
+        itemScraper(url, done);
+      }, 5000);
     });
 }
 
-const kslScraper = (url) => {
+const aslScraper = (url, done) => {
 
   const selector = 'body';
 
     const nightmare = Nightmare(options);
 
     nightmare
+      .authentication('lum-customer-hl_479f83dd-zone-static-country-us-session-', 'sp94796gy4mt')
       .goto(url)
       .wait('.listing-group')
       .evaluate((selector) => {
@@ -150,9 +115,9 @@ const kslScraper = (url) => {
         results.splice(results.indexOf(' ', 1));
         resultsNum = parseInt(results.join(''));
 
-        let pages = Math.ceil(resultsNum / 24) + 1;
-        if (pages > 415) pages = 415;
-        console.log('Total pages: ' + pages);
+        // let pages = Math.ceil(resultsNum / 24) + 1;
+        // if (pages > 415) pages = 415;
+        // console.log('Total pages: ' + pages);
 
 
 
@@ -161,7 +126,7 @@ const kslScraper = (url) => {
 
           const url = `https://classifieds.ksl.com${ item.attribs.href }`;
           setTimeout(() => {
-            itemScraper(url, i);
+            itemScraper(url, i, done);
           }, 1000);
 
         });
@@ -206,4 +171,45 @@ const kslScraper = (url) => {
       });
 }
 
-module.exports = kslScraper;
+module.exports = function kslScraper(urlQuery, done) {
+
+
+  let interval = 0;
+
+  const session_id = (1000000 * Math.random())|0;
+  // const urlQuery = 'https://classifieds.ksl.com/search?category[]=&subCategory[]=&keyword=chair&priceFrom=&priceTo=&zip=&miles=25&sellerType[]=Private&marketType[]=Sale&hasPhotos[]=Has%20Photos&postedTime[]=1HOUR';
+  const nightmare = new Nightmare(options);
+
+  nightmare
+      // .authentication('lum-customer-hl_479f83dd-zone-alertifi-route_err-pass_dyn-country-us-session-' + session_id, 'ddnxl64zgbk4')
+      // .useragent('Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36')
+      .goto(urlQuery)
+      .wait('.listing-group')
+      .evaluate((selector) => {
+        return document.querySelector(selector).innerHTML;
+      }, 'body')
+      .end()
+      .then((html) => {
+
+        const $ = cheerio.load(html);
+
+        const items = Array.from($('.listing-group').find('.listing-item-link'));
+
+        items.map((item, i) => {
+
+          const url = `https://classifieds.ksl.com${ item.attribs.href }`;
+          setTimeout(() => {
+            console.log(`Extracting item...\n`)
+            itemScraper(url, i, done);
+            interval += 5000;
+            console.log(interval);
+          }, interval);
+
+        });
+        
+
+      }).catch(error => {
+        // console.log(error);
+        kslScraper();
+      });
+}

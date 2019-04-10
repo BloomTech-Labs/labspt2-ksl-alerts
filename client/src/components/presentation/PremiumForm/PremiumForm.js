@@ -1,9 +1,9 @@
 import React from 'react';
+import axios from 'axios';
 import { Form, Segment, Button, } from 'semantic-ui-react';
 import { injectStripe, CardElement, CardNumberElement, 
         CardExpiryElement, CardCVCElement, PostalCodeElement, 
         IdealBankElement, PaymentRequestButtonElement, } from 'react-stripe-elements';
-import { style, } from './style/inline/inline.js';
 import './style/css/PremiumForm.css';
 
 
@@ -11,49 +11,34 @@ const PremiumForm = props => {
 
 
   return (
-    <div>
-
-          
-                <div class="ui checkbox" className="subscription-checkbox">
-                <h2>Subscription</h2>
-                  <div className="subscription-row">
-                  <input id="checkbox" type="checkbox" name="one-month"/>
-                  <label>1 Month Subscription - $20</label>
-                  </div>
-                  <div className="subscription-row">
-                  <input id="checkbox" type="checkbox" name="one-client"/>
-                  <label>1 Client - $1.99</label>
-                  </div>
-                </div>
-
-
-    <form 
+    <Form 
       className='premium-form'
+      loading={ props.premiumForm.loading }
     >
-
-
     
     <div className='premium-form-name'>
     
-    <h2>Payment Info</h2>
     { /* Name on card */ }
       <Form.Input
+        id='premium-form-name-input'
+        name='premiumFormNameInput'
         fluid
         placeholder='Name on card'
         label='Name on card'
         className='premium-form-name-input'
+        type='text'
+        onChange={ props.handleChange }
+        value={ props.premiumFormNameInput.value }
       />
 
     </div>
-
-
 
     <div className='premium-form-group'>
 
       { /* Card Number */ }
       <div>
         <label>Card Number</label>
-        <CardNumberElement 
+        <CardNumberElement
           className='premium-form-input premium-form-card-element'
           placeholder='#### #### #### ####'
         />
@@ -86,8 +71,12 @@ const PremiumForm = props => {
             className='premium-form-input premium-form-cvc-element' 
           />
         </div>
-      
-  
+      </div>
+
+      { /* Total */ }
+      <div className='premium-form-total'>
+        <span>Total: </span>
+        <span>${ props.premiumForm.price / 100 }</span>
       </div>
 
       { /* Submit Button */ }
@@ -97,16 +86,15 @@ const PremiumForm = props => {
           name='premiumFormSubmitButton'
           className='premium-form-submit-button'
           content='Submit'
+          type='submit'
           primary
+          loading={ props.premiumFormSubmitButton.loading    }
+          disabled={ props.premiumFormSubmitButton.disabled  }
+          onClick={ e => props.handleSubmit(e, props.stripe) }
         />
       </div>
 
-    </form>
-
-
-
-    </div>
-    
+    </Form>
   );
 }
 

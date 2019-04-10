@@ -23,18 +23,12 @@
 }
 
 .premium-form {
-  border: 1px solid black;
-
-}
-
-.premium-form {
+  margin: auto;
   display: flex;
   flex-direction: column;
   max-width: 280px;
+  width: 85%;
   min-width: 140px;
-  /* border: 1px solid black; */
-  margin-top: 25px;
-  padding-top: 10px;
 }
 
 .premium-form > div {
@@ -58,32 +52,14 @@
   width: 100%;
 }
 
-.subscription-checkbox {
-  border: 1px solid black;
+.premium-form-total {
   display: flex;
-  flex-direction: column;
-  max-width: 280px;
-  min-width: 140px;
+  justify-content: space-between;
+  align-items: baselilne;
+
 }
 
-.subscription-row {
-  display: flex;
-  flex-direction: row;
-}
-
-#checkbox {
-  margin-top: 4px;
-  margin-right: 10px;
-}
-
-.amount {
-  color: green;
-  margin-left: 15px;
-}
-
-.total {
-  display: flex;
-  flex-direction: row;
-  
-
+.premium-form-total > span {
+  font-weight: bold;
+  font-size: 18px;
 }

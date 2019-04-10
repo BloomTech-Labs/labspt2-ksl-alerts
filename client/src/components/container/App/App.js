@@ -5,7 +5,7 @@ import styled from "styled-components";
 import axios from 'axios';
 import { BrowserRouter as Router, Link, NavLink, Route, Switch, } from 'react-router-dom';
 import { Topbar, VerticalSidebar, SignedInModal, CheckoutForm, } from '../../presentation/presentation.js';
-import { Home, AlertFeed, CreateAlert, Settings, UserAccount, Billing, } from '../container.js';
+import { Home, AlertFeed, CreateAlert, Settings, UserAccount, Modals, } from '../container.js';
 import { appUrl, googleDiscoveryDocUrl, } from '../../../constants.js';
 import { Elements, StripeProvider, } from 'react-stripe-elements';
 import "semantic-ui-css/semantic.min.css";
@@ -16,9 +16,6 @@ export default class App extends Component {
 
     this.state = {
       signedIn: false,
-      signedInModal: {
-        open: true,
-      },
       authorization: {
         type: '',
         token: '',
@@ -27,10 +24,37 @@ export default class App extends Component {
         _id: '',
         username: '',
         email: '',
+        profileImg: '',
         firstName: '',
         lastName: '',
-        accountType: 'standard',
-        alerts: [],
+        accountType: '',
+        alerts: [{
+          items: [{
+            contactInfo: {
+              firstName: '',
+              homePhone: '',
+              cellPhone: '',
+            },
+            pageStats: {
+              expirationDate: '',
+              favorited: '',
+              listingNumber: '',
+              memberSince: '',
+              pageViews: '',
+              sellerType: '',
+            },
+            listingDetails: {
+              description: '',
+              location: '',
+              price: '',
+              title: '',
+            },
+            images: [{
+              small: '',
+              large: '',
+            }]
+          }]
+        }],
       },
       appContainer: {
         mobile: false,
@@ -165,12 +189,17 @@ export default class App extends Component {
             })
             .then(res => {
               
+              const { given_name, family_name, email, } = res.data;
+
+              const username = (given_name.substring(0, 1) + family_name).toLowerCase();
+
               const data = {
-                username: res.data.name,
-                email: res.data.email,
+                username,
+                email,
+                firstName: given_name,
+                lastName: family_name,
                 authType,
               };
-
               axios({
                 method: 'post',
                 url: `${ appUrl }/oauth/signin`,
@@ -302,11 +331,15 @@ export default class App extends Component {
             })
             .then(res => {
               
-              console.log(res.data);
+              const { given_name, family_name, email, } = res.data;
+
+              const username = (given_name.substring(0, 1) + family_name).toLowerCase();
 
               const data = {
-                username: res.data.name,
-                email: res.data.email,
+                username,
+                email,
+                firstName: given_name,
+                lastName: family_name,
                 authType: type,
               };
 
@@ -429,27 +462,13 @@ export default class App extends Component {
     }
   }
 
-  handleSignedInModal = e => {
-    this.setState({
-      signedInModal: {
-        open: false,
-      }
-    });
-  }
-
   componentDidMount() {
+
+    console.log('User: ' + this.state.user);
 
     this.authenticateOAuthUser();
     this.verifyOAuthUser();
     this.verifyAlertifiUser();
-
-    if (this.getSearchParams().success) {
-      this.setState({
-        signedInModal: {
-          open: true,
-        }
-      });
-    }
 
     const setMobileState = this.setMobileState;
     const setDesktopState = this.setDesktopState;
@@ -467,6 +486,10 @@ export default class App extends Component {
     });
   }
 
+  componentDidUpdate() {
+    // console.log(this.state.user);
+  }
+
   render() {
 
     const mobile = this.state.appContainer.mobile;
@@ -477,6 +500,7 @@ export default class App extends Component {
       min-height: 100vh;
       padding-left: ${ mobile ? `78px` : `170px` };
       padding-right: 21px;
+      padding-bottom: 21px;
       /* border: 1px solid black; */
     `;
 
@@ -494,37 +518,36 @@ export default class App extends Component {
         <Router>
         <VerticalSidebar
           signedIn={ this.state.signedIn }
-          signOut={ this.signOut }
-          { ...this.state.sidebar }
+          signOut={ this.signOut         }
+          { ...this.state.sidebar        }
         />
 
-        <SignedInModal
-          { ...this.state } 
-          handleClose={ this.handleSignedInModal }
-          accountType={ this.state.user.accountType }
+        <Modals
+          getSearchParams={ this.getSearchParams }
+          { ...this.state    } 
+          handleChange={ this.handleChange }
         />
 
         <Container>
           <Topbar />
-       
             <Route
               path='/Home'
-              render={ () => <Home /> }
+              render={ () => <Home { ...this.state } /> }
             />
 
             <Route
               path='/AlertFeed'
-              render={ () => <AlertFeed /> }
+              render={ () => <AlertFeed { ...this.state } /> }
             />
 
             <Route
               path="/CreateAlert"
-              render={ () => <CreateAlert { ...this.state.createAlert } /> }
+              render={ () => <CreateAlert { ...this.state } /> }
             />
 
             <Route
               path='/Settings'
-              render={ () => <Settings /> }
+              render={ () => <Settings { ...this.state } /> }
             />
 
             <Route

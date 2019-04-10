@@ -19,22 +19,23 @@
     "cors": "^2.8.5",
     "dotenv": "^7.0.0",
     "email-validator": "^2.0.4",
-    "email-verification": "^0.4.6",
-    "email-verifier": "^0.4.1",
     "express": "^4.16.4",
     "is-valid-username": "0.0.1",
     "isemail": "^3.2.0",
     "jsonwebtoken": "^8.5.1",
-    "mongodb": "^3.2.1",
-    "mongoose": "^5.4.19",
+    "mongodb": "^3.2.2",
+    "mongoose": "^5.4.20",
     "nightmare": "^3.0.1",
     "nodemailer": "^5.1.1",
-    "nodemon": "^1.18.10",
     "password-validate": "0.0.2",
+    "puppeteer": "^1.14.0",
     "randomatic": "^3.1.1",
+    "request-promise": "^4.2.4",
     "scrapoxy": "^3.1.1",
     "shortid": "^2.2.14",
     "stripe": "^6.28.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
 }

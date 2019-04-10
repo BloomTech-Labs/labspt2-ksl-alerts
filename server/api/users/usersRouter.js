@@ -91,14 +91,38 @@ const authenticate = (req, res, next) => {
 
 router.post('/api/users/payment', authenticate, (req, res, next) => {
 
-   stripe.charges.create({
-    amount: 2000,
-    currency: 'usd',
-    description: 'An example charge',
-    source: req.body.tokenId,
-  }).then(({ status }) => {
-    res.json(status);
-  }).catch(console.log);
+    const { email, } = req.body;
+    const { tokenId, amount, } = req.body.charge;
+
+    stripe.charges.create({
+      amount,
+      currency: 'usd',
+      description: 'Alertifi Subscription',
+      source: tokenId,
+    }).then(({ status }) => {
+
+      if (status === 'succeeded') {
+
+        helpers.changeAccountType({ email, accountType: 'premium', }, (changeError, updatedUserData) => {
+          if (changeError) {
+            console.log(changeError);
+            res.status(500).json({ error: changeError, });
+          } else {
+            console.log(updatedUserData);
+            const user = updatedUserData;
+            res.status(200).json({ status, user, });
+          }
+        });
+      }
+
+    }).catch(err => {
+
+      console.log(err);
+
+      res.status(500).json({ status: 'failed', });
+
+    
+    });
 
 });
 
@@ -112,11 +136,11 @@ router.get('/api/users/email-verify/:url', (req, res, next) => {
       res.send({ err });
     } else {
 
-      const { _id, username, email, password, firstName, lastName, accountType, } = tempUserData;
+      const { _id, username, email, password, firstName, lastName, accountType, alerts, } = tempUserData;
 
       const token = jwt.sign({ _id, email, }, process.env.PRIVATE_KEY);
 
-      helpers.createUser({ _id, username, email, password, firstName, lastName, accountType, }, (createError, createdUserData) => {
+      helpers.createUser({ _id, username, email, password, firstName, lastName, accountType, alerts, }, (createError, createdUserData) => {
         if (createError) {
           console.log(createError);
           res.status(500).json({ createError, });
@@ -126,9 +150,9 @@ router.get('/api/users/email-verify/:url', (req, res, next) => {
           helpers.deleteByUrlTemp({ url, }, (deleteError, deletedUserData) => {
             if (deleteError) {
               console.log(deleteError);
-              res.redirect(`${ appUrl }/Home?success=false`);
+              res.redirect(`${ productionUrl }/Home?success=false`);
             } else {
-              res.redirect(`${ appUrl }/Home?success=true&token=${ token }`);
+              res.redirect(`${ productionUrl }/Home?success=true&token=${ token }`);
             }
           });
         }
@@ -249,6 +273,9 @@ router.post('/api/users/signup', (req, res, next) => {
   const firstName = '';
   const lastName = '';
   const accountType = 'standard';
+  const alerts = [{
+    
+  }];
 
   const hash = bcrypt.hashSync(password, 10);
 
@@ -264,7 +291,7 @@ router.post('/api/users/signup', (req, res, next) => {
     } else {
       if (!foundUserData) {
         
-        helpers.createTempUser({_id, username, email, password: hash, url, firstName, lastName, accountType, }, (error, data) => {
+        helpers.createTempUser({_id, username, email, password: hash, url, firstName, lastName, accountType, alerts, }, (error, data) => {
 
           const transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
@@ -276,7 +303,7 @@ router.post('/api/users/signup', (req, res, next) => {
             }
           });
       
-          const linkUrl = `${ appUrl }/api/users/email-verify/${ url }/`;
+          const linkUrl = `${ productionUrl }/api/users/email-verify/${ url }/`;
       
           const mailOptions = {
             from: process.env.ALERTFIFI_GMAIL_EMAIL,
@@ -411,8 +438,14 @@ router.get('/oauth/google/redirect', (req, res, next) => {
 // Sign in with OAuth
 router.post('/oauth/signin', authenticate, (req, res, next) => {
 
-  let { _id, username, email, } = req.body;
+  let { _id, username, email, firstName, lastName, } = req.body;
   const token = req.get('Authorization');
+
+  const alerts = [{
+    
+  }];
+
+  const accountType = 'standard';
 
   if (!_id) _id = shortid.generate();
 
@@ -422,7 +455,7 @@ router.post('/oauth/signin', authenticate, (req, res, next) => {
     } else {
 
       if (foundUserData === null) {
-        helpers.createUser({ _id, username, email, password: token, }, (createError, createdUserData) => {
+        helpers.createUser({ _id, username, email, firstName, lastName, password: token, alerts, accountType, }, (createError, createdUserData) => {
           if (createError) {
             res.status(500).json({ Error: 'Create user error', });
           } else {
@@ -432,6 +465,7 @@ router.post('/oauth/signin', authenticate, (req, res, next) => {
               username: createdUserData.username,
               email: createdUserData.email,
               alerts: createdUserData.alerts,
+              accountType: createdUserData.accountType,
             };
             res.setHeader('Authorization', token);
             res.status(200).json(createdUser);
